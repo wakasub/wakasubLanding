@@ -167,7 +167,7 @@ export default function LandingPage() {
                 className="p-6 border-b-2 border-border/30 pb-8 hover:border-primary/50 transition-colors"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-1">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-1">
                     <trust.icon className="text-primary" size={20} />
                   </div>
                   <div>
@@ -318,7 +318,7 @@ export default function LandingPage() {
               <motion.div
                 initial={{ rotate: 10, y: 50, opacity: 0 }}
                 whileInView={{ rotate: -5, y: 0, opacity: 1 }}
-                className="bg-primary/20 p-8 rounded-[3rem] border border-primary/20 aspect-[4/5] relative overflow-hidden"
+                className="bg-primary/20 p-8 rounded-[3rem] border border-primary/20 aspect-4/5 relative overflow-hidden"
               >
                 {/* Mock UI Element */}
                 <div className="bg-background rounded-3xl p-6 shadow-2xl space-y-4">
@@ -349,7 +349,7 @@ export default function LandingPage() {
           >
             {/* Background pattern */}
             <div className="absolute inset-0 opacity-10 pointer-events-none">
-              <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_20%,#fff_1px,transparent_1px)] bg-[length:40px_40px]" />
+              <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_20%,#fff_1px,transparent_1px)] bg-size-[40px_40px]" />
             </div>
 
             <h2 className="text-4xl md:text-7xl font-bold mb-8 leading-tight">

@@ -31,9 +31,9 @@ export function Navbar() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
+      className={`fixed top-0 left-0 right-0 z-[50] transition-all duration-300 border-b ${
         mobileMenuOpen
-          ? "bg-background/95 backdrop-blur-md py-3 border-border"
+          ? "bg-background backdrop-blur-md py-3 border-border"
           : isScrolled
           ? "bg-background/80 backdrop-blur-md py-3 border-border"
           : "bg-transparent py-5 border-transparent"
@@ -112,7 +112,7 @@ export function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="fixed inset-0 bg-background/95 backdrop-blur-md z-[49] md:hidden"
+              className="fixed inset-0 bg-background/90 backdrop-blur-md z-[45] md:hidden"
             />
 
             {/* Drawer */}
@@ -121,9 +121,9 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-[80%] max-w-sm bg-background border-l border-border z-[56] md:hidden p-8 pt-24 shadow-2xl"
+              className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-background border-l border-border z-[56] md:hidden p-8 pt-24 shadow-2xl h-screen"
             >
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-6 w-full ">
                 {[
                   { name: "Features", icon: Zap, href: "#features" },
                   { name: "How it works", icon: Info, href: "#how-it-works" },
