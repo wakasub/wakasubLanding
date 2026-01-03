@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Smartphone, Wifi, Tv, Zap, Info } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -41,10 +42,23 @@ export function Navbar() {
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-            <span className="text-primary-foreground font-bold italic">W</span>
-          </div>
-          <span className="text-xl font-bold tracking-tighter">WakaSub</span>
+          <Image src="/waka 512.png" alt="WakaSub" width={32} height={32} />
+          <span className="text-xl font-bold tracking-tighter hidden md:flex">
+            {"WakaSub".split("").map((char, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: 0.3 + i * 0.1,
+                  duration: 0.7,
+                  ease: "easeOut",
+                }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
+          </span>
         </Link>
 
         {/* Desktop Nav */}
@@ -63,11 +77,11 @@ export function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-4">
-          <Button variant="ghost" size="sm">
-            Log in
+          <Button variant="ghost" size="sm" asChild>
+            <Link href="https://app.wakasub.com/login">Log in</Link>
           </Button>
-          <Button size="sm" className="rounded-full px-6">
-            Get Started
+          <Button size="sm" className="rounded-full px-6" asChild>
+            <Link href="https://app.wakasub.com/register">Get Started</Link>
           </Button>
         </div>
 
@@ -164,11 +178,17 @@ export function Navbar() {
                   <Button
                     variant="outline"
                     className="w-full h-14 rounded-2xl text-lg font-bold bg-transparent"
+                    asChild
                   >
-                    Log in
+                    <Link href="https://app.wakasub.com/login">Log in</Link>
                   </Button>
-                  <Button className="w-full h-14 rounded-2xl text-lg font-bold shadow-lg shadow-primary/20">
-                    Get Started
+                  <Button
+                    className="w-full h-14 rounded-2xl text-lg font-bold shadow-lg shadow-primary/20"
+                    asChild
+                  >
+                    <Link href="https://app.wakasub.com/register">
+                      Get Started
+                    </Link>
                   </Button>
                 </motion.div>
               </div>

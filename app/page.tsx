@@ -97,8 +97,11 @@ export default function LandingPage() {
             <Button
               size="lg"
               className="rounded-full px-8 h-14 text-lg font-semibold w-full sm:w-auto"
+              asChild
             >
-              Get Started for free
+              <Link href="https://app.wakasub.com/register">
+                Get Started for free
+              </Link>
             </Button>
             <Button
               size="lg"
@@ -362,9 +365,12 @@ export default function LandingPage() {
             <Button
               size="lg"
               variant="secondary"
-              className="rounded-full px-12 h-16 text-xl font-bold hover:scale-105 transition-transform"
+              className="rounded-full px-12 h-16 text-xl flex items-center justify-center font-bold hover:scale-105 transition-transform"
+              asChild
             >
-              Get Started for free
+              <Link href="https://app.wakasub.com/register">
+                Get Started for free
+              </Link>
             </Button>
           </motion.div>
         </div>
@@ -384,7 +390,8 @@ export default function LandingPage() {
             <Link href="#">Status</Link>
           </div>
           <p className="text-sm text-muted-foreground">
-            © 2026 Wakasub Technologies. All rights reserved.
+            © {new Date().getFullYear()} Wakasub Technologies. All rights
+            reserved.
           </p>
         </div>
       </footer>
