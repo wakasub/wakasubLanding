@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Smartphone, Wifi, Tv, Zap, Info } from "lucide-react";
+import { Menu, X, Smartphone, Wifi, Tv, Zap, Info, Users } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
@@ -63,11 +63,11 @@ export function Navbar() {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
-          {["Features", "How it works", "Pricing", "Testimonials"].map(
+          {["Features", "How it works", "Internship", "Testimonials"].map(
             (item) => (
               <Link
                 key={item}
-                href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
+                href={item === "Internship" ? "/internship" : `#${item.toLowerCase().replace(/\s+/g, "-")}`}
                 className="text-sm font-medium hover:text-primary transition-colors"
               >
                 {item}
@@ -139,8 +139,9 @@ export function Navbar() {
             >
               <div className="flex flex-col gap-6 w-full ">
                 {[
-                  { name: "Features", icon: Zap, href: "#features" },
-                  { name: "How it works", icon: Info, href: "#how-it-works" },
+                  { name: "Features", icon: Zap, href: "/#features" },
+                  { name: "How it works", icon: Info, href: "/#how-it-works" },
+                  { name: "Internship", icon: Users, href: "/internship" },
                   { name: "Airtime", icon: Smartphone, href: "#" },
                   { name: "Data", icon: Wifi, href: "#" },
                   { name: "Cable TV", icon: Tv, href: "#" },
