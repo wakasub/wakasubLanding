@@ -9,8 +9,8 @@ export async function POST(req: Request) {
     const { fullName, email, phoneNumber, courseOfStudy, level, department, reasons } = data
 
     const { data: resendData, error } = await resend.emails.send({
-      from: "Internship Program <onboarding@resend.dev>",
-      to: ["contact@wakasub.com"],
+      from: "Internship Program <noreply@wakasub.com>",
+      to: ["wakasub321@gmail.com"],
       subject: `New Internship Application: ${fullName}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #eee; padding: 20px; border-radius: 10px;">
