@@ -5,6 +5,7 @@ import Image from "next/image";
 
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/navbar";
+import { InternshipModal } from "@/components/internship-modal";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -52,6 +53,7 @@ export default function LandingPage() {
   return (
     <main className="min-h-screen">
       <Navbar />
+      <InternshipModal />
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
@@ -68,7 +70,7 @@ export default function LandingPage() {
         <div className="absolute top-0 right-0 -z-10 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3 animate-pulse" />
         <div className="absolute bottom-0 left-0 -z-10 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px] -translate-x-1/3 translate-y-1/3" />
 
-        <div className="container mx-auto px-6 text-center relative z-20">
+        <div className="container mx-auto px-4 text-center relative z-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -146,7 +148,7 @@ export default function LandingPage() {
                   >
                     {brand}
                   </span>
-                )
+                ),
               )}
             </div>
           </motion.div>
