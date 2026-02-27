@@ -68,9 +68,14 @@ export function Navbar() {
               <Link
                 key={item}
                 href={item === "Internship" ? "/internship" : `#${item.toLowerCase().replace(/\s+/g, "-")}`}
-                className="text-sm font-medium hover:text-primary transition-colors"
+                className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1.5"
               >
                 {item}
+                {item === "Internship" && (
+                  <span className="text-[10px] bg-destructive/10 text-destructive px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                    Closed
+                  </span>
+                )}
               </Link>
             )
           )}

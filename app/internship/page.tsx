@@ -29,6 +29,7 @@ import {
   Zap,
   Briefcase,
   GraduationCap,
+  Lock,
 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -158,10 +159,10 @@ export default function InternshipPage() {
             transition={{ duration: 0.5 }}
           >
             <Badge
-              variant="secondary"
-              className="mb-6 rounded-full px-4 py-1.5 bg-primary/10 text-primary border-none text-sm font-medium"
+              variant="destructive"
+              className="mb-6 rounded-full px-4 py-1.5 bg-destructive/10 text-destructive border-none text-sm font-medium"
             >
-              Batch A • First Cohort
+              Applications Closed
             </Badge>
           </motion.div>
 
@@ -265,139 +266,21 @@ export default function InternshipPage() {
                   </div>
                 </div>
 
-                <div className="p-4 md:p-12 bg-background">
-                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="fullName" className="mb-1">
-                        Full Name
-                      </Label>
-                      <Input
-                        id="fullName"
-                        placeholder="John Doe"
-                        {...register("fullName")}
-                        className={errors.fullName ? "border-destructive" : ""}
-                      />
-                      {errors.fullName && (
-                        <p className="text-xs text-destructive">
-                          {errors.fullName.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="email">Email Address</Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          placeholder="john@example.com"
-                          {...register("email")}
-                          className={errors.email ? "border-destructive" : ""}
-                        />
-                        {errors.email && (
-                          <p className="text-xs text-destructive">
-                            {errors.email.message}
-                          </p>
-                        )}
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="phoneNumber">Phone Number</Label>
-                        <Input
-                          id="phoneNumber"
-                          placeholder="08012345678"
-                          {...register("phoneNumber")}
-                          className={
-                            errors.phoneNumber ? "border-destructive" : ""
-                          }
-                        />
-                        {errors.phoneNumber && (
-                          <p className="text-xs text-destructive">
-                            {errors.phoneNumber.message}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="courseOfStudy">Course of Study</Label>
-                        <Input
-                          id="courseOfStudy"
-                          placeholder="Computer Science"
-                          {...register("courseOfStudy")}
-                          className={
-                            errors.courseOfStudy ? "border-destructive" : ""
-                          }
-                        />
-                        {errors.courseOfStudy && (
-                          <p className="text-xs text-destructive">
-                            {errors.courseOfStudy.message}
-                          </p>
-                        )}
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="level">Level / Year</Label>
-                        <Input
-                          id="level"
-                          placeholder="300 Level"
-                          {...register("level")}
-                          className={errors.level ? "border-destructive" : ""}
-                        />
-                        {errors.level && (
-                          <p className="text-xs text-destructive">
-                            {errors.level.message}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="space-y-2 ">
-                      <Label htmlFor="department">Preferred Department</Label>
-                      <select
-                        id="department"
-                        {...register("department")}
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                      >
-                        <option value="">Select a department</option>
-                        {departments.map((dept) => (
-                          <option key={dept.id} value={dept.name}>
-                            {dept.name}
-                          </option>
-                        ))}
-                      </select>
-                      {errors.department && (
-                        <p className="text-xs text-destructive">
-                          {errors.department.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="reasons">
-                        Why do you want to join Wakasub?
-                      </Label>
-                      <Textarea
-                        id="reasons"
-                        placeholder="Tell us why you're interested in this internship..."
-                        className={`min-h-[120px] ${errors.reasons ? "border-destructive" : ""}`}
-                        {...register("reasons")}
-                      />
-                      {errors.reasons && (
-                        <p className="text-xs text-destructive">
-                          {errors.reasons.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <Button
-                      type="submit"
-                      className="w-full h-12 rounded-xl text-lg font-bold"
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? "Submitting..." : "Apply Now"}
-                      <Send className="ml-2 w-4 h-4" />
-                    </Button>
-                  </form>
+                <div className="p-4 md:p-12 bg-background flex flex-col items-center justify-center text-center">
+                  <div className="w-16 h-16 bg-destructive/10 rounded-full flex items-center justify-center mb-6">
+                    <Lock className="text-destructive w-8 h-8" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4">Batch A Closed</h3>
+                  <p className="text-muted-foreground mb-8">
+                    Thank you for your interest! Applications for the Batch A
+                    internship program are now closed.
+                  </p>
+                  <Button asChild variant="outline" className="rounded-xl px-8">
+                    <Link href="/">Return to Home</Link>
+                  </Button>
+                  <p className="mt-8 text-xs text-muted-foreground">
+                    Follow us on social media for updates on future cohorts.
+                  </p>
                 </div>
               </div>
             </Card>
