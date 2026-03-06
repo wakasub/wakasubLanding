@@ -53,14 +53,14 @@ export default function LandingPage() {
   return (
     <main className="min-h-screen">
       <Navbar />
-      <InternshipModal />
+      {/* <InternshipModal /> */}
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
         {/* Closed Internship Banner */}
-        <div className="absolute top-0 left-0 w-full bg-destructive text-destructive-foreground py-2 text-center text-xs font-bold z-[60] tracking-wider uppercase">
+        {/* <div className="absolute top-0 left-0 w-full bg-destructive text-destructive-foreground py-2 text-center text-xs font-bold z-[60] tracking-wider uppercase">
           Batch A Internship Applications are now Closed
-        </div>
+        </div> */}
         {/* <div className="absolute inset-0 -z-20">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,hsl(var(--background))_100%)] z-10" />
           <div className="absolute inset-0 bg-background/60 backdrop-blur-[2px] z-10" />
