@@ -24,12 +24,16 @@ import {
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: "easeOut" as const },
+  },
 };
 
 const stagger = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.1 } },
+  show: { transition: { staggerChildren: 0.09 } },
 };
 
 const departments = [
@@ -38,24 +42,28 @@ const departments = [
     name: "Brand Ambassadors",
     desc: "Represent Wakasub in your university and community. Drive adoption and build local trust.",
     color: "bg-blue-500",
+    glow: "shadow-blue-500/30",
   },
   {
     icon: Megaphone,
     name: "Social Media",
     desc: "Create content, manage campaigns, and grow our digital presence across platforms.",
     color: "bg-violet-500",
+    glow: "shadow-violet-500/30",
   },
   {
     icon: Headset,
     name: "Customer Support",
     desc: "Help our users navigate the platform and resolve issues with care and clarity.",
     color: "bg-orange-500",
+    glow: "shadow-orange-500/30",
   },
   {
     icon: Palette,
     name: "Graphics Design",
     desc: "Design visual assets, marketing materials, and UI illustrations for the brand.",
     color: "bg-pink-500",
+    glow: "shadow-pink-500/30",
   },
 ];
 
@@ -64,31 +72,37 @@ const benefits = [
     icon: Zap,
     title: "Real impact",
     desc: "You're not shadowing — you're contributing to a platform used by thousands of Nigerians every day.",
+    accent: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
   },
   {
     icon: Layers,
     title: "Modern tooling",
     desc: "Work with Next.js, Tailwind CSS, and cloud-native tools inside a real production environment.",
+    accent: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
   },
   {
     icon: Users,
     title: "Cross-team exposure",
     desc: "Collaborate across engineering, support, and marketing to see how a full-scale product operates.",
+    accent: "bg-violet-500/10 text-violet-600 dark:text-violet-400",
   },
   {
     icon: Briefcase,
     title: "Career acceleration",
     desc: "Get a certificate, a strong reference, and a portfolio piece from a leading Nigerian fintech.",
+    accent: "bg-green-500/10 text-green-600 dark:text-green-400",
   },
   {
     icon: GraduationCap,
     title: "Direct mentorship",
     desc: "Learn from people who have actually built and scaled tech products from scratch.",
+    accent: "bg-orange-500/10 text-orange-600 dark:text-orange-400",
   },
   {
     icon: Network,
     title: "Professional network",
     desc: "Connect with driven peers and build relationships inside the Nigerian tech ecosystem.",
+    accent: "bg-teal-500/10 text-teal-600 dark:text-teal-400",
   },
 ];
 
@@ -98,14 +112,19 @@ export default function InternshipPage() {
       <Navbar />
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden pt-36 pb-24 md:pt-52 md:pb-32">
+      <section className="relative overflow-hidden pb-0 pt-36 md:pt-52">
+        {/* dot grid bg */}
+        <div className="bg-dot-grid pointer-events-none absolute inset-0 -z-10 opacity-60" />
+        {/* orbs */}
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute right-0 top-0 h-[600px] w-[600px] translate-x-1/2 -translate-y-1/4 rounded-full bg-primary/8 blur-[130px]" />
+          <div className="absolute right-0 top-0 h-[600px] w-[600px] translate-x-1/2 -translate-y-1/4 rounded-full bg-primary/10 blur-[140px]" />
+          <div className="absolute bottom-0 left-0 h-[400px] w-[400px] -translate-x-1/3 translate-y-1/3 rounded-full bg-blue-400/8 blur-[100px]" />
         </div>
 
-        <div className="container mx-auto px-6 text-center">
+        <div className="container mx-auto px-6 pb-24 text-center">
+          {/* Closed badge */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-destructive/20 bg-destructive/8 px-4 py-1.5 text-sm font-medium text-destructive"
@@ -117,12 +136,14 @@ export default function InternshipPage() {
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.1 }}
-            className="mx-auto mb-6 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight md:text-7xl"
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mx-auto mb-6 max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight md:text-7xl"
           >
             Launch your career
             <br />
-            <span className="text-primary">with Wakasub</span>
+            <span className="bg-linear-to-r from-primary via-blue-400 to-primary bg-clip-text text-transparent">
+              with Wakasub
+            </span>
           </motion.h1>
 
           <motion.p
@@ -139,13 +160,13 @@ export default function InternshipPage() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.3 }}
-            className="flex flex-wrap items-center justify-center gap-4"
+            className="flex flex-wrap items-center justify-center gap-3"
           >
-            <div className="flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium shadow-sm">
+            <div className="flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-2 text-sm font-medium shadow-sm backdrop-blur-sm">
               <Calendar size={14} className="text-primary" />
               Batch A deadline: Feb 22, 2026
             </div>
-            <div className="flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium shadow-sm">
+            <div className="flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-2 text-sm font-medium shadow-sm backdrop-blur-sm">
               <Users size={14} className="text-primary" />4 open departments
             </div>
           </motion.div>
@@ -179,16 +200,16 @@ export default function InternshipPage() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+            className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
           >
             {departments.map((d) => (
               <motion.div
                 key={d.name}
                 variants={fadeUp}
-                className="flex flex-col rounded-2xl border border-border/50 bg-background p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5"
+                className="group flex flex-col rounded-2xl border border-border/50 bg-background p-7 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
               >
                 <div
-                  className={`mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl ${d.color} shadow-md`}
+                  className={`mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl ${d.color} shadow-lg ${d.glow} transition-transform duration-300 group-hover:scale-110`}
                 >
                   <d.icon className="text-white" size={22} />
                 </div>
@@ -229,19 +250,21 @@ export default function InternshipPage() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.15 }}
-            className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+            className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3"
           >
             {benefits.map((b, i) => (
               <motion.div
                 key={i}
                 variants={fadeUp}
-                className="flex gap-5 rounded-2xl border border-border/50 bg-card p-7"
+                className="flex gap-5 rounded-2xl border border-border/50 bg-card p-7 transition-shadow hover:shadow-md"
               >
-                <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
-                  <b.icon className="text-primary" size={18} />
+                <div
+                  className={`mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${b.accent}`}
+                >
+                  <b.icon size={20} />
                 </div>
                 <div>
-                  <h3 className="mb-2 text-base font-bold">{b.title}</h3>
+                  <h3 className="mb-1.5 text-base font-bold">{b.title}</h3>
                   <p className="text-sm leading-relaxed text-muted-foreground">
                     {b.desc}
                   </p>
@@ -252,47 +275,61 @@ export default function InternshipPage() {
         </div>
       </section>
 
-      {/* ── Application Status ── */}
-      <section id="apply" className="py-28 bg-secondary/30">
-        <div className="container mx-auto px-6">
-          <div className="mx-auto max-w-3xl overflow-hidden rounded-3xl border border-border/50 bg-background shadow-xl md:rounded-[2.5rem]">
-            <div className="grid grid-cols-1 md:grid-cols-2">
-              {/* Left panel */}
-              <div className="bg-primary p-10 text-primary-foreground md:p-12">
-                <p className="mb-2 text-xs font-bold uppercase tracking-widest text-primary-foreground/60">
-                  Batch A • 2026
-                </p>
-                <h2 className="mb-5 text-3xl font-bold leading-tight">
-                  Internship
-                  <br />
-                  Program
-                </h2>
-                <p className="mb-10 text-sm leading-relaxed text-primary-foreground/75">
-                  A hands-on, paid internship for Nigerian students. Real work,
-                  real mentorship, and a launch pad into tech.
-                </p>
+      {/* ── Application status ── */}
+      <section
+        id="apply"
+        className="relative overflow-hidden bg-secondary/30 py-28"
+      >
+        {/* subtle grid */}
+        <div className="pointer-events-none absolute inset-0 opacity-30">
+          <div className="bg-dot-grid absolute inset-0 opacity-40" />
+        </div>
 
-                <div className="space-y-5">
-                  {[
-                    "Certificate of completion",
-                    "Mentorship from industry experts",
-                    "Cross-functional team experience",
-                    "Professional reference on request",
-                  ].map((item) => (
-                    <div key={item} className="flex items-center gap-3">
-                      <CheckCircle2
-                        size={16}
-                        className="shrink-0 text-primary-foreground/60"
-                      />
-                      <span className="text-sm font-medium">{item}</span>
-                    </div>
-                  ))}
+        <div className="container relative mx-auto px-6">
+          <div className="mx-auto max-w-3xl overflow-hidden rounded-3xl border border-border/50 bg-background shadow-2xl shadow-black/5 ring-1 ring-black/5 dark:ring-white/5 md:rounded-[2.5rem]">
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              {/* Left — brand panel */}
+              <div className="relative overflow-hidden bg-primary p-10 text-primary-foreground md:p-12">
+                {/* inner grid lines */}
+                <div className="pointer-events-none absolute inset-0 opacity-[0.06]">
+                  <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-size-[28px_28px]" />
+                </div>
+                <div className="relative">
+                  <p className="mb-2 text-xs font-bold uppercase tracking-widest text-primary-foreground/50">
+                    Batch A &bull; 2026
+                  </p>
+                  <h2 className="mb-5 text-3xl font-bold leading-tight">
+                    Internship
+                    <br />
+                    Program
+                  </h2>
+                  <p className="mb-10 text-sm leading-relaxed text-primary-foreground/70">
+                    A hands-on internship for Nigerian students. Real work, real
+                    mentorship, and a launch pad into tech.
+                  </p>
+
+                  <div className="space-y-4">
+                    {[
+                      "Certificate of completion",
+                      "Mentorship from industry experts",
+                      "Cross-functional team experience",
+                      "Professional reference on request",
+                    ].map((item) => (
+                      <div key={item} className="flex items-center gap-3">
+                        <CheckCircle2
+                          size={15}
+                          className="shrink-0 text-primary-foreground/50"
+                        />
+                        <span className="text-sm font-medium">{item}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              {/* Right panel */}
+              {/* Right — closed state */}
               <div className="flex flex-col items-center justify-center p-10 text-center md:p-12">
-                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-destructive/10">
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-destructive/20 bg-destructive/8">
                   <Lock className="h-7 w-7 text-destructive" />
                 </div>
                 <h3 className="mb-3 text-2xl font-bold">Batch A is closed</h3>
@@ -300,17 +337,38 @@ export default function InternshipPage() {
                   Thank you for your interest. Applications for the first cohort
                   are now closed. Follow us for updates on Batch B.
                 </p>
-                <Button
-                  asChild
-                  className="rounded-full px-8"
-                  variant="outline"
-                >
+
+                {/* Timeline */}
+                <div className="mb-8 w-full rounded-xl border border-border/50 bg-secondary/40 p-4 text-left">
+                  <div className="space-y-3">
+                    {[
+                      { label: "Batch A", status: "Closed", done: true },
+                      { label: "Batch B", status: "Coming soon", done: false },
+                    ].map((b) => (
+                      <div key={b.label} className="flex items-center gap-3">
+                        <div
+                          className={`h-2.5 w-2.5 rounded-full ${b.done ? "bg-destructive" : "bg-primary animate-pulse"}`}
+                        />
+                        <span className="flex-1 text-sm font-medium">
+                          {b.label}
+                        </span>
+                        <span
+                          className={`text-xs font-semibold ${b.done ? "text-muted-foreground" : "text-primary"}`}
+                        >
+                          {b.status}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <Button asChild className="w-full rounded-full" variant="outline">
                   <Link href="/">
                     Back to home
                     <ArrowRight size={14} className="ml-2" />
                   </Link>
                 </Button>
-                <p className="mt-6 text-xs text-muted-foreground">
+                <p className="mt-5 text-xs text-muted-foreground">
                   Questions? Reach us via our social media channels.
                 </p>
               </div>
@@ -333,11 +391,12 @@ export default function InternshipPage() {
               <span className="font-bold">WakaSub</span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Wakasub Technologies Ltd. Internship Program Batch A.
+              © {new Date().getFullYear()} Wakasub Technologies Ltd. Internship
+              Program Batch A.
             </p>
             <Link
               href="/"
-              className="text-sm font-medium text-primary hover:underline"
+              className="text-sm font-medium text-primary transition-colors hover:underline"
             >
               Return to main site
             </Link>

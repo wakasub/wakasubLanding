@@ -118,6 +118,37 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes marquee-scroll-reverse {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+.animate-marquee {
+  animation: marquee-scroll 32s linear infinite;
+}
+
+.animate-marquee-slow {
+  animation: marquee-scroll 48s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-scroll-reverse 38s linear infinite;
+}
+
+.bg-dot-grid {
+  background-image: radial-gradient(circle, oklch(0.88 0.02 250) 1.5px, transparent 1.5px);
+  background-size: 28px 28px;
+}
+
+.dark .bg-dot-grid {
+  background-image: radial-gradient(circle, oklch(0.22 0.04 250) 1.5px, transparent 1.5px);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
