@@ -2,299 +2,346 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/navbar";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import {
-  CheckCircle2,
-  Send,
   Users,
   Megaphone,
   Headset,
   Palette,
-  ArrowRight,
   Calendar,
-  Layers,
   Zap,
+  Layers,
   Briefcase,
   GraduationCap,
+  Network,
+  ArrowRight,
   Lock,
+  CheckCircle2,
 } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { toast } from "sonner";
 
-const formSchema = z.object({
-  fullName: z.string().min(2, "Full name is required"),
-  email: z.string().email("Invalid email address"),
-  phoneNumber: z.string().min(10, "Phone number is required"),
-  courseOfStudy: z.string().min(2, "Course of study is required"),
-  level: z.string().min(1, "Level is required"),
-  department: z.string().min(1, "Please select a department"),
-  reasons: z
-    .string()
-    .min(10, "Please provide reasons (at least 10 characters)"),
-});
+const fadeUp = {
+  hidden: { opacity: 0, y: 32 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
+};
 
-type FormData = z.infer<typeof formSchema>;
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1 } },
+};
+
+const departments = [
+  {
+    icon: Users,
+    name: "Brand Ambassadors",
+    desc: "Represent Wakasub in your university and community. Drive adoption and build local trust.",
+    color: "bg-blue-500",
+  },
+  {
+    icon: Megaphone,
+    name: "Social Media",
+    desc: "Create content, manage campaigns, and grow our digital presence across platforms.",
+    color: "bg-violet-500",
+  },
+  {
+    icon: Headset,
+    name: "Customer Support",
+    desc: "Help our users navigate the platform and resolve issues with care and clarity.",
+    color: "bg-orange-500",
+  },
+  {
+    icon: Palette,
+    name: "Graphics Design",
+    desc: "Design visual assets, marketing materials, and UI illustrations for the brand.",
+    color: "bg-pink-500",
+  },
+];
+
+const benefits = [
+  {
+    icon: Zap,
+    title: "Real impact",
+    desc: "You're not shadowing — you're contributing to a platform used by thousands of Nigerians every day.",
+  },
+  {
+    icon: Layers,
+    title: "Modern tooling",
+    desc: "Work with Next.js, Tailwind CSS, and cloud-native tools inside a real production environment.",
+  },
+  {
+    icon: Users,
+    title: "Cross-team exposure",
+    desc: "Collaborate across engineering, support, and marketing to see how a full-scale product operates.",
+  },
+  {
+    icon: Briefcase,
+    title: "Career acceleration",
+    desc: "Get a certificate, a strong reference, and a portfolio piece from a leading Nigerian fintech.",
+  },
+  {
+    icon: GraduationCap,
+    title: "Direct mentorship",
+    desc: "Learn from people who have actually built and scaled tech products from scratch.",
+  },
+  {
+    icon: Network,
+    title: "Professional network",
+    desc: "Connect with driven peers and build relationships inside the Nigerian tech ecosystem.",
+  },
+];
 
 export default function InternshipPage() {
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(formSchema),
-  });
-
-  const onSubmit = async (data: FormData) => {
-    setIsSubmitting(true);
-    try {
-      const response = await fetch("/api/internship", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        toast.success("Application submitted successfully!");
-        reset();
-      } else {
-        throw new Error("Failed to submit application");
-      }
-    } catch (error) {
-      toast.error("Something went wrong. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const departments = [
-    {
-      id: "ambassadors",
-      name: "Ambassadors",
-      icon: Users,
-      desc: "Represent Wakasub in your community.",
-    },
-    {
-      id: "social-media",
-      name: "Social Media Managers",
-      icon: Megaphone,
-      desc: "Help us grow our digital presence.",
-    },
-    {
-      id: "customer-support",
-      name: "Customer Supports",
-      icon: Headset,
-      desc: "Assist our users with their needs.",
-    },
-    {
-      id: "graphics-design",
-      name: "Graphics Design",
-      icon: Palette,
-      desc: "Create stunning visuals for our brand.",
-    },
-  ];
-
-  const benefits = [
-    {
-      title: "Hands-on Impact",
-      desc: "Don't just observe—contribute. Work on the actual engine that powers airtime and data for thousands of Nigerians daily.",
-      icon: Zap,
-    },
-    {
-      title: "Tech Stack Mastery",
-      desc: "Get proficient with modern tools like Next.js, Tailwind CSS, and cloud-native architectures in a fast-paced environment.",
-      icon: Layers,
-    },
-    {
-      title: "Cross-Functional Collaboration",
-      desc: "Bridge the gap between engineering, support, and marketing. Understand how a full-scale VTU platform operates.",
-      icon: Users,
-    },
-    {
-      title: "Early Career Acceleration",
-      desc: "Kickstart your professional journey with a certificate and references from a leading fintech innovator in Nigeria.",
-      icon: Briefcase,
-    },
-    {
-      title: "Mentorship",
-      desc: "Learn directly from industry experts who have built and scaled successful tech products from the ground up.",
-      icon: GraduationCap,
-    },
-    {
-      title: "Networking",
-      desc: "Connect with like-minded individuals and build lasting professional relationships within the Nigerian tech ecosystem.",
-      icon: CheckCircle2,
-    },
-  ];
-
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 md:pt-48 md:pb-32 bg-secondary/30 relative overflow-hidden">
-        <div className="absolute top-0 right-0 -z-10 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3" />
+      {/* ── Hero ── */}
+      <section className="relative overflow-hidden pt-36 pb-24 md:pt-52 md:pb-32">
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute right-0 top-0 h-[600px] w-[600px] translate-x-1/2 -translate-y-1/4 rounded-full bg-primary/8 blur-[130px]" />
+        </div>
 
-        <div className="container mx-auto px-4 text-center">
+        <div className="container mx-auto px-6 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4 }}
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-destructive/20 bg-destructive/8 px-4 py-1.5 text-sm font-medium text-destructive"
           >
-            <Badge
-              variant="destructive"
-              className="mb-6 rounded-full px-4 py-1.5 bg-destructive/10 text-destructive border-none text-sm font-medium"
-            >
-              Applications Closed
-            </Badge>
+            <Lock size={12} />
+            Applications closed — Batch A
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl md:text-7xl font-bold tracking-tight mb-8 leading-tight"
+            transition={{ duration: 0.55, delay: 0.1 }}
+            className="mx-auto mb-6 max-w-3xl text-4xl font-bold leading-[1.1] tracking-tight md:text-7xl"
           >
-            Launch Your Career <br />
-            <span className="text-primary italic">with Wakasub</span>
+            Launch your career
+            <br />
+            <span className="text-primary">with Wakasub</span>
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground mb-10"
+            transition={{ duration: 0.55, delay: 0.2 }}
+            className="mx-auto mb-10 max-w-xl text-lg text-muted-foreground"
           >
-            Join the Wakasub Internship program and gain hands-on experience in
-            the fastest growing VTU platform in Nigeria. We're looking for
-            passionate students to join our first-ever batch!
+            Join our internship program and gain real experience building one of
+            Nigeria&apos;s fastest-growing fintech platforms from the inside.
           </motion.p>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex items-center justify-center gap-4"
+            transition={{ duration: 0.55, delay: 0.3 }}
+            className="flex flex-wrap items-center justify-center gap-4"
           >
-            <div className="flex items-center gap-2 text-sm font-medium bg-background px-4 py-2 rounded-full border shadow-sm">
-              <Calendar className="w-4 h-4 text-primary" />
-              <span>Deadline: Feb 22, 2026</span>
+            <div className="flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium shadow-sm">
+              <Calendar size={14} className="text-primary" />
+              Batch A deadline: Feb 22, 2026
+            </div>
+            <div className="flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-sm font-medium shadow-sm">
+              <Users size={14} className="text-primary" />4 open departments
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Why Join Section */}
-      <section className="py-24">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">
-              Why Join Us?
-            </h2>
-            <p className="text-muted-foreground">
-              Gain real-world experience and build your network.
+      {/* ── Departments ── */}
+      <section className="bg-secondary/30 py-28">
+        <div className="container mx-auto px-6">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            className="mb-16 text-center"
+          >
+            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">
+              Departments
             </p>
-          </div>
+            <h2 className="mb-4 text-4xl font-bold md:text-5xl">
+              Find your role
+            </h2>
+            <p className="mx-auto max-w-md text-muted-foreground">
+              We&apos;re looking for driven students across four departments.
+              Pick the one that fits your skills.
+            </p>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {benefits.map((benefit, i) => (
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          >
+            {departments.map((d) => (
               <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="p-8 rounded-3xl border bg-card hover:shadow-lg transition-all h-full flex flex-col"
+                key={d.name}
+                variants={fadeUp}
+                className="flex flex-col rounded-2xl border border-border/50 bg-background p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5"
               >
-                <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center mb-6">
-                  <benefit.icon className="text-primary" />
+                <div
+                  className={`mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl ${d.color} shadow-md`}
+                >
+                  <d.icon className="text-white" size={22} />
                 </div>
-                <h3 className="text-xl font-bold mb-3">{benefit.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {benefit.desc}
+                <h3 className="mb-2 text-base font-bold">{d.name}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {d.desc}
                 </p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Form Section */}
-      <section id="apply" className="py-24 bg-secondary/20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <Card className="rounded-[2.5rem] border-none shadow-xl overflow-hidden">
-              <div className="grid grid-cols-1 md:grid-cols-2">
-                <div className="p-8 md:p-12 bg-primary text-primary-foreground">
-                  <h2 className="text-3xl font-bold mb-6">Application Form</h2>
-                  <p className="mb-10 text-primary-foreground/80 leading-relaxed">
-                    Fill out the form to apply for the Batch A internship
-                    program. Shortlisted candidates will be contacted via email.
-                  </p>
+      {/* ── Benefits ── */}
+      <section className="py-28">
+        <div className="container mx-auto px-6">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            className="mb-16 text-center"
+          >
+            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">
+              Why join
+            </p>
+            <h2 className="mb-4 text-4xl font-bold md:text-5xl">
+              What you&apos;ll gain
+            </h2>
+            <p className="mx-auto max-w-md text-muted-foreground">
+              This isn&apos;t a passive internship. You&apos;ll do real work,
+              learn real skills, and leave with something tangible.
+            </p>
+          </motion.div>
 
-                  <div className="space-y-6">
-                    {departments.map((dept) => (
-                      <div key={dept.id} className="flex gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
-                          <dept.icon size={20} />
-                        </div>
-                        <div>
-                          <h4 className="font-bold">{dept.name}</h4>
-                          <p className="text-sm text-primary-foreground/60">
-                            {dept.desc}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+            className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+          >
+            {benefits.map((b, i) => (
+              <motion.div
+                key={i}
+                variants={fadeUp}
+                className="flex gap-5 rounded-2xl border border-border/50 bg-card p-7"
+              >
+                <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
+                  <b.icon className="text-primary" size={18} />
                 </div>
+                <div>
+                  <h3 className="mb-2 text-base font-bold">{b.title}</h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {b.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
 
-                <div className="p-4 md:p-12 bg-background flex flex-col items-center justify-center text-center">
-                  <div className="w-16 h-16 bg-destructive/10 rounded-full flex items-center justify-center mb-6">
-                    <Lock className="text-destructive w-8 h-8" />
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4">Batch A Closed</h3>
-                  <p className="text-muted-foreground mb-8">
-                    Thank you for your interest! Applications for the Batch A
-                    internship program are now closed.
-                  </p>
-                  <Button asChild variant="outline" className="rounded-xl px-8">
-                    <Link href="/">Return to Home</Link>
-                  </Button>
-                  <p className="mt-8 text-xs text-muted-foreground">
-                    Follow us on social media for updates on future cohorts.
-                  </p>
+      {/* ── Application Status ── */}
+      <section id="apply" className="py-28 bg-secondary/30">
+        <div className="container mx-auto px-6">
+          <div className="mx-auto max-w-3xl overflow-hidden rounded-3xl border border-border/50 bg-background shadow-xl md:rounded-[2.5rem]">
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              {/* Left panel */}
+              <div className="bg-primary p-10 text-primary-foreground md:p-12">
+                <p className="mb-2 text-xs font-bold uppercase tracking-widest text-primary-foreground/60">
+                  Batch A • 2026
+                </p>
+                <h2 className="mb-5 text-3xl font-bold leading-tight">
+                  Internship
+                  <br />
+                  Program
+                </h2>
+                <p className="mb-10 text-sm leading-relaxed text-primary-foreground/75">
+                  A hands-on, paid internship for Nigerian students. Real work,
+                  real mentorship, and a launch pad into tech.
+                </p>
+
+                <div className="space-y-5">
+                  {[
+                    "Certificate of completion",
+                    "Mentorship from industry experts",
+                    "Cross-functional team experience",
+                    "Professional reference on request",
+                  ].map((item) => (
+                    <div key={item} className="flex items-center gap-3">
+                      <CheckCircle2
+                        size={16}
+                        className="shrink-0 text-primary-foreground/60"
+                      />
+                      <span className="text-sm font-medium">{item}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
-            </Card>
+
+              {/* Right panel */}
+              <div className="flex flex-col items-center justify-center p-10 text-center md:p-12">
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-destructive/10">
+                  <Lock className="h-7 w-7 text-destructive" />
+                </div>
+                <h3 className="mb-3 text-2xl font-bold">Batch A is closed</h3>
+                <p className="mb-8 max-w-xs text-sm leading-relaxed text-muted-foreground">
+                  Thank you for your interest. Applications for the first cohort
+                  are now closed. Follow us for updates on Batch B.
+                </p>
+                <Button
+                  asChild
+                  className="rounded-full px-8"
+                  variant="outline"
+                >
+                  <Link href="/">
+                    Back to home
+                    <ArrowRight size={14} className="ml-2" />
+                  </Link>
+                </Button>
+                <p className="mt-6 text-xs text-muted-foreground">
+                  Questions? Reach us via our social media channels.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 border-t border-border mt-12 text-center">
-        <div className="container mx-auto px-4">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Wakasub Technologies. Internship
-            Program Batch A.
-          </p>
+      {/* ── Footer ── */}
+      <footer className="border-t border-border py-12">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+            <Link href="/" className="flex items-center gap-2">
+              <Image
+                src="/waka 512.png"
+                alt="WakaSub"
+                width={24}
+                height={24}
+              />
+              <span className="font-bold">WakaSub</span>
+            </Link>
+            <p className="text-sm text-muted-foreground">
+              © {new Date().getFullYear()} Wakasub Technologies Ltd. Internship Program Batch A.
+            </p>
+            <Link
+              href="/"
+              className="text-sm font-medium text-primary hover:underline"
+            >
+              Return to main site
+            </Link>
+          </div>
         </div>
       </footer>
     </main>
