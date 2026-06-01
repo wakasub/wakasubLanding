@@ -149,6 +149,30 @@
   background-image: radial-gradient(circle, oklch(0.22 0.04 250) 1.5px, transparent 1.5px);
 }
 
+.bg-grid-lines {
+  background-image:
+    linear-gradient(to right, oklch(0.88 0.02 250 / 0.7) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.88 0.02 250 / 0.7) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.dark .bg-grid-lines {
+  background-image:
+    linear-gradient(to right, oklch(0.22 0.04 250 / 0.5) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.22 0.04 250 / 0.5) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@keyframes giveaway-progress {
+  from { width: 0%; }
+  to { width: 50%; }
+}
+
+.animate-giveaway-progress {
+  animation: giveaway-progress 2s ease-out 0.8s forwards;
+  width: 0%;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

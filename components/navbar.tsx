@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Smartphone, Wifi, Tv, Zap, Info, Users } from "lucide-react";
+import { Menu, X, Smartphone, Wifi, Tv, Zap, Info, Users, Gift } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
@@ -63,22 +63,30 @@ export function Navbar() {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
-          {["Features", "How it works", "Internship", "Testimonials"].map(
-            (item) => (
-              <Link
-                key={item}
-                href={item === "Internship" ? "/internship" : `#${item.toLowerCase().replace(/\s+/g, "-")}`}
-                className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1.5"
-              >
-                {item}
-                {item === "Internship" && (
-                  <span className="text-[10px] bg-destructive/10 text-destructive px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider">
-                    Closed
-                  </span>
-                )}
-              </Link>
-            )
-          )}
+          {[
+            { label: "Features", href: "#features" },
+            { label: "Giveaway", href: "#giveaway" },
+            { label: "How it works", href: "#how-it-works" },
+            { label: "Internship", href: "/internship" },
+          ].map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1.5"
+            >
+              {item.label}
+              {item.label === "Giveaway" && (
+                <span className="text-[10px] bg-amber-500/10 text-amber-600 dark:text-amber-400 px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                  New
+                </span>
+              )}
+              {item.label === "Internship" && (
+                <span className="text-[10px] bg-destructive/10 text-destructive px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                  Closed
+                </span>
+              )}
+            </Link>
+          ))}
         </div>
 
         <div className="hidden md:flex items-center gap-4">
@@ -145,6 +153,7 @@ export function Navbar() {
               <div className="flex flex-col gap-6 w-full ">
                 {[
                   { name: "Features", icon: Zap, href: "/#features" },
+                  { name: "Giveaway", icon: Gift, href: "/#giveaway" },
                   { name: "How it works", icon: Info, href: "/#how-it-works" },
                   { name: "Internship", icon: Users, href: "/internship" },
                   { name: "Airtime", icon: Smartphone, href: "#" },
