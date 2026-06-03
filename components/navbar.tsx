@@ -1,25 +1,27 @@
 "use client";
 
 import React from "react";
-
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Smartphone, Wifi, Tv, Zap, Info, Users, Gift } from "lucide-react";
-import { AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
 import Image from "next/image";
+
+const navLinks = [
+  { label: "Services", href: "#services" },
+  { label: "Giveaway", href: "#giveaway", badge: "New" },
+  { label: "Resellers", href: "#resellers" },
+  { label: "How it works", href: "#how-it-works" },
+];
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "unset";
+    return () => { document.body.style.overflow = "unset"; };
   }, [mobileMenuOpen]);
 
   useEffect(() => {
@@ -32,64 +34,50 @@ export function Navbar() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-[50] transition-all duration-300 border-b ${
+      className={`fixed left-0 right-0 top-0 z-[50] border-b transition-all duration-300 ${
         mobileMenuOpen
-          ? "bg-background backdrop-blur-md py-3 border-border"
+          ? "border-border bg-background py-3"
           : isScrolled
-          ? "bg-background/80 backdrop-blur-md py-3 border-border"
-          : "bg-transparent py-5 border-transparent"
+          ? "border-border bg-background/80 py-3 backdrop-blur-md"
+          : "border-transparent bg-transparent py-5"
       }`}
     >
-      <div className="container mx-auto px-6 flex items-center justify-between">
+      <div className="container mx-auto flex items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-2">
           <Image src="/waka 512.png" alt="WakaSub" width={32} height={32} />
-          <span className="text-xl font-bold tracking-tighter hidden md:flex">
+          <span className="hidden text-xl font-bold tracking-tighter md:flex">
             {"WakaSub".split("").map((char, i) => (
               <motion.span
                 key={i}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  delay: 0.3 + i * 0.1,
-                  duration: 0.7,
-                  ease: "easeOut",
-                }}
+                transition={{ delay: 0.3 + i * 0.1, duration: 0.7, ease: "easeOut" }}
               >
-                {char === " " ? "\u00A0" : char}
+                {char}
               </motion.span>
             ))}
           </span>
         </Link>
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
-          {[
-            { label: "Features", href: "#features" },
-            { label: "Giveaway", href: "#giveaway" },
-            { label: "How it works", href: "#how-it-works" },
-            { label: "Internship", href: "/internship" },
-          ].map((item) => (
+        {/* Desktop nav */}
+        <div className="hidden items-center gap-8 md:flex">
+          {navLinks.map((item) => (
             <Link
               key={item.label}
               href={item.href}
-              className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1.5"
+              className="flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-primary"
             >
               {item.label}
-              {item.label === "Giveaway" && (
-                <span className="text-[10px] bg-amber-500/10 text-amber-600 dark:text-amber-400 px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider">
-                  New
-                </span>
-              )}
-              {item.label === "Internship" && (
-                <span className="text-[10px] bg-destructive/10 text-destructive px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider">
-                  Closed
+              {item.badge && (
+                <span className="rounded-full bg-amber-500/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
+                  {item.badge}
                 </span>
               )}
             </Link>
           ))}
         </div>
 
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden items-center gap-4 md:flex">
           <Button variant="ghost" size="sm" asChild>
             <Link href="https://app.wakasub.com/login">Log in</Link>
           </Button>
@@ -98,31 +86,19 @@ export function Navbar() {
           </Button>
         </div>
 
-        {/* Mobile Toggle */}
+        {/* Mobile toggle */}
         <button
-          className="md:hidden p-2 z-[60] relative"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="relative z-[60] p-2 md:hidden"
+          onClick={() => setMobileMenuOpen((o) => !o)}
           aria-label="Toggle menu"
         >
           <AnimatePresence mode="wait">
             {mobileMenuOpen ? (
-              <motion.div
-                key="close"
-                initial={{ rotate: -90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: 90, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-              >
+              <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
                 <X size={24} />
               </motion.div>
             ) : (
-              <motion.div
-                key="menu"
-                initial={{ rotate: 90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: -90, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-              >
+              <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
                 <Menu size={24} />
               </motion.div>
             )}
@@ -130,56 +106,43 @@ export function Navbar() {
         </button>
       </div>
 
+      {/* Mobile drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="fixed inset-0 bg-background/90 backdrop-blur-md z-[45] md:hidden"
+              className="fixed inset-0 z-[45] bg-background/90 backdrop-blur-md md:hidden"
             />
-
-            {/* Drawer */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-background border-l border-border z-[56] md:hidden p-8 pt-24 shadow-2xl h-screen"
+              className="fixed bottom-0 right-0 top-0 z-[56] h-screen w-[85%] max-w-sm border-l border-border bg-background p-8 pt-24 shadow-2xl md:hidden"
             >
-              <div className="flex flex-col gap-6 w-full ">
-                {[
-                  { name: "Features", icon: Zap, href: "/#features" },
-                  { name: "Giveaway", icon: Gift, href: "/#giveaway" },
-                  { name: "How it works", icon: Info, href: "/#how-it-works" },
-                  { name: "Internship", icon: Users, href: "/internship" },
-                  { name: "Airtime", icon: Smartphone, href: "#" },
-                  { name: "Data", icon: Wifi, href: "#" },
-                  { name: "Cable TV", icon: Tv, href: "#" },
-                  { name: "Electricity", icon: Zap, href: "#" },
-                ].map((item, i) => (
+              <div className="flex w-full flex-col gap-2">
+                {navLinks.map((item, i) => (
                   <motion.div
-                    key={item.name}
+                    key={item.label}
                     initial={{ x: 20, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.1 + i * 0.05 }}
+                    transition={{ delay: 0.05 + i * 0.05 }}
                   >
                     <Link
                       href={item.href}
-                      className="group flex items-center gap-4 text-xl font-bold tracking-tight hover:text-primary transition-colors"
+                      className="flex items-center justify-between rounded-xl px-4 py-3 text-lg font-semibold tracking-tight transition-colors hover:bg-secondary hover:text-primary"
                       onClick={() => setMobileMenuOpen(false)}
                     >
-                      <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center group-hover:bg-primary/10 group-hover:scale-110 transition-all">
-                        {React.createElement(item.icon, {
-                          size: 20,
-                          className:
-                            "group-hover:text-primary transition-colors",
-                        })}
-                      </div>
-                      {item.name}
+                      {item.label}
+                      {item.badge && (
+                        <span className="rounded-full bg-amber-500/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
+                          {item.badge}
+                        </span>
+                      )}
                     </Link>
                   </motion.div>
                 ))}
@@ -187,23 +150,14 @@ export function Navbar() {
                 <motion.div
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.4 }}
+                  transition={{ delay: 0.3 }}
                   className="mt-8 flex flex-col gap-3"
                 >
-                  <Button
-                    variant="outline"
-                    className="w-full h-14 rounded-2xl text-lg font-bold bg-transparent"
-                    asChild
-                  >
-                    <Link href="https://app.wakasub.com/login">Log in</Link>
+                  <Button variant="outline" className="h-14 w-full rounded-2xl bg-transparent text-lg font-bold" asChild>
+                    <Link href="https://app.wakasub.com/login" onClick={() => setMobileMenuOpen(false)}>Log in</Link>
                   </Button>
-                  <Button
-                    className="w-full h-14 rounded-2xl text-lg font-bold shadow-lg shadow-primary/20"
-                    asChild
-                  >
-                    <Link href="https://app.wakasub.com/register">
-                      Get Started
-                    </Link>
+                  <Button className="h-14 w-full rounded-2xl text-lg font-bold shadow-lg shadow-primary/20" asChild>
+                    <Link href="https://app.wakasub.com/register" onClick={() => setMobileMenuOpen(false)}>Get Started</Link>
                   </Button>
                 </motion.div>
               </div>
