@@ -10,9 +10,10 @@ import Image from "next/image";
 
 const navLinks = [
   { label: "Services", href: "#services" },
-  { label: "Giveaway", href: "#giveaway", badge: "New" },
+  { label: "Giveaway", href: "#giveaway", badge: "New", badgeVariant: "amber" as const },
   { label: "Resellers", href: "#resellers" },
   { label: "How it works", href: "#how-it-works" },
+  { label: "Internship", href: "/internship", badge: "Closed", badgeVariant: "destructive" as const },
 ];
 
 export function Navbar() {
@@ -69,7 +70,13 @@ export function Navbar() {
             >
               {item.label}
               {item.badge && (
-                <span className="rounded-full bg-amber-500/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
+                <span
+                  className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider ${
+                    item.badgeVariant === "destructive"
+                      ? "bg-destructive/10 text-destructive"
+                      : "bg-amber-500/10 text-amber-600 dark:text-amber-400"
+                  }`}
+                >
                   {item.badge}
                 </span>
               )}
@@ -139,7 +146,13 @@ export function Navbar() {
                     >
                       {item.label}
                       {item.badge && (
-                        <span className="rounded-full bg-amber-500/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
+                        <span
+                          className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${
+                            item.badgeVariant === "destructive"
+                              ? "bg-destructive/10 text-destructive"
+                              : "bg-amber-500/10 text-amber-600 dark:text-amber-400"
+                          }`}
+                        >
                           {item.badge}
                         </span>
                       )}

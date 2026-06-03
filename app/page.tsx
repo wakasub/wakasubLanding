@@ -18,7 +18,6 @@ import {
   Gift,
   CheckCircle2,
   Trophy,
-  Send,
   Users,
   BarChart3,
   Play,
@@ -28,6 +27,8 @@ import {
   Globe,
   Layers,
   DollarSign,
+  Link2,
+  Copy,
 } from "lucide-react";
 
 const fadeUp = {
@@ -99,8 +100,8 @@ function AppleIcon({ size = 22 }: { size?: number }) {
 
 function GooglePlayIcon({ size = 22 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 512 512" fill="currentColor" aria-hidden>
-      <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l240.6-240.6L47 0zM425.2 225.6l-58.9-33.8-66.7 66.7 66.7 66.7 59.2-34c16.8-9.6 22.5-23.8 22.5-33.1 0-9.3-5.9-23.5-22.8-32.5zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z" />
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <path d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.487 1.487 0 0 0-.946-.138l11.04 10.932zm0 2.067l-11 10.933c.298.064.612.019.906-.138l13.306-7.522-3.212-3.273z" />
     </svg>
   );
 }
@@ -191,7 +192,7 @@ export default function LandingPage() {
                   className="h-13 rounded-full bg-transparent px-8 text-base font-medium gap-2.5"
                   asChild
                 >
-                  <Link href="#how-it-works">
+                  <Link href="#demo">
                     <div className="flex h-5 w-5 items-center justify-center rounded-full bg-foreground/10">
                       <Play size={9} className="fill-current ml-0.5" />
                     </div>
@@ -236,8 +237,8 @@ export default function LandingPage() {
                   <Gift size={13} className="text-amber-500" />
                 </div>
                 <div>
-                  <p className="text-xs font-semibold">Giveaway sent</p>
-                  <p className="text-[10px] text-muted-foreground">12 recipients ✓</p>
+                  <p className="text-xs font-semibold">Giveaway live</p>
+                  <p className="text-[10px] text-muted-foreground">47 claimed so far</p>
                 </div>
               </motion.div>
 
@@ -281,7 +282,7 @@ export default function LandingPage() {
                     {[
                       { label: "MTN 1GB Data", amt: "−₦280", time: "Just now" },
                       { label: "DSTV Compact", amt: "−₦8,000", time: "2h ago" },
-                      { label: "Giveaway • 12 people", amt: "−₦12,000", time: "Yesterday" },
+                      { label: "Giveaway • 47 claimed", amt: "−₦23,500", time: "Yesterday" },
                     ].map((tx) => (
                       <div key={tx.label} className="flex items-center justify-between rounded-lg px-1 py-1.5">
                         <div className="flex items-center gap-2">
@@ -342,7 +343,84 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── 4. CORE SERVICES ── */}
+      {/* ── 4. VIDEO DEMO ── */}
+      <section id="demo" className="py-24 md:py-32">
+        <div className="container mx-auto px-6">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            className="mb-12 text-center"
+          >
+            <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">Product Demo</p>
+            <h2 className="mb-4 text-4xl font-bold md:text-5xl">See Wakasub in action</h2>
+            <p className="mx-auto max-w-lg text-lg text-muted-foreground">
+              Watch a full product walkthrough — from wallet funding to instant giveaway delivery.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+            className="mx-auto max-w-4xl"
+          >
+            <div className="relative aspect-video overflow-hidden rounded-3xl border border-border/60 bg-foreground shadow-2xl shadow-black/20">
+              {/* Background gradient */}
+              <div className="absolute inset-0 bg-linear-to-br from-primary/25 via-foreground to-foreground" />
+
+              {/* Subtle grid */}
+              <div className="pointer-events-none absolute inset-0 opacity-[0.04]">
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-size-[40px_40px]" />
+              </div>
+
+              {/* Center glow */}
+              <div className="pointer-events-none absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/20 blur-[80px]" />
+
+              {/* macOS-style top bar */}
+              <div className="absolute left-5 right-5 top-5 flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <div className="h-2.5 w-2.5 rounded-full bg-white/15" />
+                  <div className="h-2.5 w-2.5 rounded-full bg-white/15" />
+                  <div className="h-2.5 w-2.5 rounded-full bg-white/15" />
+                </div>
+                <span className="rounded-full border border-white/10 bg-white/8 px-3 py-1 text-[11px] font-medium text-white/50 backdrop-blur-sm">
+                  HD • 2 min
+                </span>
+              </div>
+
+              {/* Center: play button + label */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-5">
+                <div className="relative flex items-center justify-center">
+                  <span className="absolute inline-flex h-20 w-20 animate-ping rounded-full bg-white/5" style={{ animationDuration: "2.5s" }} />
+                  <div className="relative flex h-16 w-16 items-center justify-center rounded-full border border-white/20 bg-white/10 shadow-2xl backdrop-blur-sm">
+                    <Play size={20} className="ml-1 fill-white text-white" />
+                  </div>
+                </div>
+                <div className="text-center">
+                  <p className="text-base font-semibold text-white/90">Full walkthrough coming soon</p>
+                  <p className="mt-1 text-sm text-white/40">Video is in production — check back shortly</p>
+                </div>
+              </div>
+
+              {/* Bottom: fake player chrome */}
+              <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/70 to-transparent px-5 pb-4 pt-10">
+                <div className="flex items-center gap-3">
+                  <Play size={11} className="shrink-0 fill-white/30 text-white/30" />
+                  <div className="h-[3px] flex-1 overflow-hidden rounded-full bg-white/15">
+                    <div className="h-full w-0 rounded-full bg-primary" />
+                  </div>
+                  <span className="text-[11px] font-medium tabular-nums text-white/40">0:00</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── 5. CORE SERVICES ── */}
       <section id="services" className="py-24 md:py-32">
         <div className="container mx-auto px-6">
           <motion.div
@@ -438,7 +516,7 @@ export default function LandingPage() {
               </div>
               <h3 className="mb-2 text-2xl font-bold">Giveaway</h3>
               <p className="mb-6 flex-1 text-sm leading-relaxed text-background/60">
-                Send airtime or data to 100 people at once — instantly. Perfect for community leaders, brand promotions, and group distributions.
+                Create a giveaway, share your link anywhere. Anyone who clicks can instantly claim their airtime or data — no manual sending needed.
               </p>
               <Link href="#giveaway" className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-400 transition-colors hover:text-amber-300">
                 See how it works <ArrowRight size={14} />
@@ -459,7 +537,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── 5. GIVEAWAY SPOTLIGHT ── */}
+      {/* ── 6. GIVEAWAY SPOTLIGHT ── */}
       <section
         id="giveaway"
         className="relative mx-4 my-8 overflow-hidden rounded-3xl bg-foreground py-20 text-background md:rounded-[2.5rem] md:py-28"
@@ -487,23 +565,23 @@ export default function LandingPage() {
               </div>
 
               <h2 className="mb-6 text-4xl font-bold leading-[1.05] md:text-5xl lg:text-6xl">
-                Send Airtime or Data
+                Drop a Giveaway.
                 <br />
-                to <span className="text-amber-400">100 People</span>
+                Share the Link.
                 <br />
-                in Seconds.
+                <span className="text-amber-400">Your People Claim.</span>
               </h2>
 
               <p className="mb-10 max-w-lg text-lg leading-relaxed text-background/55">
-                Select your contacts, set the amount, pick the network — Wakasub distributes instantly across MTN, Airtel, Glo, and 9mobile. Track every delivery in real time.
+                Create a giveaway in seconds, set the airtime or data amount, and share your unique link — on WhatsApp, Twitter, anywhere. Anyone who clicks claims their reward instantly. No manual sending, no spreadsheets.
               </p>
 
               <div className="mb-10 space-y-3">
                 {[
-                  "Select from contacts or enter numbers manually",
-                  "MTN, Airtel, Glo & 9mobile in one batch",
-                  "Up to 100 recipients per giveaway",
-                  "Live delivery status tracking per recipient",
+                  "Set up a giveaway in under 60 seconds",
+                  "Get a shareable link — post it anywhere",
+                  "Anyone with the link can claim their airtime or data",
+                  "Real-time tracking as claims roll in",
                 ].map((f) => (
                   <div key={f} className="flex items-center gap-3">
                     <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-amber-500/20">
@@ -520,13 +598,13 @@ export default function LandingPage() {
                 asChild
               >
                 <Link href="https://app.wakasub.com/register">
-                  Try Giveaway Free
+                  Create a Giveaway
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </motion.div>
 
-            {/* Right: Giveaway workflow card */}
+            {/* Right: Giveaway link card */}
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -535,85 +613,76 @@ export default function LandingPage() {
               className="w-full max-w-[340px] flex-shrink-0 md:self-center"
             >
               <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm">
+                {/* Header */}
                 <div className="flex items-center gap-3 border-b border-white/10 px-5 py-4">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/20">
                     <Gift size={16} className="text-amber-400" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold">New Giveaway</p>
+                    <p className="text-sm font-semibold">Christmas Giveaway 🎄</p>
                     <p className="text-[10px] text-background/45">by Adebayo O.</p>
                   </div>
                   <span className="ml-auto rounded-full bg-amber-500/20 px-2 py-0.5 text-[10px] font-bold text-amber-400">LIVE</span>
                 </div>
 
                 <div className="space-y-4 p-5">
-                  {/* Recipients */}
-                  <div>
-                    <div className="mb-2 flex items-center justify-between">
-                      <p className="text-[10px] font-semibold uppercase tracking-widest text-background/40">Recipients</p>
-                      <span className="text-xs font-semibold text-background/55">12 selected</span>
-                    </div>
-                    <div className="flex items-center">
-                      {[
-                        { initial: "A", color: "#3b82f6" },
-                        { initial: "C", color: "#8b5cf6" },
-                        { initial: "F", color: "#f59e0b" },
-                        { initial: "O", color: "#10b981" },
-                        { initial: "T", color: "#ef4444" },
-                      ].map((p, i) => (
-                        <div
-                          key={i}
-                          className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-foreground text-[11px] font-semibold text-white"
-                          style={{ backgroundColor: p.color, marginLeft: i > 0 ? "-8px" : "0", zIndex: 5 - i }}
-                        >
-                          {p.initial}
-                        </div>
-                      ))}
-                      <div
-                        className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-foreground bg-white/10 text-[10px] font-semibold"
-                        style={{ marginLeft: "-8px" }}
-                      >
-                        +7
-                      </div>
-                    </div>
-                    <div className="mt-2 flex gap-1.5 flex-wrap">
-                      {["MTN", "Airtel", "Glo", "9mobile"].map((n) => (
-                        <span key={n} className="rounded-full bg-white/10 px-2 py-0.5 text-[9px] font-bold text-background/60">{n}</span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Amount */}
+                  {/* Amount + slots */}
                   <div className="grid grid-cols-2 gap-2">
                     <div className="rounded-xl bg-white/5 p-3">
-                      <p className="mb-1 text-[10px] text-background/40">Per person</p>
-                      <p className="text-lg font-bold text-amber-400">₦1,000</p>
+                      <p className="mb-1 text-[10px] text-background/40">Per claim</p>
+                      <p className="text-lg font-bold text-amber-400">₦500</p>
+                      <p className="text-[10px] text-background/40">MTN Airtime</p>
                     </div>
                     <div className="rounded-xl bg-white/5 p-3">
-                      <p className="mb-1 text-[10px] text-background/40">Total</p>
-                      <p className="text-lg font-bold text-background/80">₦12,000</p>
+                      <p className="mb-1 text-[10px] text-background/40">Budget</p>
+                      <p className="text-lg font-bold text-background/80">₦50,000</p>
+                      <p className="text-[10px] text-background/40">100 slots</p>
                     </div>
                   </div>
 
-                  {/* Delivery status */}
+                  {/* Shareable link */}
+                  <div>
+                    <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-widest text-background/40">Your Link</p>
+                    <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/8 px-3 py-2.5">
+                      <Link2 size={12} className="shrink-0 text-amber-400" />
+                      <span className="flex-1 truncate font-mono text-xs text-background/70">wakasub.com/give/xk72p3</span>
+                      <div className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-lg bg-amber-500/20">
+                        <Copy size={10} className="text-amber-400" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Claims progress */}
                   <div>
                     <div className="mb-1.5 flex items-center justify-between">
-                      <p className="text-[10px] font-semibold uppercase tracking-widest text-background/40">Delivery</p>
-                      <span className="text-xs font-semibold text-amber-400">Sending...</span>
+                      <p className="text-[10px] font-semibold uppercase tracking-widest text-background/40">Claims</p>
+                      <span className="text-xs font-semibold text-amber-400">47 / 100</span>
                     </div>
                     <div className="h-2 overflow-hidden rounded-full bg-white/10">
-                      <div className="animate-giveaway-progress h-full rounded-full bg-amber-500" />
-                    </div>
-                    <div className="mt-1 flex justify-between">
-                      <p className="text-[10px] text-background/35">6 of 12 delivered</p>
-                      <p className="text-[10px] text-green-400">50%</p>
+                      <div className="animate-giveaway-progress h-full rounded-full bg-amber-500" style={{ animationDuration: "1.5s" }} />
                     </div>
                   </div>
 
-                  <button className="flex w-full items-center justify-center gap-2 rounded-xl bg-amber-500 py-3 text-sm font-semibold text-black transition-colors hover:bg-amber-400">
-                    <Send size={14} />
-                    Send Giveaway
-                  </button>
+                  {/* Recent claims */}
+                  <div>
+                    <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-background/40">Recent Claims</p>
+                    <div className="space-y-2">
+                      {[
+                        { number: "0803xxx", network: "MTN", time: "just now" },
+                        { number: "0812xxx", network: "Airtel", time: "2m ago" },
+                        { number: "0705xxx", network: "Glo", time: "5m ago" },
+                      ].map((c) => (
+                        <div key={c.number} className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <CheckCircle2 size={11} className="text-green-400" />
+                            <span className="text-xs text-background/60">{c.number}</span>
+                            <span className="rounded-full bg-white/10 px-1.5 py-0.5 text-[9px] font-bold text-background/50">{c.network}</span>
+                          </div>
+                          <span className="text-[10px] text-background/35">{c.time}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </motion.div>
