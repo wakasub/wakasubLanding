@@ -1092,7 +1092,7 @@ export default function LandingPage() {
               <div className="flex flex-col gap-3">
                 <span className="text-xs font-semibold uppercase tracking-widest text-foreground">Company</span>
                 <Link href="/internship" className="transition-colors hover:text-primary">Internship</Link>
-                <Link href="#" className="transition-colors hover:text-primary">Contact</Link>
+                <Link href="/contact-support" className="transition-colors hover:text-primary">Contact</Link>
                 <Link href="#" className="transition-colors hover:text-primary">Status</Link>
               </div>
               <div className="flex flex-col gap-3">
