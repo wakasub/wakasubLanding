@@ -12,12 +12,13 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Headset,
-  Mail,
   Clock,
   ShieldCheck,
+  MessageSquare,
   ArrowRight,
   Send,
   CheckCircle2,
+  Mail,
 } from "lucide-react";
 
 const fadeUp = {
@@ -29,21 +30,29 @@ const fadeUp = {
   },
 };
 
-const highlights = [
+const topics = [
+  "Transactions",
+  "Account",
+  "Giveaways",
+  "Reseller",
+  "General",
+] as const;
+
+const promises = [
   {
     icon: Clock,
-    title: "Fast replies",
-    desc: "Our support team typically responds within a few hours, every day of the week.",
+    title: "Fast response",
+    desc: "We typically reply within a few hours, every day.",
   },
   {
     icon: ShieldCheck,
     title: "Secure & private",
-    desc: "Your details are only used to resolve your request — never shared or sold.",
+    desc: "Your details are only used to resolve your request.",
   },
   {
     icon: Headset,
     title: "Real humans",
-    desc: "Talk to people who actually understand the platform and can resolve your issue.",
+    desc: "Talk to people who actually understand the platform.",
   },
 ];
 
@@ -53,15 +62,13 @@ export default function ContactSupportPage() {
   const [form, setForm] = React.useState({
     name: "",
     email: "",
-    subject: "",
+    topic: "Transactions" as (typeof topics)[number],
     message: "",
   });
 
   const update =
-    (key: keyof typeof form) =>
-    (
-      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) =>
+    (key: "name" | "email" | "message") =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
       setForm((prev) => ({ ...prev, [key]: e.target.value }));
 
   async function handleSubmit(e: React.FormEvent) {
@@ -73,7 +80,12 @@ export default function ContactSupportPage() {
       const res = await fetch("/api/contact-support", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          subject: form.topic,
+          message: form.message,
+        }),
       });
       const data = await res.json().catch(() => ({}));
 
@@ -84,7 +96,12 @@ export default function ContactSupportPage() {
 
       setSubmitted(true);
       toast.success("Message sent! We'll get back to you shortly.");
-      setForm({ name: "", email: "", subject: "", message: "" });
+      setForm({
+        name: "",
+        email: "",
+        topic: "Transactions",
+        message: "",
+      });
     } catch {
       toast.error("Network error. Please check your connection and try again.");
     } finally {
@@ -104,7 +121,7 @@ export default function ContactSupportPage() {
           <div className="absolute bottom-0 left-0 h-[400px] w-[400px] -translate-x-1/3 translate-y-1/3 rounded-full bg-blue-400/8 blur-[100px]" />
         </div>
 
-        <div className="container mx-auto px-6 pb-12 text-center">
+        <div className="container mx-auto px-6 pb-14 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -134,65 +151,71 @@ export default function ContactSupportPage() {
             className="mx-auto max-w-xl text-lg text-muted-foreground"
           >
             Have a question, hit a snag, or need a hand with a transaction? Send
-            us a message and our team will get back to you.
+            us a message and our team will get right back to you.
           </motion.p>
         </div>
       </section>
 
-      {/* ── Form + info ── */}
-      <section className="pb-28 pt-6">
+      {/* ── Unified card ── */}
+      <section className="pb-28">
         <div className="container mx-auto px-6">
-          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 lg:grid-cols-5">
-            {/* Left — highlights */}
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
-              className="flex flex-col gap-5 lg:col-span-2"
-            >
-              <div className="rounded-3xl border border-border/50 bg-secondary/30 p-7">
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg shadow-primary/30">
-                  <Mail size={22} />
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+            className="mx-auto max-w-5xl overflow-hidden rounded-3xl border border-border/50 bg-background shadow-2xl shadow-black/5 ring-1 ring-black/5 dark:ring-white/5 md:rounded-[2.5rem]"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-5">
+              {/* Left — brand panel */}
+              <div className="relative overflow-hidden bg-primary p-9 text-primary-foreground md:p-11 lg:col-span-2">
+                <div className="pointer-events-none absolute inset-0 opacity-[0.07]">
+                  <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-size-[28px_28px]" />
                 </div>
-                <h2 className="mb-2 text-xl font-bold">Reach our team</h2>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  Fill out the form and your message lands straight in our
-                  support inbox. We&apos;ll reply to the email you provide.
-                </p>
-              </div>
+                <div className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-white/10 blur-3xl" />
 
-              <div className="flex flex-col gap-3">
-                {highlights.map((h) => (
-                  <div
-                    key={h.title}
-                    className="flex gap-4 rounded-2xl border border-border/50 bg-card p-5 transition-shadow hover:shadow-md"
-                  >
-                    <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                      <h.icon size={18} />
-                    </div>
-                    <div>
-                      <h3 className="mb-1 text-sm font-bold">{h.title}</h3>
-                      <p className="text-xs leading-relaxed text-muted-foreground">
-                        {h.desc}
-                      </p>
+                <div className="relative flex h-full flex-col">
+                  <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15 backdrop-blur-sm">
+                    <MessageSquare size={22} />
+                  </div>
+                  <h2 className="mb-3 text-2xl font-bold leading-tight">
+                    Let&apos;s sort it out
+                  </h2>
+                  <p className="mb-9 text-sm leading-relaxed text-primary-foreground/70">
+                    Tell us what&apos;s going on. Your message lands straight in
+                    our support inbox and we&apos;ll reply to the email you give
+                    us.
+                  </p>
+
+                  <div className="space-y-5">
+                    {promises.map((p) => (
+                      <div key={p.title} className="flex gap-4">
+                        <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/15">
+                          <p.icon size={16} />
+                        </div>
+                        <div>
+                          <h3 className="text-sm font-bold">{p.title}</h3>
+                          <p className="text-xs leading-relaxed text-primary-foreground/65">
+                            {p.desc}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-auto pt-9">
+                    <div className="flex items-center gap-2 text-xs font-medium text-primary-foreground/60">
+                      <Mail size={13} />
+                      Prefer email? We read every message that comes through.
                     </div>
                   </div>
-                ))}
+                </div>
               </div>
-            </motion.div>
 
-            {/* Right — form */}
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              className="lg:col-span-3"
-            >
-              <div className="rounded-3xl border border-border/50 bg-background p-7 shadow-xl shadow-black/5 ring-1 ring-black/5 dark:ring-white/5 md:p-9">
+              {/* Right — form / success */}
+              <div className="p-8 md:p-11 lg:col-span-3">
                 {submitted ? (
-                  <div className="flex flex-col items-center justify-center py-12 text-center">
+                  <div className="flex h-full flex-col items-center justify-center py-12 text-center">
                     <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                       <CheckCircle2 className="h-8 w-8" />
                     </div>
@@ -218,7 +241,33 @@ export default function ContactSupportPage() {
                     </div>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                  <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+                    {/* Topic */}
+                    <div className="flex flex-col gap-3">
+                      <Label>What do you need help with?</Label>
+                      <div className="flex flex-wrap gap-2">
+                        {topics.map((t) => {
+                          const active = form.topic === t;
+                          return (
+                            <button
+                              key={t}
+                              type="button"
+                              onClick={() =>
+                                setForm((prev) => ({ ...prev, topic: t }))
+                              }
+                              className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-all ${
+                                active
+                                  ? "border-primary bg-primary text-primary-foreground shadow-sm shadow-primary/25"
+                                  : "border-border bg-background text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                              }`}
+                            >
+                              {t}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
                     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                       <div className="flex flex-col gap-2">
                         <Label htmlFor="name">Full name</Label>
@@ -231,6 +280,7 @@ export default function ContactSupportPage() {
                           required
                           maxLength={120}
                           disabled={submitting}
+                          className="h-11 rounded-xl"
                         />
                       </div>
                       <div className="flex flex-col gap-2">
@@ -245,22 +295,9 @@ export default function ContactSupportPage() {
                           required
                           maxLength={200}
                           disabled={submitting}
+                          className="h-11 rounded-xl"
                         />
                       </div>
-                    </div>
-
-                    <div className="flex flex-col gap-2">
-                      <Label htmlFor="subject">Subject</Label>
-                      <Input
-                        id="subject"
-                        name="subject"
-                        placeholder="What's this about?"
-                        value={form.subject}
-                        onChange={update("subject")}
-                        required
-                        maxLength={160}
-                        disabled={submitting}
-                      />
                     </div>
 
                     <div className="flex flex-col gap-2">
@@ -275,7 +312,7 @@ export default function ContactSupportPage() {
                         maxLength={5000}
                         rows={6}
                         disabled={submitting}
-                        className="min-h-[150px] resize-y"
+                        className="min-h-[150px] resize-y rounded-xl"
                       />
                     </div>
 
@@ -301,8 +338,8 @@ export default function ContactSupportPage() {
                   </form>
                 )}
               </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 

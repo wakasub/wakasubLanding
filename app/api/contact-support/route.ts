@@ -4,10 +4,9 @@ import { z } from "zod"
 
 // Inbox that receives the support messages
 const SUPPORT_INBOX = "wakasub321@gmail.com"
-// Resend requires a verified domain to send from. Falls back to Resend's
-// shared onboarding sender so the form still works before a domain is verified.
+// Sends from the verified wakasub.com domain (same one the internship form uses).
 const FROM_ADDRESS =
-  process.env.CONTACT_FROM_EMAIL || "Wakasub Support <onboarding@resend.dev>"
+  process.env.CONTACT_FROM_EMAIL || "Wakasub Support <noreply@wakasub.com>"
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(120),
