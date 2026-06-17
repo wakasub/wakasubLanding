@@ -9,11 +9,10 @@ import { Menu, X } from "lucide-react";
 import Image from "next/image";
 
 const navLinks = [
-  { label: "Services", href: "#services" },
-  { label: "Giveaway", href: "#giveaway", badge: "New", badgeVariant: "amber" as const },
-  { label: "Resellers", href: "#resellers" },
+  { label: "Rewards", href: "#rewards", badge: "New" },
+  { label: "Who it's for", href: "#who" },
+  { label: "Utilities", href: "#utilities" },
   { label: "How it works", href: "#how-it-works" },
-  { label: "Internship", href: "/internship", badge: "Closed", badgeVariant: "destructive" as const },
 ];
 
 export function Navbar() {
@@ -70,13 +69,7 @@ export function Navbar() {
             >
               {item.label}
               {item.badge && (
-                <span
-                  className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider ${
-                    item.badgeVariant === "destructive"
-                      ? "bg-destructive/10 text-destructive"
-                      : "bg-amber-500/10 text-amber-600 dark:text-amber-400"
-                  }`}
-                >
+                <span className="rounded-full bg-primary/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
                   {item.badge}
                 </span>
               )}
@@ -89,7 +82,7 @@ export function Navbar() {
             <Link href="https://app.wakasub.com/login">Log in</Link>
           </Button>
           <Button size="sm" className="rounded-full px-6" asChild>
-            <Link href="https://app.wakasub.com/register">Get Started</Link>
+            <Link href="https://app.wakasub.com/register">Create a Campaign</Link>
           </Button>
         </div>
 
@@ -146,13 +139,7 @@ export function Navbar() {
                     >
                       {item.label}
                       {item.badge && (
-                        <span
-                          className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${
-                            item.badgeVariant === "destructive"
-                              ? "bg-destructive/10 text-destructive"
-                              : "bg-amber-500/10 text-amber-600 dark:text-amber-400"
-                          }`}
-                        >
+                        <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
                           {item.badge}
                         </span>
                       )}
@@ -170,7 +157,7 @@ export function Navbar() {
                     <Link href="https://app.wakasub.com/login" onClick={() => setMobileMenuOpen(false)}>Log in</Link>
                   </Button>
                   <Button className="h-14 w-full rounded-2xl text-lg font-bold shadow-lg shadow-primary/20" asChild>
-                    <Link href="https://app.wakasub.com/register" onClick={() => setMobileMenuOpen(false)}>Get Started</Link>
+                    <Link href="https://app.wakasub.com/register" onClick={() => setMobileMenuOpen(false)}>Create a Campaign</Link>
                   </Button>
                 </motion.div>
               </div>

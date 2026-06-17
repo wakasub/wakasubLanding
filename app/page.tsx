@@ -8,27 +8,27 @@ import { Button } from "@/components/ui/button";
 import {
   Smartphone,
   Wifi,
-  Tv,
   Zap,
   Wallet,
   ShieldCheck,
-  Clock,
   ArrowRight,
   Star,
   Gift,
   CheckCircle2,
   Trophy,
   Users,
-  BarChart3,
-  Play,
-  TrendingUp,
+  Sparkles,
   Lock,
-  Activity,
-  Globe,
-  Layers,
-  DollarSign,
-  Link2,
-  Copy,
+  Coins,
+  Banknote,
+  ListChecks,
+  Ticket,
+  Megaphone,
+  MessageCircle,
+  Radio,
+  PartyPopper,
+  Building2,
+  Share2,
 } from "lucide-react";
 
 const fadeUp = {
@@ -41,54 +41,182 @@ const stagger = {
   show: { transition: { staggerChildren: 0.08 } },
 };
 
-const testimonials = [
-  {
-    name: "Adebayo O.",
-    role: "Business Owner",
-    location: "Lagos",
-    body: "I manage airtime for my whole team through Wakasub. It's the fastest and most reliable VTU platform I've used in Nigeria by far.",
-  },
-  {
-    name: "Chioma M.",
-    role: "Student",
-    location: "Abuja",
-    body: "As a student relying on data for online classes, Wakasub has never let me down. Transactions go through even when others fail.",
-  },
-  {
-    name: "Emeka K.",
-    role: "Freelancer",
-    location: "Port Harcourt",
-    body: "The wallet system is seamless. I fund once and pay bills all month. The platform is clean, secure, and honest about what it offers.",
-  },
-  {
-    name: "Tunde B.",
-    role: "Teacher",
-    location: "Ibadan",
-    body: "I pay electricity bills for my school through Wakasub every month. Reliable, fast, and the transaction history makes accounting easy.",
-  },
-  {
-    name: "Ngozi A.",
-    role: "Market Trader",
-    location: "Onitsha",
-    body: "My customers used to wait while I looked for recharge cards. Now I top up on the spot. Wakasub has made my business faster.",
-  },
-  {
-    name: "Seun D.",
-    role: "Software Engineer",
-    location: "Lagos",
-    body: "The response times are genuinely fast. As an engineer I can tell when a platform actually delivers on its speed claims — this one does.",
-  },
+/* ── Data ── */
+
+const tickerTop = [
+  { icon: Smartphone, label: "₦200 airtime → 50 winners" },
+  { icon: Banknote, label: "Ada won ₦5,000 cash" },
+  { icon: Wifi, label: "1GB data × 30 members" },
+  { icon: Gift, label: "Tobi's giveaway · LIVE" },
+  { icon: Smartphone, label: "₦100 airtime claimed" },
+  { icon: Banknote, label: "₦20,000 split 10 ways" },
+];
+
+const tickerBottom = [
+  { icon: Trophy, label: "Chidi rewarded the group chat" },
+  { icon: Wifi, label: "2GB data won · just now" },
+  { icon: Smartphone, label: "₦500 airtime · instant" },
+  { icon: Sparkles, label: "Members-only reward" },
+  { icon: Banknote, label: "Cash credited in seconds" },
+  { icon: Gift, label: "Match-day giveaway open" },
+];
+
+const stats = [
+  { value: "₦200", label: "First reward, free" },
+  { value: "< 5s", label: "To claim & receive" },
+  { value: "4.9★", label: "User rating" },
+  { value: "50K+", label: "Nigerians onboard" },
 ];
 
 const partners = ["MTN", "Airtel", "Glo", "9mobile", "DSTV", "GOtv", "Startimes", "EKEDC", "IKEDC", "AEDC"];
 const marqueePartners = [...partners, ...partners];
 
-const stats = [
-  { value: "50K+", label: "Active Users" },
-  { value: "4.9★", label: "User Rating" },
-  { value: "99.9%", label: "Uptime" },
-  { value: "₦1B+", label: "Processed" },
+const rewardTypes = [
+  { icon: Smartphone, label: "Airtime", desc: "Any network, any amount" },
+  { icon: Wifi, label: "Data", desc: "Daily, weekly & monthly" },
+  { icon: Banknote, label: "Cash", desc: "Spendable wallet credit" },
 ];
+
+const campaignTypes = [
+  { icon: Gift, label: "Instant giveaways" },
+  { icon: Ticket, label: "Random draws" },
+  { icon: Share2, label: "Referral-gated" },
+  { icon: Users, label: "Community-only" },
+  { icon: ListChecks, label: "Quizzes & tasks" },
+  { icon: Megaphone, label: "Sponsored" },
+];
+
+const personas = [
+  {
+    icon: Sparkles,
+    title: "Influencers & creators",
+    today: "Asking winners for their number in the DMs, buying airtime one by one.",
+    now: "Set it up once, share your link, everyone gets paid automatically.",
+  },
+  {
+    icon: MessageCircle,
+    title: "Group & channel admins",
+    today: "Begging for engagement and rewarding members by hand.",
+    now: "Reward your members in seconds — and keep it members-only.",
+  },
+  {
+    icon: Radio,
+    title: "Fan & football pages",
+    today: "Tons of engagement, no easy way to thank your people.",
+    now: "Run match-day giveaways that keep your audience coming back.",
+  },
+  {
+    icon: Building2,
+    title: "Brands & businesses",
+    today: "Paying an agency for what should be a simple reward.",
+    now: "Launch your own reward campaign in minutes — no agency.",
+  },
+  {
+    icon: PartyPopper,
+    title: "Friends & family",
+    today: "Trying to “spray” cash online — always clumsy.",
+    now: "Surprise a friend, celebrate a win, gift the group instantly.",
+  },
+  {
+    icon: Gift,
+    title: "People who love rewards",
+    today: "Chasing giveaways across comments, rarely getting paid.",
+    now: "Claim real airtime, data and cash — free to receive.",
+  },
+];
+
+const scenarios = [
+  {
+    tag: "Creator",
+    emoji: "📲",
+    name: "Tobi celebrates a new video",
+    body: "“₦200 airtime to 50 fans who follow and tag a friend.” He funds it once, drops the link in his bio, and wakes up to 50 fans already paid.",
+    metric: "Set up once · 50 fans paid",
+  },
+  {
+    tag: "Community",
+    emoji: "💬",
+    name: "Mrs. Bello boosts her group",
+    body: "Poll turnout was low, so she runs a members-only reward: “₦100 data to 30 random parents who vote.” Suddenly everyone's voting.",
+    metric: "Members only · 30 rewarded",
+  },
+  {
+    tag: "Cash gift",
+    emoji: "🎉",
+    name: "Chidi spoils the group chat",
+    body: "A friend graduated, so he splits ₦20,000 cash between 10 people. They get spendable balance instantly — no bank details, no waiting.",
+    metric: "Cash · paid in seconds",
+  },
+  {
+    tag: "Brand",
+    emoji: "🏢",
+    name: "A brand launches a product",
+    body: "“Win ₦1,000 airtime — 500 winners.” Fans enter for a shot, and every winner is paid the moment the draw closes.",
+    metric: "500 winners · one campaign",
+  },
+];
+
+const trustPillars = [
+  { icon: Zap, title: "Rewards arrive instantly", desc: "The moment you win, your airtime, data or cash is paid out automatically — no waiting on anyone." },
+  { icon: ShieldCheck, title: "Protected from cheats", desc: "Every campaign is guarded against bots and double-claims, so real people win." },
+  { icon: Lock, title: "Your money is safe", desc: "Funds are held securely until they reach the right winners — and you see where every naira went." },
+  { icon: Smartphone, title: "Works on every network", desc: "Rewards reach any Nigerian line — MTN, Airtel, Glo, 9mobile — in seconds." },
+];
+
+const howItWorks = [
+  { n: "01", icon: Wallet, title: "Set it up", desc: "Pick airtime, data or cash, choose winners and rules. Under a minute." },
+  { n: "02", icon: Share2, title: "Share your link", desc: "Drop it on WhatsApp, TikTok, X — one link does it all." },
+  { n: "03", icon: Sparkles, title: "People claim", desc: "Your people tap, claim in seconds, and receiving is always free." },
+  { n: "04", icon: Trophy, title: "Winners get paid", desc: "Rewards land automatically while you watch the claims roll in." },
+];
+
+const winnerPerks = [
+  { icon: Gift, title: "Free to receive", desc: "Claiming never costs you a thing. What you win is yours, in full." },
+  { icon: Zap, title: "Paid in seconds", desc: "No “I'll send it later.” Your reward lands almost instantly." },
+  { icon: Ticket, title: "Discover giveaways", desc: "Browse public campaigns and enter the ones you like." },
+  { icon: Banknote, title: "Cash you can spend", desc: "Win cash and it's spendable wallet balance right away." },
+];
+
+const testimonials = [
+  {
+    name: "Tobi A.",
+    role: "Content creator",
+    location: "Lagos",
+    body: "I used to DM winners one by one and buy airtime by hand. Now I set up a campaign, share the link, and everyone gets paid for me. My community looks forward to my giveaways now.",
+  },
+  {
+    name: "Mrs. Bello",
+    role: "Group admin",
+    location: "Abuja",
+    body: "A members-only data reward took our poll turnout from sleepy to packed. Only my people could enter, and Wakasub handled the whole thing.",
+  },
+  {
+    name: "Amaka N.",
+    role: "Market vendor",
+    location: "Onitsha",
+    body: "I won ₦200 airtime and it landed on my phone in seconds. A week later I ran my own little reward for my market group — it's that easy.",
+  },
+  {
+    name: "Chidi E.",
+    role: "Freelancer",
+    location: "Port Harcourt",
+    body: "I split ₦20,000 cash between friends when one of us graduated. They got spendable balance instantly — way better than trying to spray money online.",
+  },
+  {
+    name: "Seun D.",
+    role: "Software engineer",
+    location: "Lagos",
+    body: "I'm picky about apps that promise to be fast. Rewards genuinely land before I close the app, and a claim never quietly fails. It just works.",
+  },
+  {
+    name: "Ngozi A.",
+    role: "Fan page owner",
+    location: "Ibadan",
+    body: "Match-day giveaways keep my audience coming back every week. For the first time I can actually reward the people who show up.",
+  },
+];
+
+/* ── Store badges (monochrome) ── */
 
 function AppleIcon({ size = 22 }: { size?: number }) {
   return (
@@ -106,33 +234,25 @@ function GooglePlayIcon({ size = 22 }: { size?: number }) {
   );
 }
 
-function AppStoreBadge({
-  store,
-  className = "",
-  inverted = false,
-}: {
-  store: "ios" | "android";
-  className?: string;
-  inverted?: boolean;
-}) {
-  const isIos = store === "ios";
+/* Reward ticker pill */
+function TickerRow({ items, reverse = false }: { items: typeof tickerTop; reverse?: boolean }) {
+  const doubled = [...items, ...items];
   return (
-    <a
-      href="#"
-      onClick={(e) => e.preventDefault()}
-      aria-label={isIos ? "Download on the App Store" : "Get it on Google Play"}
-      className={`inline-flex items-center gap-3 rounded-xl px-5 py-3.5 transition-all duration-200 active:scale-[0.98] hover:opacity-85 ${
-        inverted
-          ? "border border-white/20 bg-white/10 text-white"
-          : "border border-foreground bg-foreground text-background"
-      } ${className}`}
-    >
-      {isIos ? <AppleIcon /> : <GooglePlayIcon />}
-      <div className="text-left">
-        <p className="text-[10px] leading-none opacity-55">{isIos ? "Download on the" : "Get it on"}</p>
-        <p className="mt-0.5 text-[15px] font-semibold leading-tight">{isIos ? "App Store" : "Google Play"}</p>
+    <div className="relative flex overflow-hidden mask-[linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+      <div className={`flex shrink-0 items-center gap-3 pr-3 ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}>
+        {doubled.map((p, i) => (
+          <span
+            key={`${p.label}-${i}`}
+            className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-border/70 bg-card px-4 py-2 text-sm font-medium text-foreground/80 shadow-sm"
+          >
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10">
+              <p.icon size={11} className="text-primary" />
+            </span>
+            {p.label}
+          </span>
+        ))}
       </div>
-    </a>
+    </div>
   );
 }
 
@@ -141,173 +261,82 @@ export default function LandingPage() {
     <main className="min-h-screen overflow-x-hidden pb-20 md:pb-0">
       <Navbar />
 
-      {/* ── 1. HERO ── */}
-      <section className="relative overflow-hidden pb-0 pt-28 md:pt-36">
-        <div className="bg-grid-lines pointer-events-none absolute inset-0 -z-10 opacity-30" />
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-b from-background via-background/95 to-background" />
+      {/* ── 1. HERO (single, centered) ── */}
+      <section className="relative flex min-h-[92vh] flex-col items-center justify-center overflow-hidden px-6 pt-28 pb-16 text-center">
+        <div className="bg-grid-lines pointer-events-none absolute inset-0 -z-10 opacity-40" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-b from-background via-background/80 to-background" />
+        <div className="pointer-events-none absolute left-1/2 top-1/3 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/15 blur-[160px]" />
+        <div className="pointer-events-none absolute right-[12%] top-[18%] -z-10 h-72 w-72 rounded-full bg-primary/10 blur-[120px]" />
 
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <motion.div initial="hidden" animate="show" variants={stagger} className="flex w-full max-w-4xl flex-col items-center">
+          <motion.div
+            variants={fadeUp}
+            className="mb-7 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-sm font-medium text-foreground/70 shadow-sm"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+            </span>
+            The rewards hub of Nigeria
+          </motion.div>
 
-            {/* Left */}
-            <motion.div initial="hidden" animate="show" variants={stagger} className="pb-4 lg:pb-16">
+          <motion.h1
+            variants={fadeUp}
+            className="text-balance text-6xl font-extrabold leading-[0.95] tracking-tight md:text-7xl lg:text-[6.5rem]"
+          >
+            Reward your people
+            <br />
+            <span className="text-gradient">in seconds.</span>
+          </motion.h1>
 
-              <motion.div
-                variants={fadeUp}
-                className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/8 px-4 py-1.5 text-sm font-medium text-primary"
-              >
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+          <motion.p variants={fadeUp} className="mt-7 max-w-xl text-lg text-muted-foreground md:text-xl">
+            Share one link. Airtime, data and cash land instantly.
+          </motion.p>
+
+          <motion.div variants={fadeUp} className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <Button size="lg" className="h-13 rounded-full px-9 text-base font-semibold shadow-lg shadow-primary/25" asChild>
+              <Link href="https://app.wakasub.com/register">
+                Create a Campaign
+                <ArrowRight className="ml-1 h-4 w-4" />
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" className="h-13 rounded-full bg-transparent px-9 text-base font-medium" asChild>
+              <Link href="#how-it-works">See how it works</Link>
+            </Button>
+          </motion.div>
+
+          <motion.div variants={fadeUp} className="mt-8 flex items-center gap-3 text-sm text-muted-foreground">
+            <div className="flex -space-x-2">
+              {["A", "C", "T", "N"].map((c) => (
+                <span key={c} className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-background bg-primary/15 text-[11px] font-bold text-primary">
+                  {c}
                 </span>
-                Trusted by 50,000+ Nigerians
-              </motion.div>
-
-              <motion.h1
-                variants={fadeUp}
-                className="mb-5 text-5xl font-extrabold leading-[1.05] tracking-tight md:text-6xl lg:text-[4.5rem]"
-              >
-                Buy Data, Airtime
-                <br />
-                &amp; Pay Bills
-                <br />
-                <span className="text-primary">in Seconds.</span>
-              </motion.h1>
-
-              <motion.p variants={fadeUp} className="mb-8 max-w-lg text-lg leading-relaxed text-muted-foreground">
-                Instant airtime, affordable data plans, electricity payments, cable TV subscriptions, and automated giveaways — all in one wallet.
-              </motion.p>
-
-              <motion.div variants={fadeUp} className="mb-8 flex flex-col gap-3 sm:flex-row">
-                <Button
-                  size="lg"
-                  className="h-13 rounded-full px-8 text-base font-semibold shadow-lg shadow-primary/25"
-                  asChild
-                >
-                  <Link href="https://app.wakasub.com/register">Get Started Free</Link>
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="h-13 rounded-full bg-transparent px-8 text-base font-medium gap-2.5"
-                  asChild
-                >
-                  <Link href="#demo">
-                    <div className="flex h-5 w-5 items-center justify-center rounded-full bg-foreground/10">
-                      <Play size={9} className="fill-current ml-0.5" />
-                    </div>
-                    Watch Demo
-                  </Link>
-                </Button>
-              </motion.div>
-
-              <motion.div variants={fadeUp} className="flex gap-3">
-                <AppStoreBadge store="android" className="flex-1 justify-center" />
-                <AppStoreBadge store="ios" className="flex-1 justify-center" />
-              </motion.div>
-            </motion.div>
-
-            {/* Right: Dashboard mock */}
-            <motion.div
-              initial={{ opacity: 0, y: 60 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="relative pb-10 lg:pb-0"
-            >
-              <motion.div
-                initial={{ opacity: 0, x: 20, y: -10 }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ delay: 1.1, duration: 0.5 }}
-                className="absolute -right-3 -top-5 z-10 flex items-center gap-2 rounded-2xl border border-green-100 bg-white px-3.5 py-2.5 shadow-xl shadow-black/10 dark:border-green-900/60 dark:bg-card md:-right-8"
-              >
-                <CheckCircle2 size={15} className="text-green-500" />
-                <div>
-                  <p className="text-xs font-semibold text-green-700 dark:text-green-400">MTN ₦500</p>
-                  <p className="text-[10px] text-muted-foreground">Delivered instantly</p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: -20, y: 10 }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ delay: 1.4, duration: 0.5 }}
-                className="absolute -bottom-3 -left-3 z-10 flex items-center gap-2 rounded-2xl border bg-white px-3.5 py-2.5 shadow-xl shadow-black/10 dark:bg-card md:-left-8"
-              >
-                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-950">
-                  <Gift size={13} className="text-amber-500" />
-                </div>
-                <div>
-                  <p className="text-xs font-semibold">Giveaway live</p>
-                  <p className="text-[10px] text-muted-foreground">47 claimed so far</p>
-                </div>
-              </motion.div>
-
-              <div className="overflow-hidden rounded-[2rem] border border-border/60 bg-card shadow-2xl shadow-black/12 ring-1 ring-black/5 dark:ring-white/5">
-                <div className="bg-primary px-6 py-5 text-primary-foreground">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-xs font-medium opacity-70">Wallet Balance</p>
-                      <p className="text-[2rem] font-bold tracking-tight">₦24,500.00</p>
-                    </div>
-                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
-                      <Wallet size={18} />
-                    </div>
-                  </div>
-                  <div className="mt-3 flex gap-2">
-                    <span className="rounded-full bg-white/15 px-3 py-1 text-[11px] font-medium">+ Add Money</span>
-                    <span className="rounded-full bg-white/15 px-3 py-1 text-[11px] font-medium">History</span>
-                  </div>
-                </div>
-
-                <div className="p-5">
-                  <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Quick Actions</p>
-                  <div className="grid grid-cols-4 gap-2">
-                    {[
-                      { icon: Smartphone, label: "Airtime", cls: "bg-blue-50 text-blue-600 dark:bg-blue-950 dark:text-blue-400" },
-                      { icon: Wifi, label: "Data", cls: "bg-violet-50 text-violet-600 dark:bg-violet-950 dark:text-violet-400" },
-                      { icon: Zap, label: "Electric", cls: "bg-amber-50 text-amber-600 dark:bg-amber-950 dark:text-amber-400" },
-                      { icon: Gift, label: "Giveaway", cls: "bg-pink-50 text-pink-500 dark:bg-pink-950 dark:text-pink-400" },
-                    ].map((a) => (
-                      <div key={a.label} className="flex cursor-pointer flex-col items-center gap-1.5 rounded-xl p-2 transition-colors hover:bg-secondary/70">
-                        <div className={`flex h-9 w-9 items-center justify-center rounded-xl ${a.cls}`}>
-                          <a.icon size={15} />
-                        </div>
-                        <span className="text-[10px] font-medium text-muted-foreground">{a.label}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="mt-4 space-y-1 rounded-xl bg-secondary/40 p-3">
-                    <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Recent</p>
-                    {[
-                      { label: "MTN 1GB Data", amt: "−₦280", time: "Just now" },
-                      { label: "DSTV Compact", amt: "−₦8,000", time: "2h ago" },
-                      { label: "Giveaway • 47 claimed", amt: "−₦23,500", time: "Yesterday" },
-                    ].map((tx) => (
-                      <div key={tx.label} className="flex items-center justify-between rounded-lg px-1 py-1.5">
-                        <div className="flex items-center gap-2">
-                          <div className="flex h-5 w-5 items-center justify-center rounded-full bg-green-100 dark:bg-green-900">
-                            <CheckCircle2 size={10} className="text-green-600" />
-                          </div>
-                          <span className="text-xs text-muted-foreground">{tx.label}</span>
-                        </div>
-                        <div className="text-right">
-                          <p className="text-xs font-semibold">{tx.amt}</p>
-                          <p className="text-[9px] text-muted-foreground">{tx.time}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+              ))}
+            </div>
+            <div className="flex items-center gap-1.5">
+              <div className="flex gap-0.5">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} size={12} className="fill-primary text-primary" />
+                ))}
               </div>
+              <span>Loved by 50,000+ Nigerians</span>
+            </div>
+          </motion.div>
+        </motion.div>
 
-              <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-16 bg-linear-to-t from-background to-transparent" />
-            </motion.div>
-          </div>
-        </div>
+        {/* Reward ticker */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
+          className="mt-16 flex w-full max-w-5xl flex-col gap-3"
+        >
+          <TickerRow items={tickerTop} />
+          <TickerRow items={tickerBottom} reverse />
+        </motion.div>
       </section>
 
-      {/* ── 2. SOCIAL PROOF STATS ── */}
+      {/* ── 2. STATS ── */}
       <section className="py-12 md:py-16">
         <div className="container mx-auto px-6">
           <motion.div
@@ -327,10 +356,10 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── 3. NETWORK PARTNERS ── */}
+      {/* ── 3. PARTNERS ── */}
       <section className="relative overflow-hidden py-10">
         <p className="mb-6 text-center text-[11px] font-medium uppercase tracking-widest text-muted-foreground/70">
-          Powering payments across every network
+          Rewards delivered across every Nigerian network
         </p>
         <div className="relative flex overflow-hidden mask-[linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
           <div className="animate-marquee-slow flex shrink-0 items-center gap-12 pr-12">
@@ -343,102 +372,299 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── 4. VIDEO DEMO ── */}
-      <section id="demo" className="py-24 md:py-32">
+      {/* ── 4. TWO WAYS ── */}
+      <section className="py-24 md:py-32">
         <div className="container mx-auto px-6">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
-            className="mb-12 text-center"
+            className="mx-auto mb-14 max-w-2xl text-center"
           >
-            <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">Product Demo</p>
-            <h2 className="mb-4 text-4xl font-bold md:text-5xl">See Wakasub in action</h2>
-            <p className="mx-auto max-w-lg text-lg text-muted-foreground">
-              Watch a full product walkthrough — from wallet funding to instant giveaway delivery.
-            </p>
+            <p className="mb-3 text-sm font-medium uppercase tracking-widest text-primary">Two ways in</p>
+            <h2 className="text-4xl font-bold leading-[1.05] md:text-5xl">Give rewards, or win them.</h2>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-            className="mx-auto max-w-4xl"
+            className="grid grid-cols-1 gap-4 md:grid-cols-2"
           >
-            <div className="relative aspect-video overflow-hidden rounded-3xl border border-border/60 bg-foreground shadow-2xl shadow-black/20">
-              {/* Background gradient */}
-              <div className="absolute inset-0 bg-linear-to-br from-primary/25 via-foreground to-foreground" />
-
-              {/* Subtle grid */}
-              <div className="pointer-events-none absolute inset-0 opacity-[0.04]">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-size-[40px_40px]" />
+            {/* Reward your people — dark */}
+            <motion.div variants={fadeUp} className="relative flex flex-col overflow-hidden rounded-3xl bg-foreground p-8 text-background md:p-10">
+              <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-primary/25 blur-3xl" />
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/20">
+                <Gift size={22} className="text-primary" />
               </div>
+              <h3 className="mb-3 text-2xl font-bold">Reward your people</h3>
+              <p className="mb-6 text-sm leading-relaxed text-background/65">
+                Pick a reward, share one link, and everyone who qualifies gets paid automatically.
+              </p>
+              <ul className="mb-8 space-y-2.5">
+                {["Set up in under a minute", "One link works everywhere", "Winners paid automatically"].map((f) => (
+                  <li key={f} className="flex items-center gap-2.5 text-sm text-background/75">
+                    <CheckCircle2 size={15} className="shrink-0 text-primary" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <Button className="mt-auto w-fit rounded-full px-7 font-semibold" asChild>
+                <Link href="https://app.wakasub.com/register">
+                  Create a Campaign
+                  <ArrowRight className="ml-1 h-4 w-4" />
+                </Link>
+              </Button>
+            </motion.div>
 
-              {/* Center glow */}
-              <div className="pointer-events-none absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/20 blur-[80px]" />
+            {/* Win rewards — light */}
+            <motion.div variants={fadeUp} className="relative flex flex-col overflow-hidden rounded-3xl border border-border/50 bg-card p-8 md:p-10">
+              <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-primary/10 blur-3xl" />
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
+                <Trophy size={22} className="text-primary" />
+              </div>
+              <h3 className="mb-3 text-2xl font-bold">Claim your rewards</h3>
+              <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
+                Got a link? Tap it and the airtime, data or cash is yours in seconds. Or browse live giveaways.
+              </p>
+              <ul className="mb-8 space-y-2.5">
+                {["Free to receive — always", "Lands on your phone in seconds", "Discover public giveaways"].map((f) => (
+                  <li key={f} className="flex items-center gap-2.5 text-sm text-muted-foreground">
+                    <CheckCircle2 size={15} className="shrink-0 text-primary" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <Button variant="outline" className="mt-auto w-fit rounded-full bg-transparent px-7 font-semibold" asChild>
+                <Link href="#how-it-works">
+                  How claiming works
+                  <ArrowRight className="ml-1 h-4 w-4" />
+                </Link>
+              </Button>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
 
-              {/* macOS-style top bar */}
-              <div className="absolute left-5 right-5 top-5 flex items-center justify-between">
-                <div className="flex items-center gap-1.5">
-                  <div className="h-2.5 w-2.5 rounded-full bg-white/15" />
-                  <div className="h-2.5 w-2.5 rounded-full bg-white/15" />
-                  <div className="h-2.5 w-2.5 rounded-full bg-white/15" />
+      {/* ── 5. REWARDS ── */}
+      <section id="rewards" className="py-24 md:py-32">
+        <div className="container mx-auto px-6">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            className="mb-12"
+          >
+            <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">What you can give & win</p>
+            <h2 className="text-4xl font-bold md:text-5xl">Three rewards. Endless ways.</h2>
+          </motion.div>
+
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-3"
+          >
+            {rewardTypes.map((r) => (
+              <motion.div
+                key={r.label}
+                variants={fadeUp}
+                className="group flex items-center gap-4 rounded-2xl border border-border/50 bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+              >
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <r.icon size={22} />
                 </div>
-                <span className="rounded-full border border-white/10 bg-white/8 px-3 py-1 text-[11px] font-medium text-white/50 backdrop-blur-sm">
-                  HD • 2 min
+                <div>
+                  <h3 className="text-lg font-semibold">{r.label}</h3>
+                  <p className="text-sm text-muted-foreground">{r.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            className="flex flex-col gap-5 rounded-3xl border border-border/50 bg-secondary/30 p-7 md:flex-row md:items-center md:justify-between"
+          >
+            <div className="shrink-0">
+              <p className="mb-1 text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">Campaign types</p>
+              <p className="text-lg font-semibold">Pick the mechanic that fits</p>
+            </div>
+            <div className="flex flex-wrap gap-2.5">
+              {campaignTypes.map((c) => (
+                <span key={c.label} className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-medium">
+                  <c.icon size={14} className="text-primary" />
+                  {c.label}
                 </span>
-              </div>
-
-              {/* Center: play button + label */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-5">
-                <div className="relative flex items-center justify-center">
-                  <span className="absolute inline-flex h-20 w-20 animate-ping rounded-full bg-white/5" style={{ animationDuration: "2.5s" }} />
-                  <div className="relative flex h-16 w-16 items-center justify-center rounded-full border border-white/20 bg-white/10 shadow-2xl backdrop-blur-sm">
-                    <Play size={20} className="ml-1 fill-white text-white" />
-                  </div>
-                </div>
-                <div className="text-center">
-                  <p className="text-base font-semibold text-white/90">Full walkthrough coming soon</p>
-                  <p className="mt-1 text-sm text-white/40">Video is in production — check back shortly</p>
-                </div>
-              </div>
-
-              {/* Bottom: fake player chrome */}
-              <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/70 to-transparent px-5 pb-4 pt-10">
-                <div className="flex items-center gap-3">
-                  <Play size={11} className="shrink-0 fill-white/30 text-white/30" />
-                  <div className="h-[3px] flex-1 overflow-hidden rounded-full bg-white/15">
-                    <div className="h-full w-0 rounded-full bg-primary" />
-                  </div>
-                  <span className="text-[11px] font-medium tabular-nums text-white/40">0:00</span>
-                </div>
-              </div>
+              ))}
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* ── 5. CORE SERVICES ── */}
-      <section id="services" className="py-24 md:py-32">
+      {/* ── 6. WHO IT'S FOR ── */}
+      <section id="who" className="py-24 md:py-32">
         <div className="container mx-auto px-6">
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
-            className="mb-16"
+            className="mb-14 text-center"
           >
-            <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">Services</p>
-            <h2 className="mb-4 text-4xl font-bold md:text-5xl">
-              Everything you need,
-              <br />
-              nothing you don&apos;t.
-            </h2>
-            <p className="max-w-lg text-lg text-muted-foreground">
-              Six services, one wallet. Pay bills, buy data, top up airtime, distribute giveaways, and run your reseller business.
-            </p>
+            <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">Who it&apos;s for</p>
+            <h2 className="text-4xl font-bold md:text-5xl">Made for the way you reward.</h2>
+          </motion.div>
+
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {personas.map((p) => (
+              <motion.div
+                key={p.title}
+                variants={fadeUp}
+                className="group flex flex-col rounded-2xl border border-border/50 bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+              >
+                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <p.icon size={20} />
+                </div>
+                <h3 className="mb-3 font-semibold">{p.title}</h3>
+                <p className="mb-2 text-sm leading-relaxed text-muted-foreground">{p.today}</p>
+                <p className="mt-auto flex gap-1.5 text-sm leading-relaxed text-foreground">
+                  <Sparkles size={15} className="mt-0.5 shrink-0 text-primary" />
+                  <span>{p.now}</span>
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── 7. SCENARIOS ── */}
+      <section className="py-24 md:py-32">
+        <div className="container mx-auto px-6">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            className="mb-14"
+          >
+            <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">In the wild</p>
+            <h2 className="text-4xl font-bold md:text-5xl">Real moments, real rewards.</h2>
+          </motion.div>
+
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+            className="grid grid-cols-1 gap-4 md:grid-cols-2"
+          >
+            {scenarios.map((s) => (
+              <motion.div
+                key={s.name}
+                variants={fadeUp}
+                className="flex flex-col rounded-2xl border border-border/50 bg-card p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+              >
+                <div className="mb-4 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">{s.emoji}</span>
+                    <h3 className="text-lg font-semibold">{s.name}</h3>
+                  </div>
+                  <span className="rounded-full bg-primary/10 px-3 py-1 text-[11px] font-semibold text-primary">{s.tag}</span>
+                </div>
+                <p className="mb-5 flex-1 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
+                <div className="flex items-center gap-2 border-t border-border/40 pt-4 text-sm font-semibold text-primary">
+                  <Trophy size={14} />
+                  {s.metric}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── 8. JUST HERE TO WIN ── */}
+      <section
+        id="win"
+        className="relative mx-4 my-8 overflow-hidden rounded-3xl bg-foreground py-20 text-background md:rounded-[2.5rem] md:py-28"
+      >
+        <div className="pointer-events-none absolute inset-0 opacity-[0.04]">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-size-[40px_40px]" />
+        </div>
+        <div className="pointer-events-none absolute -left-40 top-0 h-96 w-96 rounded-full bg-primary/25 blur-[140px]" />
+        <div className="pointer-events-none absolute -bottom-40 right-0 h-96 w-96 rounded-full bg-primary/15 blur-[140px]" />
+
+        <div className="container relative mx-auto px-6">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            className="mb-14 text-center"
+          >
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-sm font-semibold text-background/80">
+              <Trophy size={14} className="text-primary" /> Just here to win?
+            </div>
+            <h2 className="text-4xl font-bold leading-[1.05] md:text-5xl">Free airtime, data &amp; cash.</h2>
+          </motion.div>
+
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
+          >
+            {winnerPerks.map((p) => (
+              <motion.div key={p.title} variants={fadeUp} className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full border border-primary/40 bg-primary/15 text-primary">
+                  <p.icon size={18} />
+                </div>
+                <h4 className="mb-2 text-base font-bold">{p.title}</h4>
+                <p className="text-sm leading-relaxed text-background/45">{p.desc}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="mt-12 text-center"
+          >
+            <Button size="lg" className="rounded-full px-10 text-base font-semibold" asChild>
+              <Link href="https://app.wakasub.com/register">Start claiming rewards</Link>
+            </Button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── 9. TRUST ── */}
+      <section id="why" className="py-24 md:py-32">
+        <div className="container mx-auto px-6">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            className="mb-14 text-center"
+          >
+            <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">Why Wakasub</p>
+            <h2 className="text-4xl font-bold md:text-5xl">Built so everyone gets paid.</h2>
           </motion.div>
 
           <motion.div
@@ -448,314 +674,9 @@ export default function LandingPage() {
             viewport={{ once: true, amount: 0.1 }}
             className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
           >
-            {/* Airtime — featured large */}
-            <motion.div
-              variants={fadeUp}
-              className="group relative col-span-1 flex flex-col overflow-hidden rounded-2xl bg-primary p-7 text-primary-foreground transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/25 sm:col-span-2"
-            >
-              <div className="pointer-events-none absolute -right-14 -top-14 h-56 w-56 rounded-full bg-white/10 blur-3xl" />
-              <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white/20">
-                <Smartphone className="text-white" size={22} />
-              </div>
-              <h3 className="mb-2 text-2xl font-bold">Airtime</h3>
-              <p className="mb-6 flex-1 text-sm leading-relaxed text-primary-foreground/70">
-                Top up any Nigerian number in under 5 seconds. No failed transactions. No delays. Instant delivery every time.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {["MTN", "Airtel", "Glo", "9mobile"].map((n) => (
-                  <span key={n} className="rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-semibold">{n}</span>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Data */}
-            <motion.div variants={fadeUp} className="group flex flex-col rounded-2xl border border-border/50 bg-card p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-              <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-violet-500/10 transition-colors group-hover:bg-violet-500/15">
-                <Wifi className="text-violet-500" size={22} />
-              </div>
-              <h3 className="mb-2 text-lg font-semibold">Data Bundles</h3>
-              <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
-                Get online instantly with daily, weekly, and monthly plans at the most competitive rates in Nigeria.
-              </p>
-            </motion.div>
-
-            {/* Electricity */}
-            <motion.div variants={fadeUp} className="group flex flex-col rounded-2xl border border-border/50 bg-card p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-              <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500/10 transition-colors group-hover:bg-amber-500/15">
-                <Zap className="text-amber-500" size={22} />
-              </div>
-              <h3 className="mb-2 text-lg font-semibold">Electricity</h3>
-              <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
-                Never lose power. Pay EKEDC, IKEDC, AEDC and more — anytime, without leaving your seat.
-              </p>
-            </motion.div>
-
-            {/* Cable TV */}
-            <motion.div variants={fadeUp} className="group flex flex-col rounded-2xl border border-border/50 bg-card p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-              <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-orange-500/10 transition-colors group-hover:bg-orange-500/15">
-                <Tv className="text-orange-500" size={22} />
-              </div>
-              <h3 className="mb-2 text-lg font-semibold">Cable TV</h3>
-              <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
-                Keep your DSTV, GOtv, or Startimes running without the queue. Renew your subscription in seconds.
-              </p>
-            </motion.div>
-
-            {/* Giveaway — featured dark */}
-            <motion.div
-              variants={fadeUp}
-              className="group relative col-span-1 flex flex-col overflow-hidden rounded-2xl bg-foreground p-7 text-background transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl sm:col-span-2"
-            >
-              <div className="pointer-events-none absolute -right-14 -top-14 h-56 w-56 rounded-full bg-amber-500/15 blur-3xl" />
-              <div className="mb-3 inline-flex w-fit items-center gap-2 rounded-full border border-amber-500/40 bg-amber-500/15 px-3 py-1 text-xs font-semibold text-amber-400">
-                <Trophy size={11} />
-                Flagship Feature
-              </div>
-              <div className="mt-3 mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-amber-500/20">
-                <Gift className="text-amber-400" size={22} />
-              </div>
-              <h3 className="mb-2 text-2xl font-bold">Giveaway</h3>
-              <p className="mb-6 flex-1 text-sm leading-relaxed text-background/60">
-                Create a giveaway, share your link anywhere. Anyone who clicks can instantly claim their airtime or data — no manual sending needed.
-              </p>
-              <Link href="#giveaway" className="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-400 transition-colors hover:text-amber-300">
-                See how it works <ArrowRight size={14} />
-              </Link>
-            </motion.div>
-
-            {/* Resellers */}
-            <motion.div variants={fadeUp} className="group flex flex-col rounded-2xl border border-border/50 bg-card p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-              <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-green-500/10 transition-colors group-hover:bg-green-500/15">
-                <TrendingUp className="text-green-600 dark:text-green-400" size={22} />
-              </div>
-              <h3 className="mb-2 text-lg font-semibold">Reseller</h3>
-              <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
-                Earn from every top-up at better rates. Manage bulk transactions and track your business growth in real time.
-              </p>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── 6. GIVEAWAY SPOTLIGHT ── */}
-      <section
-        id="giveaway"
-        className="relative mx-4 my-8 overflow-hidden rounded-3xl bg-foreground py-20 text-background md:rounded-[2.5rem] md:py-28"
-      >
-        <div className="pointer-events-none absolute inset-0 opacity-[0.03]">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-size-[40px_40px]" />
-        </div>
-        <div className="pointer-events-none absolute -left-40 top-0 h-96 w-96 rounded-full bg-amber-500/20 blur-[140px]" />
-        <div className="pointer-events-none absolute -bottom-40 right-0 h-96 w-96 rounded-full bg-primary/20 blur-[140px]" />
-
-        <div className="container relative mx-auto px-6">
-          <div className="flex flex-col items-start gap-16 md:flex-row md:items-center md:gap-20">
-
-            {/* Left: Copy */}
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
-              className="flex-1"
-            >
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-amber-500/35 bg-amber-500/12 px-4 py-1.5 text-sm font-semibold text-amber-400">
-                <Trophy size={14} />
-                Flagship Feature
-              </div>
-
-              <h2 className="mb-6 text-4xl font-bold leading-[1.05] md:text-5xl lg:text-6xl">
-                Drop a Giveaway.
-                <br />
-                Share the Link.
-                <br />
-                <span className="text-amber-400">Your People Claim.</span>
-              </h2>
-
-              <p className="mb-10 max-w-lg text-lg leading-relaxed text-background/55">
-                Create a giveaway in seconds, set the airtime or data amount, and share your unique link — on WhatsApp, Twitter, anywhere. Anyone who clicks claims their reward instantly. No manual sending, no spreadsheets.
-              </p>
-
-              <div className="mb-10 space-y-3">
-                {[
-                  "Set up a giveaway in under 60 seconds",
-                  "Get a shareable link — post it anywhere",
-                  "Anyone with the link can claim their airtime or data",
-                  "Real-time tracking as claims roll in",
-                ].map((f) => (
-                  <div key={f} className="flex items-center gap-3">
-                    <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-amber-500/20">
-                      <CheckCircle2 size={13} className="text-amber-400" />
-                    </div>
-                    <span className="text-sm text-background/65">{f}</span>
-                  </div>
-                ))}
-              </div>
-
-              <Button
-                size="lg"
-                className="rounded-full bg-amber-500 px-8 text-base font-semibold text-black shadow-lg shadow-amber-500/25 hover:bg-amber-400"
-                asChild
-              >
-                <Link href="https://app.wakasub.com/register">
-                  Create a Giveaway
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </motion.div>
-
-            {/* Right: Giveaway link card */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="w-full max-w-[340px] flex-shrink-0 md:self-center"
-            >
-              <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm">
-                {/* Header */}
-                <div className="flex items-center gap-3 border-b border-white/10 px-5 py-4">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/20">
-                    <Gift size={16} className="text-amber-400" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold">Christmas Giveaway 🎄</p>
-                    <p className="text-[10px] text-background/45">by Adebayo O.</p>
-                  </div>
-                  <span className="ml-auto rounded-full bg-amber-500/20 px-2 py-0.5 text-[10px] font-bold text-amber-400">LIVE</span>
-                </div>
-
-                <div className="space-y-4 p-5">
-                  {/* Amount + slots */}
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className="rounded-xl bg-white/5 p-3">
-                      <p className="mb-1 text-[10px] text-background/40">Per claim</p>
-                      <p className="text-lg font-bold text-amber-400">₦500</p>
-                      <p className="text-[10px] text-background/40">MTN Airtime</p>
-                    </div>
-                    <div className="rounded-xl bg-white/5 p-3">
-                      <p className="mb-1 text-[10px] text-background/40">Budget</p>
-                      <p className="text-lg font-bold text-background/80">₦50,000</p>
-                      <p className="text-[10px] text-background/40">100 slots</p>
-                    </div>
-                  </div>
-
-                  {/* Shareable link */}
-                  <div>
-                    <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-widest text-background/40">Your Link</p>
-                    <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/8 px-3 py-2.5">
-                      <Link2 size={12} className="shrink-0 text-amber-400" />
-                      <span className="flex-1 truncate font-mono text-xs text-background/70">wakasub.com/give/xk72p3</span>
-                      <div className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-lg bg-amber-500/20">
-                        <Copy size={10} className="text-amber-400" />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Claims progress */}
-                  <div>
-                    <div className="mb-1.5 flex items-center justify-between">
-                      <p className="text-[10px] font-semibold uppercase tracking-widest text-background/40">Claims</p>
-                      <span className="text-xs font-semibold text-amber-400">47 / 100</span>
-                    </div>
-                    <div className="h-2 overflow-hidden rounded-full bg-white/10">
-                      <div className="animate-giveaway-progress h-full rounded-full bg-amber-500" style={{ animationDuration: "1.5s" }} />
-                    </div>
-                  </div>
-
-                  {/* Recent claims */}
-                  <div>
-                    <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-background/40">Recent Claims</p>
-                    <div className="space-y-2">
-                      {[
-                        { number: "0803xxx", network: "MTN", time: "just now" },
-                        { number: "0812xxx", network: "Airtel", time: "2m ago" },
-                        { number: "0705xxx", network: "Glo", time: "5m ago" },
-                      ].map((c) => (
-                        <div key={c.number} className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <CheckCircle2 size={11} className="text-green-400" />
-                            <span className="text-xs text-background/60">{c.number}</span>
-                            <span className="rounded-full bg-white/10 px-1.5 py-0.5 text-[9px] font-bold text-background/50">{c.network}</span>
-                          </div>
-                          <span className="text-[10px] text-background/35">{c.time}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 6. WHY CHOOSE WAKASUB ── */}
-      <section className="py-24 md:py-32">
-        <div className="container mx-auto px-6">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-            className="mb-16 text-center"
-          >
-            <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">Why Wakasub</p>
-            <h2 className="mb-4 text-4xl font-bold md:text-5xl">
-              Built for trust.
-              <br />
-              Designed for speed.
-            </h2>
-            <p className="mx-auto max-w-lg text-lg text-muted-foreground">
-              We don&apos;t cut corners on what matters most — your money moves instantly and your data stays protected.
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.1 }}
-            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
-          >
-            {[
-              {
-                icon: Lock,
-                title: "Security",
-                desc: "End-to-end encryption on every transaction. Your wallet and personal data are protected at all times.",
-                iconCls: "text-green-600 dark:text-green-400 bg-green-500/10",
-              },
-              {
-                icon: Zap,
-                title: "Instant Delivery",
-                desc: "No waiting. Airtime, data, and bill payments are processed the moment you confirm.",
-                iconCls: "text-amber-600 dark:text-amber-400 bg-amber-500/10",
-              },
-              {
-                icon: Clock,
-                title: "24/7 Availability",
-                desc: "Pay at 2am on a Sunday. Our infrastructure never sleeps — ever.",
-                iconCls: "text-blue-600 dark:text-blue-400 bg-blue-500/10",
-              },
-              {
-                icon: Activity,
-                title: "Reliable Infrastructure",
-                desc: "99.9% uptime backed by battle-tested payment rails across all Nigerian networks.",
-                iconCls: "text-violet-600 dark:text-violet-400 bg-violet-500/10",
-              },
-              {
-                icon: ShieldCheck,
-                title: "Transparent Transactions",
-                desc: "No hidden fees. Every transaction shows exactly what you paid and what was delivered.",
-                iconCls: "text-primary bg-primary/10",
-              },
-            ].map((t, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp}
-                className="flex flex-col rounded-2xl border border-border/50 bg-card p-6 transition-shadow hover:shadow-md"
-              >
-                <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-xl ${t.iconCls}`}>
+            {trustPillars.map((t) => (
+              <motion.div key={t.title} variants={fadeUp} className="flex flex-col rounded-2xl border border-border/50 bg-card p-6 transition-shadow hover:shadow-md">
+                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
                   <t.icon size={20} />
                 </div>
                 <h3 className="mb-2 font-semibold">{t.title}</h3>
@@ -766,103 +687,31 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── 7. RESELLER SECTION ── */}
-      <section id="resellers" className="bg-secondary/20 py-24 md:py-32">
+      {/* ── 10. UTILITIES ── */}
+      <section id="utilities" className="bg-secondary/20 py-24 md:py-32">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:gap-24">
-
-            {/* Left: Business dashboard mock */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6 }}
-              className="order-2 lg:order-1"
-            >
-              <div className="overflow-hidden rounded-3xl border border-border/60 bg-card p-6 shadow-xl">
-                <div className="mb-5 flex items-center justify-between">
-                  <div>
-                    <p className="mb-0.5 text-xs text-muted-foreground">Reseller Dashboard</p>
-                    <p className="text-lg font-bold">Business Overview</p>
-                  </div>
-                  <span className="flex items-center gap-1.5 rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700 dark:bg-green-900 dark:text-green-400">
-                    <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
-                    Live
-                  </span>
-                </div>
-
-                <div className="mb-5 grid grid-cols-3 gap-3">
-                  {[
-                    { label: "Today's Revenue", value: "₦45,200", icon: DollarSign, cls: "text-green-600 bg-green-50 dark:text-green-400 dark:bg-green-950" },
-                    { label: "Transactions", value: "87", icon: Activity, cls: "text-blue-600 bg-blue-50 dark:text-blue-400 dark:bg-blue-950" },
-                    { label: "Active Clients", value: "23", icon: Users, cls: "text-violet-600 bg-violet-50 dark:text-violet-400 dark:bg-violet-950" },
-                  ].map((m) => (
-                    <div key={m.label} className="rounded-xl bg-secondary/50 p-3">
-                      <div className={`mb-2 flex h-7 w-7 items-center justify-center rounded-lg ${m.cls}`}>
-                        <m.icon size={13} />
-                      </div>
-                      <p className="text-sm font-bold">{m.value}</p>
-                      <p className="text-[10px] leading-tight text-muted-foreground">{m.label}</p>
-                    </div>
-                  ))}
-                </div>
-
-                <div>
-                  <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Weekly Sales</p>
-                  <div className="flex h-14 items-end gap-1.5">
-                    {[40, 65, 50, 80, 70, 90, 75].map((h, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ scaleY: 0 }}
-                        whileInView={{ scaleY: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: i * 0.05, ease: "easeOut" }}
-                        style={{ height: `${h}%`, transformOrigin: "bottom" }}
-                        className={`flex-1 rounded-t-sm ${i === 5 ? "bg-primary" : "bg-primary/20"}`}
-                      />
-                    ))}
-                  </div>
-                  <div className="mt-1 flex justify-between">
-                    {["M", "T", "W", "T", "F", "S", "S"].map((d, i) => (
-                      <span key={i} className={`flex-1 text-center text-[9px] ${i === 5 ? "font-bold text-primary" : "text-muted-foreground"}`}>{d}</span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Right: Copy */}
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
-              className="order-1 lg:order-2"
-            >
-              <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">For Resellers</p>
-              <h2 className="mb-6 text-4xl font-bold md:text-5xl">
-                Turn Airtime Sales
-                <br />
-                Into Extra Income.
-              </h2>
+            <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
+              <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">Everyday too</p>
+              <h2 className="mb-5 text-4xl font-bold md:text-5xl">Top up. Pay bills. Spend your wins.</h2>
               <p className="mb-8 text-lg leading-relaxed text-muted-foreground">
-                Whether you&apos;re a roadside vendor or running a digital shop, Wakasub gives you competitive rates, powerful tools, and real-time reports to grow your business.
+                The same wallet that powers every reward handles your airtime, data, electricity and cable — all one tap away.
               </p>
 
-              <div className="mb-10 space-y-4">
+              <div className="mb-10 grid grid-cols-2 gap-3">
                 {[
-                  { icon: TrendingUp, title: "Better rates on every sale", desc: "Earn more per transaction with our dedicated reseller pricing." },
-                  { icon: Layers, title: "Bulk transactions in seconds", desc: "Process hundreds of top-ups without the wait or the hassle." },
-                  { icon: BarChart3, title: "Detailed sales reports", desc: "Track your earnings, clients, and performance in real time." },
-                  { icon: Globe, title: "Business dashboard", desc: "Manage airtime, data, and clients from one clean interface." },
-                ].map((b) => (
-                  <div key={b.title} className="flex gap-4">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
-                      <b.icon size={18} className="text-primary" />
+                  { icon: Smartphone, label: "Airtime", sub: "MTN · Airtel · Glo · 9mobile" },
+                  { icon: Wifi, label: "Data", sub: "Daily, weekly & monthly" },
+                  { icon: Zap, label: "Electricity", sub: "EKEDC · IKEDC · AEDC" },
+                  { icon: Coins, label: "Cable TV", sub: "DSTV · GOtv · Startimes" },
+                ].map((u) => (
+                  <div key={u.label} className="flex items-center gap-3 rounded-2xl border border-border/50 bg-card p-4">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                      <u.icon size={18} />
                     </div>
                     <div>
-                      <h4 className="mb-0.5 font-semibold">{b.title}</h4>
-                      <p className="text-sm text-muted-foreground">{b.desc}</p>
+                      <p className="text-sm font-semibold">{u.label}</p>
+                      <p className="text-[11px] text-muted-foreground">{u.sub}</p>
                     </div>
                   </div>
                 ))}
@@ -870,25 +719,92 @@ export default function LandingPage() {
 
               <Button size="lg" className="rounded-full px-8 text-base font-semibold shadow-lg shadow-primary/20" asChild>
                 <Link href="https://app.wakasub.com/register">
-                  Start Reselling
+                  Open Wakasub
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
+            </motion.div>
+
+            {/* Wallet mock */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="overflow-hidden rounded-[2rem] border border-border/60 bg-card shadow-2xl shadow-black/12 ring-1 ring-black/5 dark:ring-white/5">
+                <div className="bg-primary px-6 py-5 text-primary-foreground">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-xs font-medium opacity-70">Wallet balance</p>
+                      <p className="text-[2rem] font-bold tracking-tight">₦24,500.00</p>
+                    </div>
+                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
+                      <Wallet size={18} />
+                    </div>
+                  </div>
+                  <div className="mt-3 flex gap-2">
+                    <span className="rounded-full bg-white/15 px-3 py-1 text-[11px] font-medium">+ Add money</span>
+                    <span className="rounded-full bg-white/15 px-3 py-1 text-[11px] font-medium">🎁 Won ₦2,000</span>
+                  </div>
+                </div>
+
+                <div className="p-5">
+                  <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Quick actions</p>
+                  <div className="grid grid-cols-4 gap-2">
+                    {[
+                      { icon: Smartphone, label: "Airtime" },
+                      { icon: Wifi, label: "Data" },
+                      { icon: Zap, label: "Electric" },
+                      { icon: Gift, label: "Reward" },
+                    ].map((a) => (
+                      <div key={a.label} className="flex cursor-pointer flex-col items-center gap-1.5 rounded-xl p-2 transition-colors hover:bg-secondary/70">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                          <a.icon size={15} />
+                        </div>
+                        <span className="text-[10px] font-medium text-muted-foreground">{a.label}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-4 space-y-1 rounded-xl bg-secondary/40 p-3">
+                    <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Recent</p>
+                    {[
+                      { label: "Won ₦200 · Tobi's giveaway", amt: "+₦200", time: "Just now", positive: true },
+                      { label: "MTN 1GB Data", amt: "−₦280", time: "2h ago" },
+                      { label: "Funded: Market group", amt: "−₦5,000", time: "Yesterday" },
+                    ].map((tx) => (
+                      <div key={tx.label} className="flex items-center justify-between rounded-lg px-1 py-1.5">
+                        <div className="flex items-center gap-2">
+                          <div className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10">
+                            {tx.positive ? <Gift size={10} className="text-primary" /> : <CheckCircle2 size={10} className="text-primary" />}
+                          </div>
+                          <span className="text-xs text-muted-foreground">{tx.label}</span>
+                        </div>
+                        <div className="text-right">
+                          <p className={`text-xs font-semibold ${tx.positive ? "text-primary" : ""}`}>{tx.amt}</p>
+                          <p className="text-[9px] text-muted-foreground">{tx.time}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ── 8. HOW IT WORKS ── */}
+      {/* ── 11. HOW IT WORKS ── */}
       <section
         id="how-it-works"
         className="relative mx-4 my-12 overflow-hidden rounded-3xl bg-foreground py-24 text-background md:rounded-[2.5rem]"
       >
-        <div className="pointer-events-none absolute inset-0 opacity-[0.03]">
+        <div className="pointer-events-none absolute inset-0 opacity-[0.04]">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-size-[40px_40px]" />
         </div>
         <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-primary/20 blur-[100px]" />
-        <div className="pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-blue-500/10 blur-[100px]" />
+        <div className="pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-primary/15 blur-[100px]" />
 
         <div className="container relative mx-auto px-6">
           <motion.div
@@ -896,13 +812,10 @@ export default function LandingPage() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
-            className="mb-16 text-center"
+            className="mb-14 text-center"
           >
             <p className="mb-4 text-sm font-medium uppercase tracking-widest text-primary">How it works</p>
-            <h2 className="mb-4 text-4xl font-bold leading-tight md:text-5xl">Up and running in minutes</h2>
-            <p className="mx-auto max-w-lg text-lg text-background/50">
-              Four simple steps from zero to your first transaction.
-            </p>
+            <h2 className="text-4xl font-bold leading-tight md:text-5xl">From idea to paid winners.</h2>
           </motion.div>
 
           <motion.div
@@ -912,17 +825,8 @@ export default function LandingPage() {
             viewport={{ once: true, amount: 0.1 }}
             className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
           >
-            {[
-              { n: "01", icon: Users, title: "Create Account", desc: "Sign up with your email in under 60 seconds. No paperwork, no stress." },
-              { n: "02", icon: Wallet, title: "Fund Wallet", desc: "Transfer to your dedicated virtual account — money reflects instantly." },
-              { n: "03", icon: Smartphone, title: "Make Payment", desc: "Select your service, enter details, and confirm. Done in seconds." },
-              { n: "04", icon: CheckCircle2, title: "Receive Instantly", desc: "Your airtime, data, or bill payment arrives before you close the app." },
-            ].map((s, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp}
-                className="relative rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
-              >
+            {howItWorks.map((s, i) => (
+              <motion.div key={s.n} variants={fadeUp} className="relative rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
                 <div className="mb-4 flex items-center justify-between">
                   <div className="flex h-10 w-10 items-center justify-center rounded-full border border-primary/40 bg-primary/15 text-sm font-bold text-primary">
                     {s.n}
@@ -933,7 +837,7 @@ export default function LandingPage() {
                 </div>
                 <h4 className="mb-2 text-base font-bold">{s.title}</h4>
                 <p className="text-sm leading-relaxed text-background/45">{s.desc}</p>
-                {i < 3 && (
+                {i < howItWorks.length - 1 && (
                   <div className="absolute -right-2 top-1/2 hidden -translate-y-1/2 lg:block">
                     <ArrowRight size={16} className="text-background/20" />
                   </div>
@@ -950,13 +854,13 @@ export default function LandingPage() {
             className="mt-12 text-center"
           >
             <Button size="lg" className="rounded-full px-10 text-base font-semibold" asChild>
-              <Link href="https://app.wakasub.com/register">Create Free Account</Link>
+              <Link href="https://app.wakasub.com/register">Create your first campaign</Link>
             </Button>
           </motion.div>
         </div>
       </section>
 
-      {/* ── 9. TESTIMONIALS ── */}
+      {/* ── 12. TESTIMONIALS ── */}
       <section id="testimonials" className="py-24 md:py-32">
         <div className="container mx-auto px-6">
           <motion.div
@@ -964,13 +868,10 @@ export default function LandingPage() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
-            className="mb-16 text-center"
+            className="mb-14 text-center"
           >
             <p className="mb-3 text-sm font-medium uppercase tracking-widest text-primary">Testimonials</p>
-            <h2 className="mb-4 text-4xl font-bold md:text-5xl">Real people, real results</h2>
-            <p className="mx-auto max-w-lg text-lg text-muted-foreground">
-              Thousands of Nigerians rely on Wakasub every day.
-            </p>
+            <h2 className="text-4xl font-bold md:text-5xl">Creators and winners.</h2>
           </motion.div>
 
           <motion.div
@@ -981,11 +882,7 @@ export default function LandingPage() {
             className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
           >
             {testimonials.map((t, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp}
-                className="flex flex-col rounded-2xl border border-border/50 bg-card p-6 transition-shadow hover:shadow-md"
-              >
+              <motion.div key={i} variants={fadeUp} className="flex flex-col rounded-2xl border border-border/50 bg-card p-6 transition-shadow hover:shadow-md">
                 <div className="mb-3 flex gap-0.5">
                   {[...Array(5)].map((_, j) => (
                     <Star key={j} size={12} className="fill-primary text-primary" />
@@ -1007,7 +904,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── 10. FINAL CTA ── */}
+      {/* ── 13. FINAL CTA ── */}
       <section className="py-20 md:py-28">
         <div className="container mx-auto px-6">
           <motion.div
@@ -1024,31 +921,23 @@ export default function LandingPage() {
             <div className="pointer-events-none absolute -bottom-16 -right-16 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
 
             <div className="relative">
-              <p className="mb-4 text-sm font-medium uppercase tracking-widest text-primary-foreground/55">
-                Get started today
-              </p>
               <h2 className="mb-6 text-4xl font-bold leading-tight md:text-6xl">
-                Join 50,000+ Nigerians
+                Reward your people.
                 <br />
-                Using Wakasub Every Day
+                Or get rewarded.
               </h2>
-              <p className="mx-auto mb-10 max-w-xl text-lg text-primary-foreground/70">
-                Sign up free. Fund your wallet in seconds. Start paying bills, buying data, and sending giveaways the smart way.
+              <p className="mx-auto mb-10 max-w-lg text-lg text-primary-foreground/70">
+                Create a campaign in under a minute, or claim your first reward in seconds.
               </p>
-              <Button
-                size="lg"
-                variant="secondary"
-                className="h-14 rounded-full px-12 text-base font-bold shadow-xl"
-                asChild
-              >
-                <Link href="https://app.wakasub.com/register">Create Free Account</Link>
+              <Button size="lg" variant="secondary" className="h-14 rounded-full px-12 text-base font-bold shadow-xl" asChild>
+                <Link href="https://app.wakasub.com/register">Create a Campaign</Link>
               </Button>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* ── 11. FOOTER ── */}
+      {/* ── 14. FOOTER ── */}
       <footer className="border-t border-border py-14">
         <div className="container mx-auto px-6">
           <div className="flex flex-col items-start justify-between gap-10 md:flex-row">
@@ -1058,22 +947,14 @@ export default function LandingPage() {
                 <span className="text-lg font-bold">WakaSub</span>
               </Link>
               <p className="mb-6 text-sm text-muted-foreground">
-                Nigeria&apos;s easiest and most reliable platform for buying data, airtime, paying bills, and distributing giveaways.
+                The rewards hub of Nigeria — reward your people with airtime, data and cash in seconds.
               </p>
               <div className="flex flex-col gap-2">
-                <a
-                  href="#"
-                  onClick={(e) => e.preventDefault()}
-                  className="inline-flex items-center gap-2.5 rounded-lg border border-border bg-foreground/5 px-3.5 py-2 text-sm text-foreground transition-colors hover:bg-foreground/10"
-                >
+                <a href="#" onClick={(e) => e.preventDefault()} className="inline-flex items-center gap-2.5 rounded-lg border border-border bg-foreground/5 px-3.5 py-2 text-sm text-foreground transition-colors hover:bg-foreground/10">
                   <AppleIcon size={15} />
                   App Store
                 </a>
-                <a
-                  href="#"
-                  onClick={(e) => e.preventDefault()}
-                  className="inline-flex items-center gap-2.5 rounded-lg border border-border bg-foreground/5 px-3.5 py-2 text-sm text-foreground transition-colors hover:bg-foreground/10"
-                >
+                <a href="#" onClick={(e) => e.preventDefault()} className="inline-flex items-center gap-2.5 rounded-lg border border-border bg-foreground/5 px-3.5 py-2 text-sm text-foreground transition-colors hover:bg-foreground/10">
                   <GooglePlayIcon size={15} />
                   Google Play
                 </a>
@@ -1083,11 +964,11 @@ export default function LandingPage() {
             <div className="flex flex-wrap gap-x-12 gap-y-4 text-sm text-muted-foreground">
               <div className="flex flex-col gap-3">
                 <span className="text-xs font-semibold uppercase tracking-widest text-foreground">Platform</span>
-                <Link href="#services" className="transition-colors hover:text-primary">Services</Link>
-                <Link href="#giveaway" className="transition-colors hover:text-primary">Giveaway</Link>
-                <Link href="#resellers" className="transition-colors hover:text-primary">Resellers</Link>
+                <Link href="#rewards" className="transition-colors hover:text-primary">Rewards</Link>
+                <Link href="#who" className="transition-colors hover:text-primary">Who it&apos;s for</Link>
+                <Link href="#utilities" className="transition-colors hover:text-primary">Utilities</Link>
                 <Link href="#how-it-works" className="transition-colors hover:text-primary">How it works</Link>
-                <Link href="https://app.wakasub.com/register" className="transition-colors hover:text-primary">Sign up free</Link>
+                <Link href="https://app.wakasub.com/register" className="transition-colors hover:text-primary">Create a campaign</Link>
               </div>
               <div className="flex flex-col gap-3">
                 <span className="text-xs font-semibold uppercase tracking-widest text-foreground">Company</span>
@@ -1106,18 +987,18 @@ export default function LandingPage() {
           <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border/50 pt-8 text-xs text-muted-foreground md:flex-row">
             <p>© {new Date().getFullYear()} Wakasub Technologies Ltd. All rights reserved.</p>
             <div className="flex items-center gap-2">
-              <CheckCircle2 size={13} className="text-green-500" />
+              <CheckCircle2 size={13} className="text-primary" />
               <span>All systems operational</span>
             </div>
           </div>
         </div>
       </footer>
 
-      {/* ── 12. STICKY MOBILE CTA ── */}
+      {/* ── 15. STICKY MOBILE CTA ── */}
       <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden">
         <div className="border-t border-border/50 bg-background/95 px-4 py-3 shadow-2xl shadow-black/10 backdrop-blur-md">
           <Button size="lg" className="h-12 w-full rounded-full text-base font-semibold" asChild>
-            <Link href="https://app.wakasub.com/register">Get Started Free</Link>
+            <Link href="https://app.wakasub.com/register">Create a Campaign</Link>
           </Button>
         </div>
       </div>
