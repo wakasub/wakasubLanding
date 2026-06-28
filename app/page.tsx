@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { useState, useEffect, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/navbar";
 import { Button } from "@/components/ui/button";
 import {
@@ -29,6 +30,8 @@ import {
   PartyPopper,
   Building2,
   Share2,
+  Check,
+  MousePointerClick,
 } from "lucide-react";
 
 const fadeUp = {
@@ -256,6 +259,202 @@ function TickerRow({ items, reverse = false }: { items: typeof tickerTop; revers
   );
 }
 
+/* ── Interactive hero: live claim demo ── */
+
+const demoRewards = [
+  { icon: Smartphone, amount: "₦200", kind: "airtime", network: "MTN", time: "2.4s" },
+  { icon: Wifi, amount: "1GB", kind: "data", network: "Airtel", time: "3.1s" },
+  { icon: Banknote, amount: "₦5,000", kind: "cash", network: "Wallet", time: "1.9s" },
+];
+
+const demoGivers = [
+  { initial: "T", name: "Tobi", campaign: "Match-day giveaway", phone: "0803 ••• •• 42" },
+  { initial: "A", name: "Ada", campaign: "10k followers drop", phone: "0701 ••• •• 18" },
+  { initial: "C", name: "Chidi", campaign: "Group reward", phone: "0809 ••• •• 73" },
+];
+
+type DemoStep = "offer" | "sending" | "done";
+
+function Confetti({ seed }: { seed: number }) {
+  const pieces = useMemo(
+    () =>
+      Array.from({ length: 14 }, (_, i) => {
+        const angle = (i / 14) * Math.PI * 2 + seed;
+        const dist = 60 + ((i * 37 + seed * 13) % 70);
+        return {
+          x: Math.cos(angle) * dist,
+          y: Math.sin(angle) * dist - 20,
+          rotate: (i * 57 + seed * 90) % 360,
+          delay: (i % 5) * 0.02,
+          tint: i % 3,
+        };
+      }),
+    [seed],
+  );
+  const tints = ["bg-primary", "bg-primary/60", "bg-[oklch(0.72_0.14_250)]"];
+  return (
+    <div className="pointer-events-none absolute inset-0 flex items-center justify-center" aria-hidden>
+      {pieces.map((p, i) => (
+        <motion.span
+          key={i}
+          className={`absolute h-2 w-2 rounded-[2px] ${tints[p.tint]}`}
+          initial={{ opacity: 1, x: 0, y: 0, scale: 1, rotate: 0 }}
+          animate={{ opacity: 0, x: p.x, y: p.y, scale: 0.4, rotate: p.rotate }}
+          transition={{ duration: 0.9, delay: p.delay, ease: "easeOut" }}
+        />
+      ))}
+    </div>
+  );
+}
+
+function LiveClaimDemo() {
+  const [round, setRound] = useState(0);
+  const [step, setStep] = useState<DemoStep>("offer");
+
+  const reward = demoRewards[round % demoRewards.length];
+  const giver = demoGivers[round % demoGivers.length];
+
+  useEffect(() => {
+    const durations: Record<DemoStep, number> = { offer: 2600, sending: 1600, done: 2900 };
+    const next: Record<DemoStep, DemoStep> = { offer: "sending", sending: "done", done: "offer" };
+    const t = setTimeout(() => {
+      if (step === "done") setRound((r) => r + 1);
+      setStep(next[step]);
+    }, durations[step]);
+    return () => clearTimeout(t);
+  }, [step]);
+
+  return (
+    <div className="relative w-full max-w-sm">
+      {/* glow */}
+      <div className="pointer-events-none absolute -inset-px -z-10 rounded-[1.7rem] bg-linear-to-b from-primary/30 to-transparent blur-md" />
+
+      <div className="relative overflow-hidden rounded-[1.6rem] border border-border/70 bg-card/80 p-1.5 shadow-2xl shadow-primary/10 backdrop-blur-xl">
+        {/* header */}
+        <div className="flex items-center gap-2.5 px-3.5 pb-3 pt-2.5">
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-xs font-bold text-primary">
+            {giver.initial}
+          </span>
+          <div className="min-w-0 flex-1 text-left">
+            <p className="truncate text-[13px] font-semibold leading-tight">{giver.name}</p>
+            <p className="truncate text-[11px] leading-tight text-muted-foreground">{giver.campaign}</p>
+          </div>
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+            </span>
+            Live
+          </span>
+        </div>
+
+        {/* body */}
+        <div className="relative min-h-[208px] overflow-hidden rounded-[1.2rem] bg-background/60 p-5">
+          <AnimatePresence mode="wait">
+            {step === "offer" && (
+              <motion.div
+                key="offer"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="flex h-full flex-col items-center"
+              >
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/12">
+                  <reward.icon size={26} className="text-primary" />
+                </div>
+                <p className="mt-3 text-[11px] font-medium uppercase tracking-widest text-muted-foreground">
+                  You&apos;ve been sent
+                </p>
+                <p className="text-2xl font-extrabold leading-tight">
+                  {reward.amount} <span className="text-muted-foreground/80">{reward.kind}</span>
+                </p>
+                <div className="relative mt-4 w-full">
+                  <div className="flex h-11 w-full items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground shadow-lg shadow-primary/30">
+                    Claim now
+                  </div>
+                  {/* auto-tapping cursor */}
+                  <motion.div
+                    className="absolute -bottom-1 right-7 text-foreground"
+                    initial={{ x: 26, y: 22, opacity: 0 }}
+                    animate={{ x: [26, 0, 0], y: [22, 0, 0], opacity: [0, 1, 1], scale: [1, 1, 0.82] }}
+                    transition={{ duration: 1.2, delay: 1.1, times: [0, 0.7, 1], ease: "easeOut" }}
+                  >
+                    <MousePointerClick size={20} className="drop-shadow" />
+                  </motion.div>
+                </div>
+              </motion.div>
+            )}
+
+            {step === "sending" && (
+              <motion.div
+                key="sending"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="flex h-full flex-col items-center justify-center"
+              >
+                <div className="relative flex h-14 w-14 items-center justify-center">
+                  <motion.span
+                    className="absolute inset-0 rounded-full border-2 border-primary/20 border-t-primary"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+                  />
+                  <reward.icon size={22} className="text-primary" />
+                </div>
+                <p className="mt-4 text-sm font-semibold">Sending {reward.amount} {reward.kind}…</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  to {giver.phone} · {reward.network}
+                </p>
+                <div className="mt-4 h-1.5 w-44 overflow-hidden rounded-full bg-border">
+                  <motion.div
+                    className="h-full rounded-full bg-primary"
+                    initial={{ width: "0%" }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: 1.4, ease: "easeInOut" }}
+                  />
+                </div>
+              </motion.div>
+            )}
+
+            {step === "done" && (
+              <motion.div
+                key="done"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="relative flex h-full flex-col items-center justify-center"
+              >
+                <Confetti seed={round} />
+                <motion.div
+                  className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground"
+                  initial={{ scale: 0.4, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ type: "spring", stiffness: 320, damping: 16 }}
+                >
+                  <Check size={28} strokeWidth={3} />
+                </motion.div>
+                <p className="mt-3 text-base font-bold">{reward.amount} {reward.kind} delivered</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Landed in {reward.time} · no app switch
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* footer */}
+        <div className="flex items-center justify-center gap-1.5 py-2.5 text-[11px] font-medium text-muted-foreground">
+          <Lock size={11} className="text-primary" />
+          Secured by Wakasub · wakasub.com
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function LandingPage() {
   return (
     <main className="min-h-screen overflow-x-hidden pb-20 md:pb-0">
@@ -269,17 +468,6 @@ export default function LandingPage() {
         <div className="pointer-events-none absolute right-[12%] top-[18%] -z-10 h-72 w-72 rounded-full bg-primary/10 blur-[120px]" />
 
         <motion.div initial="hidden" animate="show" variants={stagger} className="flex w-full max-w-4xl flex-col items-center">
-          <motion.div
-            variants={fadeUp}
-            className="mb-7 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-sm font-medium text-foreground/70 shadow-sm"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-            </span>
-            The rewards hub of Nigeria
-          </motion.div>
-
           <motion.h1
             variants={fadeUp}
             className="text-balance text-6xl font-extrabold leading-[0.95] tracking-tight md:text-7xl lg:text-[6.5rem]"
@@ -324,12 +512,22 @@ export default function LandingPage() {
           </motion.div>
         </motion.div>
 
+        {/* Interactive live-claim demo */}
+        <motion.div
+          initial={{ opacity: 0, y: 28, scale: 0.97 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ delay: 0.5, duration: 0.7, ease: "easeOut" }}
+          className="mt-12 flex w-full justify-center"
+        >
+          <LiveClaimDemo />
+        </motion.div>
+
         {/* Reward ticker */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-          className="mt-16 flex w-full max-w-5xl flex-col gap-3"
+          transition={{ delay: 0.7, duration: 0.6 }}
+          className="mt-12 flex w-full max-w-5xl flex-col gap-3"
         >
           <TickerRow items={tickerTop} />
           <TickerRow items={tickerBottom} reverse />
@@ -938,56 +1136,67 @@ export default function LandingPage() {
       </section>
 
       {/* ── 14. FOOTER ── */}
-      <footer className="border-t border-border py-14">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col items-start justify-between gap-10 md:flex-row">
-            <div className="max-w-xs">
-              <Link href="/" className="mb-3 flex items-center gap-2">
-                <Image src="/waka 512.png" alt="WakaSub" width={28} height={28} />
-                <span className="text-lg font-bold">WakaSub</span>
+      <footer className="border-t border-border bg-card/30">
+        <div className="container mx-auto px-6 py-16">
+          <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-12 md:gap-x-8">
+            {/* Brand */}
+            <div className="col-span-2 md:col-span-5 md:pr-8">
+              <Link href="/" className="mb-4 flex items-center gap-2">
+                <Image src="/waka 512.png" alt="WakaSub" width={30} height={30} />
+                <span className="text-lg font-bold tracking-tight">WakaSub</span>
               </Link>
-              <p className="mb-6 text-sm text-muted-foreground">
+              <p className="mb-6 max-w-xs text-sm leading-relaxed text-muted-foreground">
                 The rewards hub of Nigeria — reward your people with airtime, data and cash in seconds.
               </p>
-              <div className="flex flex-col gap-2">
-                <a href="#" onClick={(e) => e.preventDefault()} className="inline-flex items-center gap-2.5 rounded-lg border border-border bg-foreground/5 px-3.5 py-2 text-sm text-foreground transition-colors hover:bg-foreground/10">
-                  <AppleIcon size={15} />
+              <div className="flex flex-wrap gap-2.5">
+                <a href="https://apps.apple.com/ng/app/wakasub-data-bills-and-more/id6777371534" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 rounded-xl border border-border bg-foreground/5 px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-foreground/10">
+                  <AppleIcon size={16} />
                   App Store
                 </a>
-                <a href="#" onClick={(e) => e.preventDefault()} className="inline-flex items-center gap-2.5 rounded-lg border border-border bg-foreground/5 px-3.5 py-2 text-sm text-foreground transition-colors hover:bg-foreground/10">
-                  <GooglePlayIcon size={15} />
+                <a href="https://play.google.com/store/apps/details?id=com.wakasub.vtu" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 rounded-xl border border-border bg-foreground/5 px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-foreground/10">
+                  <GooglePlayIcon size={16} />
                   Google Play
                 </a>
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-x-12 gap-y-4 text-sm text-muted-foreground">
-              <div className="flex flex-col gap-3">
-                <span className="text-xs font-semibold uppercase tracking-widest text-foreground">Platform</span>
-                <Link href="#rewards" className="transition-colors hover:text-primary">Rewards</Link>
-                <Link href="#who" className="transition-colors hover:text-primary">Who it&apos;s for</Link>
-                <Link href="#utilities" className="transition-colors hover:text-primary">Utilities</Link>
-                <Link href="#how-it-works" className="transition-colors hover:text-primary">How it works</Link>
-                <Link href="https://app.wakasub.com/register" className="transition-colors hover:text-primary">Create a campaign</Link>
-              </div>
-              <div className="flex flex-col gap-3">
-                <span className="text-xs font-semibold uppercase tracking-widest text-foreground">Company</span>
-                <Link href="/internship" className="transition-colors hover:text-primary">Internship</Link>
-                <Link href="/contact-support" className="transition-colors hover:text-primary">Contact</Link>
-                <Link href="#" className="transition-colors hover:text-primary">Status</Link>
-              </div>
-              <div className="flex flex-col gap-3">
-                <span className="text-xs font-semibold uppercase tracking-widest text-foreground">Legal</span>
-                <Link href="#" className="transition-colors hover:text-primary">Terms</Link>
-                <Link href="#" className="transition-colors hover:text-primary">Privacy</Link>
-              </div>
+            {/* Platform */}
+            <div className="md:col-span-3">
+              <span className="mb-4 block text-xs font-semibold uppercase tracking-widest text-foreground">Platform</span>
+              <ul className="space-y-3 text-sm text-muted-foreground">
+                <li><Link href="#rewards" className="transition-colors hover:text-primary">Rewards</Link></li>
+                <li><Link href="#who" className="transition-colors hover:text-primary">Who it&apos;s for</Link></li>
+                <li><Link href="#utilities" className="transition-colors hover:text-primary">Utilities</Link></li>
+                <li><Link href="#how-it-works" className="transition-colors hover:text-primary">How it works</Link></li>
+                <li><Link href="https://app.wakasub.com/register" className="transition-colors hover:text-primary">Create a campaign</Link></li>
+              </ul>
+            </div>
+
+            {/* Company */}
+            <div className="md:col-span-2">
+              <span className="mb-4 block text-xs font-semibold uppercase tracking-widest text-foreground">Company</span>
+              <ul className="space-y-3 text-sm text-muted-foreground">
+                <li><Link href="/internship" className="transition-colors hover:text-primary">Internship</Link></li>
+                <li><Link href="/contact-support" className="transition-colors hover:text-primary">Contact</Link></li>
+              </ul>
+            </div>
+
+            {/* Legal */}
+            <div className="md:col-span-2">
+              <span className="mb-4 block text-xs font-semibold uppercase tracking-widest text-foreground">Legal</span>
+              <ul className="space-y-3 text-sm text-muted-foreground">
+                <li><Link href="https://app.wakasub.com/privacy-policy" className="transition-colors hover:text-primary">Privacy Policy</Link></li>
+              </ul>
             </div>
           </div>
 
-          <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border/50 pt-8 text-xs text-muted-foreground md:flex-row">
+          <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-border/50 pt-8 text-xs text-muted-foreground sm:flex-row">
             <p>© {new Date().getFullYear()} Wakasub Technologies Ltd. All rights reserved.</p>
             <div className="flex items-center gap-2">
-              <CheckCircle2 size={13} className="text-primary" />
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+              </span>
               <span>All systems operational</span>
             </div>
           </div>

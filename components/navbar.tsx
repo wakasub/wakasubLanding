@@ -13,6 +13,8 @@ const navLinks = [
   { label: "Who it's for", href: "#who" },
   { label: "Utilities", href: "#utilities" },
   { label: "How it works", href: "#how-it-works" },
+  { label: "Internship", href: "/internship" },
+  { label: "Contact", href: "/contact-support" },
 ];
 
 export function Navbar() {
@@ -60,7 +62,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-6 lg:flex">
           {navLinks.map((item) => (
             <Link
               key={item.label}
@@ -77,7 +79,7 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="hidden items-center gap-4 md:flex">
+        <div className="hidden items-center gap-4 lg:flex">
           <Button variant="ghost" size="sm" asChild>
             <Link href="https://app.wakasub.com/login">Log in</Link>
           </Button>
@@ -88,7 +90,7 @@ export function Navbar() {
 
         {/* Mobile toggle */}
         <button
-          className="relative z-[60] p-2 md:hidden"
+          className="relative z-[60] p-2 lg:hidden"
           onClick={() => setMobileMenuOpen((o) => !o)}
           aria-label="Toggle menu"
         >
@@ -115,14 +117,14 @@ export function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="fixed inset-0 z-[45] bg-background/90 backdrop-blur-md md:hidden"
+              className="fixed inset-0 z-[45] bg-background/90 backdrop-blur-md lg:hidden"
             />
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed bottom-0 right-0 top-0 z-[56] h-screen w-[85%] max-w-sm border-l border-border bg-background p-8 pt-24 shadow-2xl md:hidden"
+              className="fixed bottom-0 right-0 top-0 z-[56] h-screen w-[85%] max-w-sm border-l border-border bg-background p-8 pt-24 shadow-2xl lg:hidden"
             >
               <div className="flex w-full flex-col gap-2">
                 {navLinks.map((item, i) => (
