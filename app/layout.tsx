@@ -167,68 +167,6 @@ const jsonLd = {
         bestRating: "5",
       },
     },
-    {
-      "@type": "Service",
-      "@id": "https://wakasub.com/#reseller",
-      name: "Wakasub VTU Reseller Program",
-      serviceType: "VTU airtime, data and bill payment reseller platform",
-      provider: { "@id": "https://wakasub.com/#organization" },
-      areaServed: { "@type": "Country", name: "Nigeria" },
-      description:
-        "Resell airtime, data, cable TV and electricity at Nigeria's best wholesale rates with instant, automated delivery on every network — plus a developer API to power your own VTU business.",
-      offers: {
-        "@type": "Offer",
-        priceCurrency: "NGN",
-        price: "0",
-        description: "Free to join. Fund your wallet and resell at discounted wholesale rates.",
-      },
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://wakasub.com/#reseller-faq",
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "What is a Wakasub reseller?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "A Wakasub reseller buys airtime, data, cable TV and electricity at discounted wholesale rates and resells them to customers, keeping the margin on every transaction.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "How much does it cost to become a VTU reseller on Wakasub?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Signing up is completely free. You only fund your wallet with the amount you want to start selling — there are no setup, activation or monthly fees.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Which services can I resell?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Airtime and data for MTN, Airtel, Glo and 9mobile, plus cable TV (DStv, GOtv, StarTimes), electricity for every disco, and recharge and exam pins.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "How fast are reseller transactions delivered?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Top-ups are delivered instantly and automatically, 24/7, across every Nigerian network — so your customers are served the moment they pay.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Is there a reseller API?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Yes. Developers can integrate the Wakasub VTU API to automate airtime, data, cable TV and electricity payments inside their own app, website or business.",
-          },
-        },
-      ],
-    },
   ],
 };
 
