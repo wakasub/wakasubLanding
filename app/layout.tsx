@@ -1,9 +1,8 @@
 import type React from "react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Poppins, Bricolage_Grotesque } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { Toaster } from "sonner";
-import Script from "next/script";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -50,6 +49,19 @@ export const metadata: Metadata = {
     "virtual top up Nigeria",
     "automated airtime distribution",
     "reward your audience",
+    "become a VTU reseller Nigeria",
+    "VTU reseller platform Nigeria",
+    "best VTU prices Nigeria",
+    "cheap data reseller Nigeria",
+    "airtime reseller business",
+    "data reseller Nigeria",
+    "airtime and data API Nigeria",
+    "VTU API Nigeria",
+    "bulk airtime Nigeria",
+    "wholesale airtime and data",
+    "cable TV subscription reseller",
+    "electricity bill payment API",
+    "start a data reselling business Nigeria",
   ],
   authors: [{ name: "Wakasub Technologies Ltd" }],
   creator: "Wakasub Technologies Ltd",
@@ -72,28 +84,19 @@ export const metadata: Metadata = {
     siteName: "Wakasub",
     title: "Wakasub — The Rewards Hub of Nigeria",
     description:
-      "Reward your people with airtime, data and cash in seconds. Create a campaign, share one link, and your winners claim instantly — on rails that power millions of top-ups.",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Wakasub — The Rewards Hub of Nigeria",
-      },
-    ],
+      "Reward your people with airtime, data and cash in seconds, and resell airtime & data at Nigeria's best rates. Create a campaign, share one link, or fund a reseller wallet — delivery is instant.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Wakasub — The Rewards Hub of Nigeria",
     description:
-      "Reward your audience with airtime, data and cash in seconds. Create a campaign, share one link, winners claim instantly. Utilities one tap away too.",
-    images: ["/og-image.png"],
+      "Reward your audience with airtime, data and cash in seconds, and resell at Nigeria's best VTU rates. Instant delivery on every network.",
     creator: "@wakasub",
   },
   alternates: {
     canonical: "https://wakasub.com",
   },
-  manifest: "/manifest.json",
+  manifest: "/manifest.webmanifest",
   icons: {
     icon: [
       { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
@@ -106,6 +109,15 @@ export const metadata: Metadata = {
     statusBarStyle: "default",
     title: "Wakasub",
   },
+  category: "finance",
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a1020" },
+  ],
+  colorScheme: "light dark",
 };
 
 const jsonLd = {
@@ -155,6 +167,68 @@ const jsonLd = {
         bestRating: "5",
       },
     },
+    {
+      "@type": "Service",
+      "@id": "https://wakasub.com/#reseller",
+      name: "Wakasub VTU Reseller Program",
+      serviceType: "VTU airtime, data and bill payment reseller platform",
+      provider: { "@id": "https://wakasub.com/#organization" },
+      areaServed: { "@type": "Country", name: "Nigeria" },
+      description:
+        "Resell airtime, data, cable TV and electricity at Nigeria's best wholesale rates with instant, automated delivery on every network — plus a developer API to power your own VTU business.",
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "NGN",
+        price: "0",
+        description: "Free to join. Fund your wallet and resell at discounted wholesale rates.",
+      },
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://wakasub.com/#reseller-faq",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What is a Wakasub reseller?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "A Wakasub reseller buys airtime, data, cable TV and electricity at discounted wholesale rates and resells them to customers, keeping the margin on every transaction.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "How much does it cost to become a VTU reseller on Wakasub?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Signing up is completely free. You only fund your wallet with the amount you want to start selling — there are no setup, activation or monthly fees.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Which services can I resell?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Airtime and data for MTN, Airtel, Glo and 9mobile, plus cable TV (DStv, GOtv, StarTimes), electricity for every disco, and recharge and exam pins.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "How fast are reseller transactions delivered?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Top-ups are delivered instantly and automatically, 24/7, across every Nigerian network — so your customers are served the moment they pay.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Is there a reseller API?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. Developers can integrate the Wakasub VTU API to automate airtime, data, cable TV and electricity payments inside their own app, website or business.",
+          },
+        },
+      ],
+    },
   ],
 };
 
@@ -166,8 +240,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <Script
-          id="json-ld"
+        {/* JSON-LD as a plain script so it is server-rendered into the static HTML for crawlers */}
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />

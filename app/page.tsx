@@ -32,6 +32,13 @@ import {
   Share2,
   Check,
   MousePointerClick,
+  BadgePercent,
+  Layers,
+  Code2,
+  Headphones,
+  Repeat,
+  Tv,
+  TrendingUp,
 } from "lucide-react";
 
 const fadeUp = {
@@ -73,6 +80,30 @@ const stats = [
 
 const partners = ["MTN", "Airtel", "Glo", "9mobile", "DSTV", "GOtv", "Startimes", "EKEDC", "IKEDC", "AEDC"];
 const marqueePartners = [...partners, ...partners];
+
+const resellerFeatures = [
+  { icon: BadgePercent, title: "Nigeria's best rates", desc: "Buy airtime, data and bills at discounted wholesale prices and keep the margin on every sale." },
+  { icon: Zap, title: "Instant, automated delivery", desc: "Top-ups land the moment your customer pays — 24/7, no manual processing." },
+  { icon: Layers, title: "Every network & service", desc: "Airtime, data, cable TV, electricity and pins, all from one wallet." },
+  { icon: Code2, title: "Developer-ready API", desc: "Plug the Wakasub VTU API into your own app or website and automate everything." },
+  { icon: Wallet, title: "Easy wallet funding", desc: "Fund instantly via transfer or card and start selling in minutes." },
+  { icon: Headphones, title: "24/7 reseller support", desc: "Real humans on standby whenever you or your customers need a hand." },
+];
+
+const resellerServices = [
+  { icon: Smartphone, label: "Airtime", note: "All networks" },
+  { icon: Wifi, label: "Data bundles", note: "Daily · weekly · monthly" },
+  { icon: Tv, label: "Cable TV", note: "DStv · GOtv · StarTimes" },
+  { icon: Zap, label: "Electricity", note: "Every disco" },
+  { icon: Ticket, label: "Recharge & exam pins", note: "WAEC · NECO & more" },
+];
+
+const resellerFaqs = [
+  { q: "What is a Wakasub reseller?", a: "A reseller buys airtime, data, cable TV and electricity at discounted wholesale rates and resells them to customers, keeping the margin on every transaction." },
+  { q: "How much does it cost to start?", a: "Signing up is free. You only fund your wallet with what you want to sell — no setup, activation or monthly fees." },
+  { q: "Which services can I resell?", a: "Airtime and data for MTN, Airtel, Glo and 9mobile, plus cable TV (DStv, GOtv, StarTimes), electricity for every disco, and recharge and exam pins." },
+  { q: "Is there a reseller API?", a: "Yes — developers can integrate the Wakasub VTU API to automate airtime, data and bill payments inside their own app or business." },
+];
 
 const rewardTypes = [
   { icon: Smartphone, label: "Airtime", desc: "Any network, any amount" },
@@ -567,6 +598,147 @@ export default function LandingPage() {
               </span>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── 3.5 RESELLER ── */}
+      <section id="reseller" aria-labelledby="reseller-heading" className="py-24 md:py-32">
+        <div className="container mx-auto px-6">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            {/* Copy */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
+                <BadgePercent size={13} />
+                For VTU resellers
+              </span>
+              <h2 id="reseller-heading" className="mt-5 text-4xl font-bold leading-[1.05] md:text-5xl">
+                Resell airtime &amp; data at <span className="text-gradient">Nigeria&apos;s best rates</span>
+              </h2>
+              <p className="mt-5 max-w-xl text-lg text-muted-foreground">
+                Join thousands of resellers buying airtime, data, cable TV and electricity at discounted
+                wholesale prices — delivered instantly on every network. Fund your wallet, sell to your
+                customers, and keep the margin on every transaction.
+              </p>
+
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Button size="lg" className="h-13 rounded-full px-9 text-base font-semibold shadow-lg shadow-primary/25" asChild>
+                  <Link href="https://app.wakasub.com/register">
+                    Become a reseller
+                    <ArrowRight className="ml-1 h-4 w-4" />
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" className="h-13 rounded-full bg-transparent px-9 text-base font-medium" asChild>
+                  <Link href="/contact-support">Talk to our team</Link>
+                </Button>
+              </div>
+
+              <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
+                <span className="inline-flex items-center gap-1.5"><Zap size={15} className="text-primary" /> Instant delivery</span>
+                <span className="inline-flex items-center gap-1.5"><Repeat size={15} className="text-primary" /> Free to join</span>
+                <span className="inline-flex items-center gap-1.5"><ShieldCheck size={15} className="text-primary" /> Secure wallet</span>
+              </div>
+            </motion.div>
+
+            {/* Rate card */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.3 }}
+              className="relative"
+            >
+              <div className="pointer-events-none absolute -inset-4 -z-10 rounded-[2.5rem] bg-primary/10 blur-3xl" />
+              <div className="overflow-hidden rounded-[2rem] border border-border/60 bg-card shadow-2xl shadow-black/12 ring-1 ring-black/5 dark:ring-white/5">
+                <div className="bg-primary px-6 py-5 text-primary-foreground">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-xs font-medium opacity-70">Reseller pricing</p>
+                      <p className="text-[1.6rem] font-bold tracking-tight">Wholesale rates</p>
+                    </div>
+                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
+                      <TrendingUp size={18} />
+                    </div>
+                  </div>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <span className="rounded-full bg-white/15 px-3 py-1 text-[11px] font-medium">Instant delivery</span>
+                    <span className="rounded-full bg-white/15 px-3 py-1 text-[11px] font-medium">Best discounts</span>
+                    <span className="rounded-full bg-white/15 px-3 py-1 text-[11px] font-medium">One wallet</span>
+                  </div>
+                </div>
+
+                <div className="p-4">
+                  <p className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">What you can resell</p>
+                  <ul className="space-y-1">
+                    {resellerServices.map((s) => (
+                      <li key={s.label} className="flex items-center justify-between rounded-xl px-2 py-2.5 transition-colors hover:bg-secondary/60">
+                        <div className="flex items-center gap-3">
+                          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                            <s.icon size={16} />
+                          </div>
+                          <div>
+                            <p className="text-sm font-semibold leading-tight">{s.label}</p>
+                            <p className="text-[11px] leading-tight text-muted-foreground">{s.note}</p>
+                          </div>
+                        </div>
+                        <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                          <BadgePercent size={11} /> Discounted
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Button className="mt-3 w-full rounded-full font-semibold" asChild>
+                    <Link href="https://app.wakasub.com/register">
+                      Start reselling
+                      <ArrowRight className="ml-1 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Feature grid */}
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+            className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {resellerFeatures.map((f) => (
+              <motion.div key={f.title} variants={fadeUp} className="rounded-2xl border border-border/50 bg-card p-6">
+                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <f.icon size={20} />
+                </div>
+                <h3 className="mb-1.5 text-base font-bold">{f.title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Reseller FAQ */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="mt-16"
+          >
+            <h3 className="mb-6 text-center text-2xl font-bold md:text-3xl">Reseller questions, answered</h3>
+            <div className="mx-auto grid max-w-4xl grid-cols-1 gap-4 md:grid-cols-2">
+              {resellerFaqs.map((item) => (
+                <div key={item.q} className="rounded-2xl border border-border/50 bg-card p-6">
+                  <h4 className="mb-2 text-base font-semibold">{item.q}</h4>
+                  <p className="text-sm leading-relaxed text-muted-foreground">{item.a}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -1167,6 +1339,7 @@ export default function LandingPage() {
                 <li><Link href="#rewards" className="transition-colors hover:text-primary">Rewards</Link></li>
                 <li><Link href="#who" className="transition-colors hover:text-primary">Who it&apos;s for</Link></li>
                 <li><Link href="#utilities" className="transition-colors hover:text-primary">Utilities</Link></li>
+                <li><Link href="#reseller" className="transition-colors hover:text-primary">Become a reseller</Link></li>
                 <li><Link href="#how-it-works" className="transition-colors hover:text-primary">How it works</Link></li>
                 <li><Link href="https://app.wakasub.com/register" className="transition-colors hover:text-primary">Create a campaign</Link></li>
               </ul>
