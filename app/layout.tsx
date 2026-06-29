@@ -1,9 +1,8 @@
 import type React from "react";
-import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Poppins, Bricolage_Grotesque } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { Toaster } from "sonner";
-import Script from "next/script";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -12,16 +11,30 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
+const bricolage = Bricolage_Grotesque({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-display",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://wakasub.com"),
   title: {
-    default: "Wakasub — Buy Airtime, Data & Pay Bills in Nigeria",
+    default: "Wakasub — The Rewards Hub of Nigeria",
     template: "%s | Wakasub",
   },
   description:
-    "Wakasub is Nigeria's fastest VTU platform. Buy MTN, Airtel, Glo and 9mobile airtime & data bundles, pay DSTV, GOtv, electricity bills, and send automated airtime & data giveaways to your whole squad. Trusted by 50,000+ Nigerians.",
+    "Wakasub is the rewards hub of Nigeria. Reward your audience with airtime, data and cash in seconds — create a campaign, share one link, and your winners claim instantly. Influencers, group admins, brands and friends reward their people on rails that power millions of top-ups. Utilities (airtime, data, bills) are one tap away too.",
   keywords: [
-    "VTU Nigeria",
+    "rewards Nigeria",
+    "airtime giveaway Nigeria",
+    "data giveaway Nigeria",
+    "cash giveaway Nigeria",
+    "reward campaign Nigeria",
+    "influencer giveaway tool",
+    "WhatsApp group rewards",
+    "instant airtime giveaway",
     "buy airtime Nigeria",
     "buy data Nigeria",
     "MTN airtime",
@@ -31,17 +44,24 @@ export const metadata: Metadata = {
     "DSTV subscription Nigeria",
     "GOtv subscription",
     "electricity bill payment Nigeria",
-    "EKEDC payment",
-    "IKEDC payment",
-    "airtime giveaway Nigeria",
-    "data giveaway Nigeria",
     "Wakasub",
-    "bill payment Nigeria",
-    "recharge card Nigeria",
+    "VTU Nigeria",
     "virtual top up Nigeria",
-    "cheapest data Nigeria",
-    "bulk airtime Nigeria",
     "automated airtime distribution",
+    "reward your audience",
+    "become a VTU reseller Nigeria",
+    "VTU reseller platform Nigeria",
+    "best VTU prices Nigeria",
+    "cheap data reseller Nigeria",
+    "airtime reseller business",
+    "data reseller Nigeria",
+    "airtime and data API Nigeria",
+    "VTU API Nigeria",
+    "bulk airtime Nigeria",
+    "wholesale airtime and data",
+    "cable TV subscription reseller",
+    "electricity bill payment API",
+    "start a data reselling business Nigeria",
   ],
   authors: [{ name: "Wakasub Technologies Ltd" }],
   creator: "Wakasub Technologies Ltd",
@@ -62,30 +82,21 @@ export const metadata: Metadata = {
     locale: "en_NG",
     url: "https://wakasub.com",
     siteName: "Wakasub",
-    title: "Wakasub — Buy Airtime, Data & Pay Bills in Nigeria",
+    title: "Wakasub — The Rewards Hub of Nigeria",
     description:
-      "Nigeria's fastest VTU platform. Buy airtime, data bundles, pay DSTV, GOtv, electricity bills and send automated airtime & data giveaways to your whole squad.",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Wakasub — Nigeria's Digital Services Platform",
-      },
-    ],
+      "Reward your people with airtime, data and cash in seconds, and resell airtime & data at Nigeria's best rates. Create a campaign, share one link, or fund a reseller wallet — delivery is instant.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Wakasub — Buy Airtime, Data & Pay Bills in Nigeria",
+    title: "Wakasub — The Rewards Hub of Nigeria",
     description:
-      "Nigeria's fastest VTU platform. Buy airtime, data, pay bills and send automated airtime & data giveaways to 100 people at once.",
-    images: ["/og-image.png"],
+      "Reward your audience with airtime, data and cash in seconds, and resell at Nigeria's best VTU rates. Instant delivery on every network.",
     creator: "@wakasub",
   },
   alternates: {
     canonical: "https://wakasub.com",
   },
-  manifest: "/manifest.json",
+  manifest: "/manifest.webmanifest",
   icons: {
     icon: [
       { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
@@ -98,6 +109,15 @@ export const metadata: Metadata = {
     statusBarStyle: "default",
     title: "Wakasub",
   },
+  category: "finance",
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a1020" },
+  ],
+  colorScheme: "light dark",
 };
 
 const jsonLd = {
@@ -115,7 +135,7 @@ const jsonLd = {
         height: 192,
       },
       description:
-        "Nigeria's trusted VTU platform for airtime, data, cable TV subscriptions, electricity bills and automated airtime & data giveaways.",
+        "The rewards hub of Nigeria — reward your audience with airtime, data and cash in seconds via shareable campaigns, with airtime, data, cable TV and electricity utilities one tap away.",
       areaServed: { "@type": "Country", name: "Nigeria" },
       contactPoint: {
         "@type": "ContactPoint",
@@ -158,14 +178,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <Script
-          id="json-ld"
+        {/* JSON-LD as a plain script so it is server-rendered into the static HTML for crawlers */}
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body
-        className={`${poppins.variable} font-sans antialiased bg-background text-foreground`}
+        className={`${poppins.variable} ${bricolage.variable} font-sans antialiased bg-background text-foreground`}
       >
         {children}
         <Toaster position="top-center" richColors />
