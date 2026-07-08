@@ -72,7 +72,11 @@ function Icon({
       className={cn("absolute", iconData.className)}
     >
       <motion.div
-        className="flex h-11 w-11 items-center justify-center rounded-2xl border border-border/60 bg-card/80 shadow-lg shadow-black/5 backdrop-blur-md md:h-14 md:w-14"
+        className={cn(
+          "flex h-11 w-11 items-center justify-center rounded-2xl border-2 border-current/30 bg-card/80 shadow-lg shadow-black/5 backdrop-blur-md md:h-16 md:w-16 md:rounded-[1.25rem]",
+          "text-primary",
+          iconData.tint,
+        )}
         animate={
           reduced
             ? undefined
@@ -85,7 +89,7 @@ function Icon({
           ease: "easeInOut",
         }}
       >
-        <iconData.icon size={22} className={cn("text-primary", iconData.tint)} />
+        <iconData.icon size={22} className="md:[&_svg]:size-7" />
       </motion.div>
     </motion.div>
   );
