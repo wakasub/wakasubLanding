@@ -16,6 +16,7 @@ import {
  useRef,
  type HTMLAttributes,
 } from "react";
+
 export interface StarIconHandle {
  startAnimation: () => void;
  stopAnimation: () => void;
@@ -81,28 +82,24 @@ const StarIcon = forwardRef<StarIconHandle, StarIconProps>(
    [controls, onMouseLeave],
   );
 
-  const starVariants: Variants = {
-   idle: {
-    scale: [1, 1.02, 0.98, 1],
-    transition: {
-     duration: 2.5 * duration,
-     repeat: Infinity,
-     ease: "easeInOut",
-    },
-   },
+  const iconVariants: Variants = {
+   normal: { scale: 1, rotate: 0, x: 0 },
    animate: {
-    scale: [1, 1.2, 0.95, 1.05, 1],
-    rotate: [0, -10, 10, 0],
-    transition: { duration: 1.2 * duration, ease: "easeInOut" },
+    scale: [1, 1.18, 1],
+     rotate: [0, -8, 8, 0],
+    transition: { duration: 0.55 * duration, ease: "easeOut" },
    },
   };
 
   return (
    <LazyMotion features={domMin} strict>
     <m.div
-     className={cn("inline-flex", className)}
+     className={cn("inline-flex items-center justify-center", className)}
      onMouseEnter={handleEnter}
      onMouseLeave={handleLeave}
+     variants={iconVariants}
+     initial="normal"
+     animate={controls}
      {...props}
      style={{ color, ...props.style }}
     >
@@ -111,19 +108,14 @@ const StarIcon = forwardRef<StarIconHandle, StarIconProps>(
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      fill="none"
+      fill="currentColor"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
-      animate={controls}
-      initial="idle"
-      variants={starVariants}
+      className="lucide lucide-star"
      >
-      <m.path
-       d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"
-       fill="none"
-      />
+      <m.path key={0} d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
      </m.svg>
     </m.div>
    </LazyMotion>

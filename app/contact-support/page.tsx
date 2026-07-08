@@ -10,7 +10,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Clock, MessageSquare, ArrowRight, CheckCircle2 } from "lucide-react";
+import { ClockIcon } from "@/components/icons/clock";
+import { MessageSquareIcon } from "@/components/icons/message-square";
+import { ArrowRightIcon } from "@/components/icons/arrow-right";
+import { CheckCircle2Icon } from "@/components/icons/check-circle-2";
 import { HeadsetIcon } from "@/components/icons/headset";
 import { ShieldCheckIcon } from "@/components/icons/shield-check";
 import { SendIcon } from "@/components/icons/send";
@@ -35,7 +38,7 @@ const topics = [
 
 const promises = [
   {
-    icon: Clock,
+    icon: ClockIcon,
     title: "Fast response",
     desc: "We typically reply within a few hours, every day.",
   },
@@ -171,7 +174,7 @@ export default function ContactSupportPage() {
 
                 <div className="relative flex h-full flex-col">
                   <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15 backdrop-blur-sm">
-                    <MessageSquare size={22} />
+                    <MessageSquareIcon size={22} />
                   </div>
                   <h2 className="mb-3 text-2xl font-bold leading-tight">
                     Let&apos;s sort it out
@@ -212,7 +215,7 @@ export default function ContactSupportPage() {
                 {submitted ? (
                   <div className="flex h-full flex-col items-center justify-center py-12 text-center">
                     <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                      <CheckCircle2 className="h-8 w-8" />
+                      <CheckCircle2Icon className="h-8 w-8" />
                     </div>
                     <h3 className="mb-2 text-2xl font-bold">Message sent</h3>
                     <p className="mb-8 max-w-xs text-sm leading-relaxed text-muted-foreground">
@@ -230,7 +233,7 @@ export default function ContactSupportPage() {
                       <Button asChild className="rounded-full">
                         <Link href="/">
                           Back to home
-                          <ArrowRight size={14} className="ml-2" />
+                          <ArrowRightIcon size={14} className="ml-2" />
                         </Link>
                       </Button>
                     </div>

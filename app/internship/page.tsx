@@ -6,16 +6,14 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/navbar";
 import { Button } from "@/components/ui/button";
-import {
-  Megaphone,
-  Palette,
-  Calendar,
-  Briefcase,
-  GraduationCap,
-  Network,
-  ArrowRight,
-  CheckCircle2,
-} from "lucide-react";
+import { MegaphoneIcon } from "@/components/icons/megaphone";
+import { PaletteIcon } from "@/components/icons/palette";
+import { CalendarIcon } from "@/components/icons/calendar";
+import { BriefcaseIcon } from "@/components/icons/briefcase";
+import { GraduationCapIcon } from "@/components/icons/graduation-cap";
+import { NetworkIcon } from "@/components/icons/network";
+import { ArrowRightIcon } from "@/components/icons/arrow-right";
+import { CheckCircle2Icon } from "@/components/icons/check-circle-2";
 import { UsersIcon } from "@/components/icons/users";
 import { HeadsetIcon } from "@/components/icons/headset";
 import { ZapIcon } from "@/components/icons/zap";
@@ -45,7 +43,7 @@ const departments = [
     glow: "shadow-blue-500/30",
   },
   {
-    icon: Megaphone,
+    icon: MegaphoneIcon,
     name: "Social Media",
     desc: "Create content, manage campaigns, and grow our digital presence across platforms.",
     color: "bg-violet-500",
@@ -59,7 +57,7 @@ const departments = [
     glow: "shadow-orange-500/30",
   },
   {
-    icon: Palette,
+    icon: PaletteIcon,
     name: "Graphics Design",
     desc: "Design visual assets, marketing materials, and UI illustrations for the brand.",
     color: "bg-pink-500",
@@ -87,19 +85,19 @@ const benefits = [
     accent: "bg-violet-500/10 text-violet-600 dark:text-violet-400",
   },
   {
-    icon: Briefcase,
+    icon: BriefcaseIcon,
     title: "Career acceleration",
     desc: "Get a certificate, a strong reference, and a portfolio piece from a leading Nigerian fintech.",
     accent: "bg-green-500/10 text-green-600 dark:text-green-400",
   },
   {
-    icon: GraduationCap,
+    icon: GraduationCapIcon,
     title: "Direct mentorship",
     desc: "Learn from people who have actually built and scaled tech products from scratch.",
     accent: "bg-orange-500/10 text-orange-600 dark:text-orange-400",
   },
   {
-    icon: Network,
+    icon: NetworkIcon,
     title: "Professional network",
     desc: "Connect with driven peers and build relationships inside the Nigerian tech ecosystem.",
     accent: "bg-teal-500/10 text-teal-600 dark:text-teal-400",
@@ -163,7 +161,7 @@ export default function InternshipPage() {
             className="flex flex-wrap items-center justify-center gap-3"
           >
             <div className="flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-2 text-sm font-medium shadow-sm backdrop-blur-sm">
-              <Calendar size={14} className="text-primary" />
+              <CalendarIcon size={14} className="text-primary" />
               Batch A deadline: Feb 22, 2026
             </div>
             <div className="flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-2 text-sm font-medium shadow-sm backdrop-blur-sm">
@@ -316,7 +314,7 @@ export default function InternshipPage() {
                       "Professional reference on request",
                     ].map((item) => (
                       <div key={item} className="flex items-center gap-3">
-                        <CheckCircle2
+                        <CheckCircle2Icon
                           size={15}
                           className="shrink-0 text-primary-foreground/50"
                         />
@@ -365,7 +363,7 @@ export default function InternshipPage() {
                 <Button asChild className="w-full rounded-full" variant="outline">
                   <Link href="/">
                     Back to home
-                    <ArrowRight size={14} className="ml-2" />
+                    <ArrowRightIcon size={14} className="ml-2" />
                   </Link>
                 </Button>
                 <p className="mt-5 text-xs text-muted-foreground">

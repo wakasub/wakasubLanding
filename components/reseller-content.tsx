@@ -5,15 +5,13 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/navbar";
 import { Button } from "@/components/ui/button";
-import {
-  BadgePercent,
-  Repeat,
-  Smartphone,
-  Tv,
-  Ticket,
-  ArrowRight,
-  Banknote,
-} from "lucide-react";
+import { BadgePercentIcon } from "@/components/icons/badge-percent";
+import { RepeatIcon } from "@/components/icons/repeat";
+import { SmartphoneIcon } from "@/components/icons/smartphone";
+import { TvIcon } from "@/components/icons/tv";
+import { TicketIcon } from "@/components/icons/ticket";
+import { ArrowRightIcon } from "@/components/icons/arrow-right";
+import { BanknoteIcon } from "@/components/icons/banknote";
 import { ZapIcon } from "@/components/icons/zap";
 import { LayersIcon } from "@/components/icons/layers";
 import { CodeIcon } from "@/components/icons/code";
@@ -35,7 +33,7 @@ const stagger = {
 };
 
 const features = [
-  { icon: BadgePercent, title: "Nigeria's best rates", desc: "Buy airtime, data and bills at discounted wholesale prices and keep the margin on every sale." },
+  { icon: BadgePercentIcon, title: "Nigeria's best rates", desc: "Buy airtime, data and bills at discounted wholesale prices and keep the margin on every sale." },
   { icon: ZapIcon, title: "Instant, automated delivery", desc: "Top-ups land the moment your customer pays — 24/7, with no manual processing." },
   { icon: LayersIcon, title: "Every network & service", desc: "Airtime, data, cable TV, electricity and pins, all from a single wallet." },
   { icon: CodeIcon, title: "Developer-ready API", desc: "Plug the Wakasub VTU API into your own app or website and automate everything." },
@@ -44,18 +42,18 @@ const features = [
 ];
 
 const services = [
-  { icon: Smartphone, label: "Airtime", note: "MTN · Airtel · Glo · 9mobile" },
+  { icon: SmartphoneIcon, label: "Airtime", note: "MTN · Airtel · Glo · 9mobile" },
   { icon: WifiIcon, label: "Data bundles", note: "Daily · weekly · monthly" },
-  { icon: Tv, label: "Cable TV", note: "DStv · GOtv · StarTimes" },
+  { icon: TvIcon, label: "Cable TV", note: "DStv · GOtv · StarTimes" },
   { icon: ZapIcon, label: "Electricity", note: "Every disco, instant tokens" },
-  { icon: Ticket, label: "Recharge & exam pins", note: "WAEC · NECO & more" },
+  { icon: TicketIcon, label: "Recharge & exam pins", note: "WAEC · NECO & more" },
 ];
 
 const steps = [
   { icon: UserPlusIcon, n: "01", title: "Create your account", desc: "Sign up free in under a minute — no setup or activation fees." },
   { icon: WalletIcon, n: "02", title: "Fund your wallet", desc: "Top up instantly via bank transfer or card, with whatever you want to sell." },
-  { icon: Repeat, n: "03", title: "Sell airtime, data & bills", desc: "Serve customers from your dashboard, or automate it with the API." },
-  { icon: Banknote, n: "04", title: "Earn your margin", desc: "You buy at wholesale and sell at retail — the difference is yours." },
+  { icon: RepeatIcon, n: "03", title: "Sell airtime, data & bills", desc: "Serve customers from your dashboard, or automate it with the API." },
+  { icon: BanknoteIcon, n: "04", title: "Earn your margin", desc: "You buy at wholesale and sell at retail — the difference is yours." },
 ];
 
 const faqs = [
@@ -85,7 +83,7 @@ export function ResellerContent() {
                 variants={fadeUp}
                 className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary"
               >
-                <BadgePercent size={13} />
+                <BadgePercentIcon size={13} />
                 VTU Reseller Program
               </motion.span>
               <motion.h1
@@ -103,7 +101,7 @@ export function ResellerContent() {
                 <Button size="lg" className="h-13 rounded-full px-9 text-base font-semibold shadow-lg shadow-primary/25" asChild>
                   <Link href="https://app.wakasub.com/register">
                     Become a reseller
-                    <ArrowRight className="ml-1 h-4 w-4" />
+                    <ArrowRightIcon className="ml-1 h-4 w-4" />
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline" className="h-13 rounded-full bg-transparent px-9 text-base font-medium" asChild>
@@ -112,7 +110,7 @@ export function ResellerContent() {
               </motion.div>
               <motion.div variants={fadeUp} className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
                 <span className="inline-flex items-center gap-1.5"><ZapIcon size={15} className="text-primary" /> Instant delivery</span>
-                <span className="inline-flex items-center gap-1.5"><Repeat size={15} className="text-primary" /> Free to join</span>
+                <span className="inline-flex items-center gap-1.5"><RepeatIcon size={15} className="text-primary" /> Free to join</span>
                 <span className="inline-flex items-center gap-1.5"><ShieldCheckIcon size={15} className="text-primary" /> Secure wallet</span>
               </motion.div>
             </motion.div>
@@ -152,7 +150,7 @@ export function ResellerContent() {
                           </div>
                         </div>
                         <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
-                          <BadgePercent size={11} /> Discounted
+                          <BadgePercentIcon size={11} /> Discounted
                         </span>
                       </li>
                     ))}
@@ -160,7 +158,7 @@ export function ResellerContent() {
                   <Button className="mt-3 w-full rounded-full font-semibold" asChild>
                     <Link href="https://app.wakasub.com/register">
                       Start reselling
-                      <ArrowRight className="ml-1 h-4 w-4" />
+                      <ArrowRightIcon className="ml-1 h-4 w-4" />
                     </Link>
                   </Button>
                 </div>
