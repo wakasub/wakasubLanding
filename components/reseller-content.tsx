@@ -7,22 +7,22 @@ import { Navbar } from "@/components/navbar";
 import { Button } from "@/components/ui/button";
 import {
   BadgePercent,
-  Zap,
-  Layers,
-  Code2,
-  Wallet,
-  Headphones,
   Repeat,
   Smartphone,
-  Wifi,
   Tv,
   Ticket,
-  TrendingUp,
   ArrowRight,
-  ShieldCheck,
-  UserPlus,
   Banknote,
 } from "lucide-react";
+import { ZapIcon } from "@/components/icons/zap";
+import { LayersIcon } from "@/components/icons/layers";
+import { CodeIcon } from "@/components/icons/code";
+import { WalletIcon } from "@/components/icons/wallet";
+import { HeadphonesIcon } from "@/components/icons/headphones";
+import { WifiIcon } from "@/components/icons/wifi";
+import { TrendingUpIcon } from "@/components/icons/trending-up";
+import { ShieldCheckIcon } from "@/components/icons/shield-check";
+import { UserPlusIcon } from "@/components/icons/user-plus";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -36,24 +36,24 @@ const stagger = {
 
 const features = [
   { icon: BadgePercent, title: "Nigeria's best rates", desc: "Buy airtime, data and bills at discounted wholesale prices and keep the margin on every sale." },
-  { icon: Zap, title: "Instant, automated delivery", desc: "Top-ups land the moment your customer pays — 24/7, with no manual processing." },
-  { icon: Layers, title: "Every network & service", desc: "Airtime, data, cable TV, electricity and pins, all from a single wallet." },
-  { icon: Code2, title: "Developer-ready API", desc: "Plug the Wakasub VTU API into your own app or website and automate everything." },
-  { icon: Wallet, title: "Easy wallet funding", desc: "Fund instantly via bank transfer or card and start selling in minutes." },
-  { icon: Headphones, title: "24/7 reseller support", desc: "Real humans on standby whenever you or your customers need a hand." },
+  { icon: ZapIcon, title: "Instant, automated delivery", desc: "Top-ups land the moment your customer pays — 24/7, with no manual processing." },
+  { icon: LayersIcon, title: "Every network & service", desc: "Airtime, data, cable TV, electricity and pins, all from a single wallet." },
+  { icon: CodeIcon, title: "Developer-ready API", desc: "Plug the Wakasub VTU API into your own app or website and automate everything." },
+  { icon: WalletIcon, title: "Easy wallet funding", desc: "Fund instantly via bank transfer or card and start selling in minutes." },
+  { icon: HeadphonesIcon, title: "24/7 reseller support", desc: "Real humans on standby whenever you or your customers need a hand." },
 ];
 
 const services = [
   { icon: Smartphone, label: "Airtime", note: "MTN · Airtel · Glo · 9mobile" },
-  { icon: Wifi, label: "Data bundles", note: "Daily · weekly · monthly" },
+  { icon: WifiIcon, label: "Data bundles", note: "Daily · weekly · monthly" },
   { icon: Tv, label: "Cable TV", note: "DStv · GOtv · StarTimes" },
-  { icon: Zap, label: "Electricity", note: "Every disco, instant tokens" },
+  { icon: ZapIcon, label: "Electricity", note: "Every disco, instant tokens" },
   { icon: Ticket, label: "Recharge & exam pins", note: "WAEC · NECO & more" },
 ];
 
 const steps = [
-  { icon: UserPlus, n: "01", title: "Create your account", desc: "Sign up free in under a minute — no setup or activation fees." },
-  { icon: Wallet, n: "02", title: "Fund your wallet", desc: "Top up instantly via bank transfer or card, with whatever you want to sell." },
+  { icon: UserPlusIcon, n: "01", title: "Create your account", desc: "Sign up free in under a minute — no setup or activation fees." },
+  { icon: WalletIcon, n: "02", title: "Fund your wallet", desc: "Top up instantly via bank transfer or card, with whatever you want to sell." },
   { icon: Repeat, n: "03", title: "Sell airtime, data & bills", desc: "Serve customers from your dashboard, or automate it with the API." },
   { icon: Banknote, n: "04", title: "Earn your margin", desc: "You buy at wholesale and sell at retail — the difference is yours." },
 ];
@@ -111,9 +111,9 @@ export function ResellerContent() {
                 </Button>
               </motion.div>
               <motion.div variants={fadeUp} className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
-                <span className="inline-flex items-center gap-1.5"><Zap size={15} className="text-primary" /> Instant delivery</span>
+                <span className="inline-flex items-center gap-1.5"><ZapIcon size={15} className="text-primary" /> Instant delivery</span>
                 <span className="inline-flex items-center gap-1.5"><Repeat size={15} className="text-primary" /> Free to join</span>
-                <span className="inline-flex items-center gap-1.5"><ShieldCheck size={15} className="text-primary" /> Secure wallet</span>
+                <span className="inline-flex items-center gap-1.5"><ShieldCheckIcon size={15} className="text-primary" /> Secure wallet</span>
               </motion.div>
             </motion.div>
 
@@ -128,7 +128,7 @@ export function ResellerContent() {
                       <p className="text-[1.6rem] font-bold tracking-tight">Wholesale rates</p>
                     </div>
                     <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
-                      <TrendingUp size={18} />
+                      <TrendingUpIcon size={18} />
                     </div>
                   </div>
                   <div className="mt-3 flex flex-wrap gap-2">

@@ -7,20 +7,20 @@ import { motion } from "framer-motion";
 import { Navbar } from "@/components/navbar";
 import { Button } from "@/components/ui/button";
 import {
-  Users,
   Megaphone,
-  Headset,
   Palette,
   Calendar,
-  Zap,
-  Layers,
   Briefcase,
   GraduationCap,
   Network,
   ArrowRight,
-  Lock,
   CheckCircle2,
 } from "lucide-react";
+import { UsersIcon } from "@/components/icons/users";
+import { HeadsetIcon } from "@/components/icons/headset";
+import { ZapIcon } from "@/components/icons/zap";
+import { LayersIcon } from "@/components/icons/layers";
+import { LockIcon } from "@/components/icons/lock";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
@@ -38,7 +38,7 @@ const stagger = {
 
 const departments = [
   {
-    icon: Users,
+    icon: UsersIcon,
     name: "Brand Ambassadors",
     desc: "Represent Wakasub in your university and community. Drive adoption and build local trust.",
     color: "bg-blue-500",
@@ -52,7 +52,7 @@ const departments = [
     glow: "shadow-violet-500/30",
   },
   {
-    icon: Headset,
+    icon: HeadsetIcon,
     name: "Customer Support",
     desc: "Help our users navigate the platform and resolve issues with care and clarity.",
     color: "bg-orange-500",
@@ -69,19 +69,19 @@ const departments = [
 
 const benefits = [
   {
-    icon: Zap,
+    icon: ZapIcon,
     title: "Real impact",
     desc: "You're not shadowing — you're contributing to a platform used by thousands of Nigerians every day.",
     accent: "bg-amber-500/10 text-amber-600 dark:text-amber-400",
   },
   {
-    icon: Layers,
+    icon: LayersIcon,
     title: "Modern tooling",
     desc: "Work with Next.js, Tailwind CSS, and cloud-native tools inside a real production environment.",
     accent: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
   },
   {
-    icon: Users,
+    icon: UsersIcon,
     title: "Cross-team exposure",
     desc: "Collaborate across engineering, support, and marketing to see how a full-scale product operates.",
     accent: "bg-violet-500/10 text-violet-600 dark:text-violet-400",
@@ -129,7 +129,7 @@ export default function InternshipPage() {
             transition={{ duration: 0.4 }}
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-destructive/20 bg-destructive/8 px-4 py-1.5 text-sm font-medium text-destructive"
           >
-            <Lock size={12} />
+            <LockIcon size={12} />
             Applications closed — Batch A
           </motion.div>
 
@@ -167,7 +167,7 @@ export default function InternshipPage() {
               Batch A deadline: Feb 22, 2026
             </div>
             <div className="flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-2 text-sm font-medium shadow-sm backdrop-blur-sm">
-              <Users size={14} className="text-primary" />4 open departments
+              <UsersIcon size={14} className="text-primary" />4 open departments
             </div>
           </motion.div>
         </div>
@@ -330,7 +330,7 @@ export default function InternshipPage() {
               {/* Right — closed state */}
               <div className="flex flex-col items-center justify-center p-10 text-center md:p-12">
                 <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-destructive/20 bg-destructive/8">
-                  <Lock className="h-7 w-7 text-destructive" />
+                  <LockIcon size={28} className="text-destructive" />
                 </div>
                 <h3 className="mb-3 text-2xl font-bold">Batch A is closed</h3>
                 <p className="mb-8 max-w-xs text-sm leading-relaxed text-muted-foreground">

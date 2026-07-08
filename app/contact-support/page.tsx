@@ -10,16 +10,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Headset,
-  Clock,
-  ShieldCheck,
-  MessageSquare,
-  ArrowRight,
-  Send,
-  CheckCircle2,
-  Mail,
-} from "lucide-react";
+import { Clock, MessageSquare, ArrowRight, CheckCircle2 } from "lucide-react";
+import { HeadsetIcon } from "@/components/icons/headset";
+import { ShieldCheckIcon } from "@/components/icons/shield-check";
+import { SendIcon } from "@/components/icons/send";
+import { MailIcon } from "@/components/icons/mail";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
@@ -45,12 +40,12 @@ const promises = [
     desc: "We typically reply within a few hours, every day.",
   },
   {
-    icon: ShieldCheck,
+    icon: ShieldCheckIcon,
     title: "Secure & private",
     desc: "Your details are only used to resolve your request.",
   },
   {
-    icon: Headset,
+    icon: HeadsetIcon,
     title: "Real humans",
     desc: "Talk to people who actually understand the platform.",
   },
@@ -128,7 +123,7 @@ export default function ContactSupportPage() {
             transition={{ duration: 0.4 }}
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/8 px-4 py-1.5 text-sm font-medium text-primary"
           >
-            <Headset size={13} />
+            <HeadsetIcon size={13} />
             Contact Support
           </motion.div>
 
@@ -205,7 +200,7 @@ export default function ContactSupportPage() {
 
                   <div className="mt-auto pt-9">
                     <div className="flex items-center gap-2 text-xs font-medium text-primary-foreground/60">
-                      <Mail size={13} />
+                      <MailIcon size={13} />
                       Prefer email? We read every message that comes through.
                     </div>
                   </div>
@@ -326,7 +321,7 @@ export default function ContactSupportPage() {
                       ) : (
                         <>
                           Send message
-                          <Send size={16} className="ml-2" />
+                          <SendIcon size={16} className="ml-2" />
                         </>
                       )}
                     </Button>

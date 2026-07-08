@@ -8,32 +8,32 @@ import { Navbar } from "@/components/navbar";
 import { Button } from "@/components/ui/button";
 import {
   Smartphone,
-  Wifi,
-  Zap,
-  Wallet,
-  ShieldCheck,
   ArrowRight,
   Star,
   Gift,
   CheckCircle2,
   Trophy,
-  Users,
-  Sparkles,
-  Lock,
   Coins,
   Banknote,
   ListChecks,
   Ticket,
   Megaphone,
-  MessageCircle,
   Radio,
   PartyPopper,
   Building2,
   Share2,
-  Check,
-  MousePointerClick,
   BadgePercent,
 } from "lucide-react";
+import { WifiIcon } from "@/components/icons/wifi";
+import { ZapIcon } from "@/components/icons/zap";
+import { WalletIcon } from "@/components/icons/wallet";
+import { ShieldCheckIcon } from "@/components/icons/shield-check";
+import { UsersIcon } from "@/components/icons/users";
+import { SparklesIcon } from "@/components/icons/sparkles";
+import { LockIcon } from "@/components/icons/lock";
+import { MessageCircleIcon } from "@/components/icons/message-circle";
+import { CheckIcon } from "@/components/icons/check";
+import { MousePointerClickIcon } from "@/components/icons/mouse-pointer-click";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -50,7 +50,7 @@ const stagger = {
 const tickerTop = [
   { icon: Smartphone, label: "₦200 airtime → 50 winners" },
   { icon: Banknote, label: "Ada won ₦5,000 cash" },
-  { icon: Wifi, label: "1GB data × 30 members" },
+  { icon: WifiIcon, label: "1GB data × 30 members" },
   { icon: Gift, label: "Tobi's giveaway · LIVE" },
   { icon: Smartphone, label: "₦100 airtime claimed" },
   { icon: Banknote, label: "₦20,000 split 10 ways" },
@@ -58,9 +58,9 @@ const tickerTop = [
 
 const tickerBottom = [
   { icon: Trophy, label: "Chidi rewarded the group chat" },
-  { icon: Wifi, label: "2GB data won · just now" },
+  { icon: WifiIcon, label: "2GB data won · just now" },
   { icon: Smartphone, label: "₦500 airtime · instant" },
-  { icon: Sparkles, label: "Members-only reward" },
+  { icon: SparklesIcon, label: "Members-only reward" },
   { icon: Banknote, label: "Cash credited in seconds" },
   { icon: Gift, label: "Match-day giveaway open" },
 ];
@@ -77,7 +77,7 @@ const marqueePartners = [...partners, ...partners];
 
 const rewardTypes = [
   { icon: Smartphone, label: "Airtime", desc: "Any network, any amount" },
-  { icon: Wifi, label: "Data", desc: "Daily, weekly & monthly" },
+  { icon: WifiIcon, label: "Data", desc: "Daily, weekly & monthly" },
   { icon: Banknote, label: "Cash", desc: "Spendable wallet credit" },
 ];
 
@@ -85,20 +85,20 @@ const campaignTypes = [
   { icon: Gift, label: "Instant giveaways" },
   { icon: Ticket, label: "Random draws" },
   { icon: Share2, label: "Referral-gated" },
-  { icon: Users, label: "Community-only" },
+  { icon: UsersIcon, label: "Community-only" },
   { icon: ListChecks, label: "Quizzes & tasks" },
   { icon: Megaphone, label: "Sponsored" },
 ];
 
 const personas = [
   {
-    icon: Sparkles,
+    icon: SparklesIcon,
     title: "Influencers & creators",
     today: "Asking winners for their number in the DMs, buying airtime one by one.",
     now: "Set it up once, share your link, everyone gets paid automatically.",
   },
   {
-    icon: MessageCircle,
+    icon: MessageCircleIcon,
     title: "Group & channel admins",
     today: "Begging for engagement and rewarding members by hand.",
     now: "Reward your members in seconds — and keep it members-only.",
@@ -161,22 +161,22 @@ const scenarios = [
 ];
 
 const trustPillars = [
-  { icon: Zap, title: "Rewards arrive instantly", desc: "The moment you win, your airtime, data or cash is paid out automatically — no waiting on anyone." },
-  { icon: ShieldCheck, title: "Protected from cheats", desc: "Every campaign is guarded against bots and double-claims, so real people win." },
-  { icon: Lock, title: "Your money is safe", desc: "Funds are held securely until they reach the right winners — and you see where every naira went." },
+  { icon: ZapIcon, title: "Rewards arrive instantly", desc: "The moment you win, your airtime, data or cash is paid out automatically — no waiting on anyone." },
+  { icon: ShieldCheckIcon, title: "Protected from cheats", desc: "Every campaign is guarded against bots and double-claims, so real people win." },
+  { icon: LockIcon, title: "Your money is safe", desc: "Funds are held securely until they reach the right winners — and you see where every naira went." },
   { icon: Smartphone, title: "Works on every network", desc: "Rewards reach any Nigerian line — MTN, Airtel, Glo, 9mobile — in seconds." },
 ];
 
 const howItWorks = [
-  { n: "01", icon: Wallet, title: "Set it up", desc: "Pick airtime, data or cash, choose winners and rules. Under a minute." },
+  { n: "01", icon: WalletIcon, title: "Set it up", desc: "Pick airtime, data or cash, choose winners and rules. Under a minute." },
   { n: "02", icon: Share2, title: "Share your link", desc: "Drop it on WhatsApp, TikTok, X — one link does it all." },
-  { n: "03", icon: Sparkles, title: "People claim", desc: "Your people tap, claim in seconds, and receiving is always free." },
+  { n: "03", icon: SparklesIcon, title: "People claim", desc: "Your people tap, claim in seconds, and receiving is always free." },
   { n: "04", icon: Trophy, title: "Winners get paid", desc: "Rewards land automatically while you watch the claims roll in." },
 ];
 
 const winnerPerks = [
   { icon: Gift, title: "Free to receive", desc: "Claiming never costs you a thing. What you win is yours, in full." },
-  { icon: Zap, title: "Paid in seconds", desc: "No “I'll send it later.” Your reward lands almost instantly." },
+  { icon: ZapIcon, title: "Paid in seconds", desc: "No “I'll send it later.” Your reward lands almost instantly." },
   { icon: Ticket, title: "Discover giveaways", desc: "Browse public campaigns and enter the ones you like." },
   { icon: Banknote, title: "Cash you can spend", desc: "Win cash and it's spendable wallet balance right away." },
 ];
@@ -264,7 +264,7 @@ function TickerRow({ items, reverse = false }: { items: typeof tickerTop; revers
 
 const demoRewards = [
   { icon: Smartphone, amount: "₦200", kind: "airtime", network: "MTN", time: "2.4s" },
-  { icon: Wifi, amount: "1GB", kind: "data", network: "Airtel", time: "3.1s" },
+  { icon: WifiIcon, amount: "1GB", kind: "data", network: "Airtel", time: "3.1s" },
   { icon: Banknote, amount: "₦5,000", kind: "cash", network: "Wallet", time: "1.9s" },
 ];
 
@@ -381,7 +381,7 @@ function LiveClaimDemo() {
                     animate={{ x: [26, 0, 0], y: [22, 0, 0], opacity: [0, 1, 1], scale: [1, 1, 0.82] }}
                     transition={{ duration: 1.2, delay: 1.1, times: [0, 0.7, 1], ease: "easeOut" }}
                   >
-                    <MousePointerClick size={20} className="drop-shadow" />
+                    <MousePointerClickIcon size={20} className="drop-shadow" />
                   </motion.div>
                 </div>
               </motion.div>
@@ -435,7 +435,7 @@ function LiveClaimDemo() {
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ type: "spring", stiffness: 320, damping: 16 }}
                 >
-                  <Check size={28} strokeWidth={3} />
+                  <CheckIcon size={28} />
                 </motion.div>
                 <p className="mt-3 text-base font-bold">{reward.amount} {reward.kind} delivered</p>
                 <p className="mt-1 text-xs text-muted-foreground">
@@ -448,7 +448,7 @@ function LiveClaimDemo() {
 
         {/* footer */}
         <div className="flex items-center justify-center gap-1.5 py-2.5 text-[11px] font-medium text-muted-foreground">
-          <Lock size={11} className="text-primary" />
+          <LockIcon size={11} className="text-primary" />
           Secured by Wakasub · wakasub.com
         </div>
       </div>
@@ -465,8 +465,8 @@ export default function LandingPage() {
       <section className="relative flex min-h-[92vh] flex-col items-center justify-center overflow-hidden px-6 pt-28 pb-16 text-center">
         <div className="bg-grid-lines pointer-events-none absolute inset-0 -z-10 opacity-40" />
         <div className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-b from-background via-background/80 to-background" />
-        <div className="pointer-events-none absolute left-1/2 top-1/3 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/15 blur-[160px]" />
-        <div className="pointer-events-none absolute right-[12%] top-[18%] -z-10 h-72 w-72 rounded-full bg-primary/10 blur-[120px]" />
+        <div className="glow-primary pointer-events-none absolute left-1/2 top-1/3 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-15" />
+        <div className="glow-primary pointer-events-none absolute right-[12%] top-[18%] -z-10 h-72 w-72 rounded-full opacity-10" />
 
         <motion.div initial="hidden" animate="show" variants={stagger} className="flex w-full max-w-4xl flex-col items-center">
           <motion.h1
@@ -584,7 +584,7 @@ export default function LandingPage() {
               href="/reseller"
               className="group relative flex flex-col items-start gap-5 overflow-hidden rounded-3xl border border-border/60 bg-card p-6 transition-colors hover:border-primary/40 md:flex-row md:items-center md:justify-between md:p-8"
             >
-              <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-primary/10 blur-3xl" />
+              <div className="glow-primary pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full opacity-10" />
               <div className="relative flex items-start gap-4">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                   <BadgePercent size={22} />
@@ -633,7 +633,7 @@ export default function LandingPage() {
           >
             {/* Reward your people — dark */}
             <motion.div variants={fadeUp} className="relative flex flex-col overflow-hidden rounded-3xl bg-foreground p-8 text-background md:p-10">
-              <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-primary/25 blur-3xl" />
+              <div className="glow-primary pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full opacity-25" />
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/20">
                 <Gift size={22} className="text-primary" />
               </div>
@@ -659,7 +659,7 @@ export default function LandingPage() {
 
             {/* Win rewards — light */}
             <motion.div variants={fadeUp} className="relative flex flex-col overflow-hidden rounded-3xl border border-border/50 bg-card p-8 md:p-10">
-              <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-primary/10 blur-3xl" />
+              <div className="glow-primary pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full opacity-10" />
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
                 <Trophy size={22} className="text-primary" />
               </div>
@@ -780,7 +780,7 @@ export default function LandingPage() {
                 <h3 className="mb-3 font-semibold">{p.title}</h3>
                 <p className="mb-2 text-sm leading-relaxed text-muted-foreground">{p.today}</p>
                 <p className="mt-auto flex gap-1.5 text-sm leading-relaxed text-foreground">
-                  <Sparkles size={15} className="mt-0.5 shrink-0 text-primary" />
+                  <SparklesIcon size={15} className="mt-0.5 shrink-0 text-primary" />
                   <span>{p.now}</span>
                 </p>
               </motion.div>
@@ -842,8 +842,8 @@ export default function LandingPage() {
         <div className="pointer-events-none absolute inset-0 opacity-[0.04]">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-size-[40px_40px]" />
         </div>
-        <div className="pointer-events-none absolute -left-40 top-0 h-96 w-96 rounded-full bg-primary/25 blur-[140px]" />
-        <div className="pointer-events-none absolute -bottom-40 right-0 h-96 w-96 rounded-full bg-primary/15 blur-[140px]" />
+        <div className="glow-primary pointer-events-none absolute -left-40 top-0 h-96 w-96 rounded-full opacity-25" />
+        <div className="glow-primary pointer-events-none absolute -bottom-40 right-0 h-96 w-96 rounded-full opacity-15" />
 
         <div className="container relative mx-auto px-6">
           <motion.div
@@ -939,8 +939,8 @@ export default function LandingPage() {
               <div className="mb-10 grid grid-cols-2 gap-3">
                 {[
                   { icon: Smartphone, label: "Airtime", sub: "MTN · Airtel · Glo · 9mobile" },
-                  { icon: Wifi, label: "Data", sub: "Daily, weekly & monthly" },
-                  { icon: Zap, label: "Electricity", sub: "EKEDC · IKEDC · AEDC" },
+                  { icon: WifiIcon, label: "Data", sub: "Daily, weekly & monthly" },
+                  { icon: ZapIcon, label: "Electricity", sub: "EKEDC · IKEDC · AEDC" },
                   { icon: Coins, label: "Cable TV", sub: "DSTV · GOtv · Startimes" },
                 ].map((u) => (
                   <div key={u.label} className="flex items-center gap-3 rounded-2xl border border-border/50 bg-card p-4">
@@ -978,7 +978,7 @@ export default function LandingPage() {
                       <p className="text-[2rem] font-bold tracking-tight">₦24,500.00</p>
                     </div>
                     <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
-                      <Wallet size={18} />
+                      <WalletIcon size={18} />
                     </div>
                   </div>
                   <div className="mt-3 flex gap-2">
@@ -992,8 +992,8 @@ export default function LandingPage() {
                   <div className="grid grid-cols-4 gap-2">
                     {[
                       { icon: Smartphone, label: "Airtime" },
-                      { icon: Wifi, label: "Data" },
-                      { icon: Zap, label: "Electric" },
+                      { icon: WifiIcon, label: "Data" },
+                      { icon: ZapIcon, label: "Electric" },
                       { icon: Gift, label: "Reward" },
                     ].map((a) => (
                       <div key={a.label} className="flex cursor-pointer flex-col items-center gap-1.5 rounded-xl p-2 transition-colors hover:bg-secondary/70">
@@ -1041,8 +1041,8 @@ export default function LandingPage() {
         <div className="pointer-events-none absolute inset-0 opacity-[0.04]">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-size-[40px_40px]" />
         </div>
-        <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-primary/20 blur-[100px]" />
-        <div className="pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-primary/15 blur-[100px]" />
+        <div className="glow-primary pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full opacity-20" />
+        <div className="glow-primary pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full opacity-15" />
 
         <div className="container relative mx-auto px-6">
           <motion.div
@@ -1155,8 +1155,8 @@ export default function LandingPage() {
             <div className="pointer-events-none absolute inset-0 opacity-[0.07]">
               <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-size-[32px_32px]" />
             </div>
-            <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-16 -right-16 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
+            <div className="glow-white pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full opacity-10" />
+            <div className="glow-white pointer-events-none absolute -bottom-16 -right-16 h-72 w-72 rounded-full opacity-10" />
 
             <div className="relative">
               <h2 className="mb-6 text-4xl font-bold leading-tight md:text-6xl">

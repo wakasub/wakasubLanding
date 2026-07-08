@@ -215,3 +215,36 @@
 .animate-float {
   animation: float-y 6s ease-in-out infinite;
 }
+
+/*
+ * Decorative glow blobs. A radial-gradient renders the same soft halo as a
+ * large `filter: blur()` disc but at a fraction of the paint cost — large-radius
+ * blur filters are re-rasterized on every repaint and were the main cause of
+ * scroll/interaction jank. Opacity is controlled with Tailwind's opacity-* utils.
+ */
+.glow-primary {
+  background: radial-gradient(circle closest-side, var(--primary), transparent 100%);
+}
+.glow-white {
+  background: radial-gradient(circle closest-side, #fff, transparent 100%);
+}
+
+/* Give the always-on marquees their own compositor layer so they never
+   repaint neighbouring content while they run. */
+.animate-marquee,
+.animate-marquee-slow,
+.animate-marquee-reverse {
+  will-change: transform;
+}
+
+/* Respect users who ask for less motion: kill the infinite/continuous
+   animations that otherwise keep the compositor busy every frame. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-slow,
+  .animate-marquee-reverse,
+  .animate-float,
+  .animate-ping {
+    animation: none !important;
+  }
+}
