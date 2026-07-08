@@ -558,8 +558,10 @@ export default function LandingPage() {
             variants={fadeUp}
             className="text-balance text-6xl font-extrabold leading-[0.95] tracking-tight md:text-7xl lg:text-[6.5rem]"
           >
-            Reward <br className="md:hidden" />
-            your
+            <span className="title-glow">
+              Reward <br className="md:hidden" />
+              your
+            </span>
             <br />
             <RotatingWord />
             <br />
@@ -680,7 +682,7 @@ export default function LandingPage() {
             className="mx-auto mb-14 max-w-2xl text-center"
           >
             <p className="mb-3 text-sm font-medium uppercase tracking-widest text-primary">Two ways in</p>
-            <h2 className="text-4xl font-bold leading-[1.05] md:text-5xl">Give rewards, or win them.</h2>
+            <h2 className="title-glow text-4xl font-bold leading-[1.05] md:text-5xl">Give rewards, or win them.</h2>
           </motion.div>
 
           <motion.div
@@ -756,7 +758,7 @@ export default function LandingPage() {
             className="mb-12"
           >
             <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">What you can give & win</p>
-            <h2 className="text-4xl font-bold md:text-5xl">Three rewards. Endless ways.</h2>
+            <h2 className="title-glow text-4xl font-bold md:text-5xl">Three rewards. Endless ways.</h2>
           </motion.div>
 
           <motion.div
@@ -817,7 +819,7 @@ export default function LandingPage() {
             className="mb-14 text-center"
           >
             <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">Who it&apos;s for</p>
-            <h2 className="text-4xl font-bold md:text-5xl">Made for the way you reward.</h2>
+            <h2 className="title-glow text-4xl font-bold md:text-5xl">Made for the way you reward.</h2>
           </motion.div>
 
           <motion.div
@@ -870,7 +872,7 @@ export default function LandingPage() {
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-sm font-semibold text-background/80">
               <TrophyIcon size={14} className="text-primary" /> Just here to win?
             </div>
-            <h2 className="text-4xl font-bold leading-[1.05] md:text-5xl">Free airtime, data &amp; cash.</h2>
+            <h2 className="title-glow text-4xl font-bold leading-[1.05] md:text-5xl">Free airtime, data &amp; cash.</h2>
           </motion.div>
 
           <motion.div
@@ -916,7 +918,7 @@ export default function LandingPage() {
             className="mb-14 text-center"
           >
             <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">Why Wakasub</p>
-            <h2 className="text-4xl font-bold md:text-5xl">Built so everyone gets paid.</h2>
+            <h2 className="title-glow text-4xl font-bold md:text-5xl">Built so everyone gets paid.</h2>
           </motion.div>
 
           <motion.div
@@ -945,7 +947,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:gap-24">
             <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }}>
               <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">Everyday too</p>
-              <h2 className="mb-5 text-4xl font-bold md:text-5xl">Top up. Pay bills. Spend your wins.</h2>
+              <h2 className="title-glow mb-5 text-4xl font-bold md:text-5xl">Top up. Pay bills. Spend your wins.</h2>
               <p className="mb-8 text-lg leading-relaxed text-muted-foreground">
                 The same wallet that powers every reward handles your airtime, data, electricity and cable — all one tap away.
               </p>
@@ -1067,7 +1069,7 @@ export default function LandingPage() {
             className="mb-14 text-center"
           >
             <p className="mb-4 text-sm font-medium uppercase tracking-widest text-primary">How it works</p>
-            <h2 className="text-4xl font-bold leading-tight md:text-5xl">From idea to paid winners.</h2>
+            <h2 className="title-glow text-4xl font-bold leading-tight md:text-5xl">From idea to paid winners.</h2>
           </motion.div>
 
           <motion.div
@@ -1122,7 +1124,7 @@ export default function LandingPage() {
           className="container mx-auto mb-14 px-6 text-center"
         >
           <p className="mb-3 text-sm font-medium uppercase tracking-widest text-primary">Testimonials</p>
-          <h2 className="text-4xl font-bold md:text-5xl">Creators and winners.</h2>
+          <h2 className="title-glow text-4xl font-bold md:text-5xl">Creators and winners.</h2>
         </motion.div>
 
         <motion.div
@@ -1157,7 +1159,7 @@ export default function LandingPage() {
             <div className="glow-white pointer-events-none absolute -bottom-16 -right-16 h-72 w-72 rounded-full opacity-10" />
 
             <div className="relative">
-              <h2 className="mb-6 text-4xl font-bold leading-tight md:text-6xl">
+              <h2 className="title-glow mb-6 text-4xl font-bold leading-tight md:text-6xl">
                 Reward your people.
                 <br />
                 Or get rewarded.
