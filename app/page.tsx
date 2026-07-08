@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/navbar";
+import { RotatingWord } from "@/components/rotating-word";
 import { Button } from "@/components/ui/button";
 import { SmartphoneIcon } from "@/components/icons/smartphone";
 import { ArrowRightIcon } from "@/components/icons/arrow-right";
@@ -471,7 +472,7 @@ export default function LandingPage() {
             variants={fadeUp}
             className="text-balance text-6xl font-extrabold leading-[0.95] tracking-tight md:text-7xl lg:text-[6.5rem]"
           >
-            Reward your people
+            Reward your <RotatingWord />
             <br />
             <span className="text-gradient">in seconds.</span>
           </motion.h1>
