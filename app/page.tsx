@@ -5,35 +5,34 @@ import Image from "next/image";
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/navbar";
+import { RotatingWord } from "@/components/rotating-word";
 import { Button } from "@/components/ui/button";
-import {
-  Smartphone,
-  Wifi,
-  Zap,
-  Wallet,
-  ShieldCheck,
-  ArrowRight,
-  Star,
-  Gift,
-  CheckCircle2,
-  Trophy,
-  Users,
-  Sparkles,
-  Lock,
-  Coins,
-  Banknote,
-  ListChecks,
-  Ticket,
-  Megaphone,
-  MessageCircle,
-  Radio,
-  PartyPopper,
-  Building2,
-  Share2,
-  Check,
-  MousePointerClick,
-  BadgePercent,
-} from "lucide-react";
+import { SmartphoneIcon } from "@/components/icons/smartphone";
+import { ArrowRightIcon } from "@/components/icons/arrow-right";
+import { StarIcon } from "@/components/icons/star";
+import { GiftIcon } from "@/components/icons/gift";
+import { CheckCircle2Icon } from "@/components/icons/check-circle-2";
+import { TrophyIcon } from "@/components/icons/trophy";
+import { CoinsIcon } from "@/components/icons/coins";
+import { BanknoteIcon } from "@/components/icons/banknote";
+import { ListChecksIcon } from "@/components/icons/list-checks";
+import { TicketIcon } from "@/components/icons/ticket";
+import { MegaphoneIcon } from "@/components/icons/megaphone";
+import { RadioIcon } from "@/components/icons/radio";
+import { PartyPopperIcon } from "@/components/icons/party-popper";
+import { Building2Icon } from "@/components/icons/building-2";
+import { Share2Icon } from "@/components/icons/share-2";
+import { BadgePercentIcon } from "@/components/icons/badge-percent";
+import { WifiIcon } from "@/components/icons/wifi";
+import { ZapIcon } from "@/components/icons/zap";
+import { WalletIcon } from "@/components/icons/wallet";
+import { ShieldCheckIcon } from "@/components/icons/shield-check";
+import { UsersIcon } from "@/components/icons/users";
+import { SparklesIcon } from "@/components/icons/sparkles";
+import { LockIcon } from "@/components/icons/lock";
+import { MessageCircleIcon } from "@/components/icons/message-circle";
+import { CheckIcon } from "@/components/icons/check";
+import { MousePointerClickIcon } from "@/components/icons/mouse-pointer-click";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -48,21 +47,21 @@ const stagger = {
 /* ── Data ── */
 
 const tickerTop = [
-  { icon: Smartphone, label: "₦200 airtime → 50 winners" },
-  { icon: Banknote, label: "Ada won ₦5,000 cash" },
-  { icon: Wifi, label: "1GB data × 30 members" },
-  { icon: Gift, label: "Tobi's giveaway · LIVE" },
-  { icon: Smartphone, label: "₦100 airtime claimed" },
-  { icon: Banknote, label: "₦20,000 split 10 ways" },
+  { icon: SmartphoneIcon, label: "₦200 airtime → 50 winners" },
+  { icon: BanknoteIcon, label: "Ada won ₦5,000 cash" },
+  { icon: WifiIcon, label: "1GB data × 30 members" },
+  { icon: GiftIcon, label: "Tobi's giveaway · LIVE" },
+  { icon: SmartphoneIcon, label: "₦100 airtime claimed" },
+  { icon: BanknoteIcon, label: "₦20,000 split 10 ways" },
 ];
 
 const tickerBottom = [
-  { icon: Trophy, label: "Chidi rewarded the group chat" },
-  { icon: Wifi, label: "2GB data won · just now" },
-  { icon: Smartphone, label: "₦500 airtime · instant" },
-  { icon: Sparkles, label: "Members-only reward" },
-  { icon: Banknote, label: "Cash credited in seconds" },
-  { icon: Gift, label: "Match-day giveaway open" },
+  { icon: TrophyIcon, label: "Chidi rewarded the group chat" },
+  { icon: WifiIcon, label: "2GB data won · just now" },
+  { icon: SmartphoneIcon, label: "₦500 airtime · instant" },
+  { icon: SparklesIcon, label: "Members-only reward" },
+  { icon: BanknoteIcon, label: "Cash credited in seconds" },
+  { icon: GiftIcon, label: "Match-day giveaway open" },
 ];
 
 const stats = [
@@ -76,53 +75,53 @@ const partners = ["MTN", "Airtel", "Glo", "9mobile", "DSTV", "GOtv", "Startimes"
 const marqueePartners = [...partners, ...partners];
 
 const rewardTypes = [
-  { icon: Smartphone, label: "Airtime", desc: "Any network, any amount" },
-  { icon: Wifi, label: "Data", desc: "Daily, weekly & monthly" },
-  { icon: Banknote, label: "Cash", desc: "Spendable wallet credit" },
+  { icon: SmartphoneIcon, label: "Airtime", desc: "Any network, any amount" },
+  { icon: WifiIcon, label: "Data", desc: "Daily, weekly & monthly" },
+  { icon: BanknoteIcon, label: "Cash", desc: "Spendable wallet credit" },
 ];
 
 const campaignTypes = [
-  { icon: Gift, label: "Instant giveaways" },
-  { icon: Ticket, label: "Random draws" },
-  { icon: Share2, label: "Referral-gated" },
-  { icon: Users, label: "Community-only" },
-  { icon: ListChecks, label: "Quizzes & tasks" },
-  { icon: Megaphone, label: "Sponsored" },
+  { icon: GiftIcon, label: "Instant giveaways" },
+  { icon: TicketIcon, label: "Random draws" },
+  { icon: Share2Icon, label: "Referral-gated" },
+  { icon: UsersIcon, label: "Community-only" },
+  { icon: ListChecksIcon, label: "Quizzes & tasks" },
+  { icon: MegaphoneIcon, label: "Sponsored" },
 ];
 
 const personas = [
   {
-    icon: Sparkles,
+    icon: SparklesIcon,
     title: "Influencers & creators",
     today: "Asking winners for their number in the DMs, buying airtime one by one.",
     now: "Set it up once, share your link, everyone gets paid automatically.",
   },
   {
-    icon: MessageCircle,
+    icon: MessageCircleIcon,
     title: "Group & channel admins",
     today: "Begging for engagement and rewarding members by hand.",
     now: "Reward your members in seconds — and keep it members-only.",
   },
   {
-    icon: Radio,
+    icon: RadioIcon,
     title: "Fan & football pages",
     today: "Tons of engagement, no easy way to thank your people.",
     now: "Run match-day giveaways that keep your audience coming back.",
   },
   {
-    icon: Building2,
+    icon: Building2Icon,
     title: "Brands & businesses",
     today: "Paying an agency for what should be a simple reward.",
     now: "Launch your own reward campaign in minutes — no agency.",
   },
   {
-    icon: PartyPopper,
+    icon: PartyPopperIcon,
     title: "Friends & family",
     today: "Trying to “spray” cash online — always clumsy.",
     now: "Surprise a friend, celebrate a win, gift the group instantly.",
   },
   {
-    icon: Gift,
+    icon: GiftIcon,
     title: "People who love rewards",
     today: "Chasing giveaways across comments, rarely getting paid.",
     now: "Claim real airtime, data and cash — free to receive.",
@@ -161,24 +160,24 @@ const scenarios = [
 ];
 
 const trustPillars = [
-  { icon: Zap, title: "Rewards arrive instantly", desc: "The moment you win, your airtime, data or cash is paid out automatically — no waiting on anyone." },
-  { icon: ShieldCheck, title: "Protected from cheats", desc: "Every campaign is guarded against bots and double-claims, so real people win." },
-  { icon: Lock, title: "Your money is safe", desc: "Funds are held securely until they reach the right winners — and you see where every naira went." },
-  { icon: Smartphone, title: "Works on every network", desc: "Rewards reach any Nigerian line — MTN, Airtel, Glo, 9mobile — in seconds." },
+  { icon: ZapIcon, title: "Rewards arrive instantly", desc: "The moment you win, your airtime, data or cash is paid out automatically — no waiting on anyone." },
+  { icon: ShieldCheckIcon, title: "Protected from cheats", desc: "Every campaign is guarded against bots and double-claims, so real people win." },
+  { icon: LockIcon, title: "Your money is safe", desc: "Funds are held securely until they reach the right winners — and you see where every naira went." },
+  { icon: SmartphoneIcon, title: "Works on every network", desc: "Rewards reach any Nigerian line — MTN, Airtel, Glo, 9mobile — in seconds." },
 ];
 
 const howItWorks = [
-  { n: "01", icon: Wallet, title: "Set it up", desc: "Pick airtime, data or cash, choose winners and rules. Under a minute." },
-  { n: "02", icon: Share2, title: "Share your link", desc: "Drop it on WhatsApp, TikTok, X — one link does it all." },
-  { n: "03", icon: Sparkles, title: "People claim", desc: "Your people tap, claim in seconds, and receiving is always free." },
-  { n: "04", icon: Trophy, title: "Winners get paid", desc: "Rewards land automatically while you watch the claims roll in." },
+  { n: "01", icon: WalletIcon, title: "Set it up", desc: "Pick airtime, data or cash, choose winners and rules. Under a minute." },
+  { n: "02", icon: Share2Icon, title: "Share your link", desc: "Drop it on WhatsApp, TikTok, X — one link does it all." },
+  { n: "03", icon: SparklesIcon, title: "People claim", desc: "Your people tap, claim in seconds, and receiving is always free." },
+  { n: "04", icon: TrophyIcon, title: "Winners get paid", desc: "Rewards land automatically while you watch the claims roll in." },
 ];
 
 const winnerPerks = [
-  { icon: Gift, title: "Free to receive", desc: "Claiming never costs you a thing. What you win is yours, in full." },
-  { icon: Zap, title: "Paid in seconds", desc: "No “I'll send it later.” Your reward lands almost instantly." },
-  { icon: Ticket, title: "Discover giveaways", desc: "Browse public campaigns and enter the ones you like." },
-  { icon: Banknote, title: "Cash you can spend", desc: "Win cash and it's spendable wallet balance right away." },
+  { icon: GiftIcon, title: "Free to receive", desc: "Claiming never costs you a thing. What you win is yours, in full." },
+  { icon: ZapIcon, title: "Paid in seconds", desc: "No “I'll send it later.” Your reward lands almost instantly." },
+  { icon: TicketIcon, title: "Discover giveaways", desc: "Browse public campaigns and enter the ones you like." },
+  { icon: BanknoteIcon, title: "Cash you can spend", desc: "Win cash and it's spendable wallet balance right away." },
 ];
 
 const testimonials = [
@@ -263,9 +262,9 @@ function TickerRow({ items, reverse = false }: { items: typeof tickerTop; revers
 /* ── Interactive hero: live claim demo ── */
 
 const demoRewards = [
-  { icon: Smartphone, amount: "₦200", kind: "airtime", network: "MTN", time: "2.4s" },
-  { icon: Wifi, amount: "1GB", kind: "data", network: "Airtel", time: "3.1s" },
-  { icon: Banknote, amount: "₦5,000", kind: "cash", network: "Wallet", time: "1.9s" },
+  { icon: SmartphoneIcon, amount: "₦200", kind: "airtime", network: "MTN", time: "2.4s" },
+  { icon: WifiIcon, amount: "1GB", kind: "data", network: "Airtel", time: "3.1s" },
+  { icon: BanknoteIcon, amount: "₦5,000", kind: "cash", network: "Wallet", time: "1.9s" },
 ];
 
 const demoGivers = [
@@ -381,7 +380,7 @@ function LiveClaimDemo() {
                     animate={{ x: [26, 0, 0], y: [22, 0, 0], opacity: [0, 1, 1], scale: [1, 1, 0.82] }}
                     transition={{ duration: 1.2, delay: 1.1, times: [0, 0.7, 1], ease: "easeOut" }}
                   >
-                    <MousePointerClick size={20} className="drop-shadow" />
+                    <MousePointerClickIcon size={20} className="drop-shadow" />
                   </motion.div>
                 </div>
               </motion.div>
@@ -435,7 +434,7 @@ function LiveClaimDemo() {
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ type: "spring", stiffness: 320, damping: 16 }}
                 >
-                  <Check size={28} strokeWidth={3} />
+                  <CheckIcon size={28} />
                 </motion.div>
                 <p className="mt-3 text-base font-bold">{reward.amount} {reward.kind} delivered</p>
                 <p className="mt-1 text-xs text-muted-foreground">
@@ -448,7 +447,7 @@ function LiveClaimDemo() {
 
         {/* footer */}
         <div className="flex items-center justify-center gap-1.5 py-2.5 text-[11px] font-medium text-muted-foreground">
-          <Lock size={11} className="text-primary" />
+          <LockIcon size={11} className="text-primary" />
           Secured by Wakasub · wakasub.com
         </div>
       </div>
@@ -465,15 +464,15 @@ export default function LandingPage() {
       <section className="relative flex min-h-[92vh] flex-col items-center justify-center overflow-hidden px-6 pt-28 pb-16 text-center">
         <div className="bg-grid-lines pointer-events-none absolute inset-0 -z-10 opacity-40" />
         <div className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-b from-background via-background/80 to-background" />
-        <div className="pointer-events-none absolute left-1/2 top-1/3 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/15 blur-[160px]" />
-        <div className="pointer-events-none absolute right-[12%] top-[18%] -z-10 h-72 w-72 rounded-full bg-primary/10 blur-[120px]" />
+        <div className="glow-primary pointer-events-none absolute left-1/2 top-1/3 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-15" />
+        <div className="glow-primary pointer-events-none absolute right-[12%] top-[18%] -z-10 h-72 w-72 rounded-full opacity-10" />
 
         <motion.div initial="hidden" animate="show" variants={stagger} className="flex w-full max-w-4xl flex-col items-center">
           <motion.h1
             variants={fadeUp}
             className="text-balance text-6xl font-extrabold leading-[0.95] tracking-tight md:text-7xl lg:text-[6.5rem]"
           >
-            Reward your people
+            Reward your <RotatingWord />
             <br />
             <span className="text-gradient">in seconds.</span>
           </motion.h1>
@@ -486,7 +485,7 @@ export default function LandingPage() {
             <Button size="lg" className="h-13 rounded-full px-9 text-base font-semibold shadow-lg shadow-primary/25" asChild>
               <Link href="https://app.wakasub.com/register">
                 Create a Campaign
-                <ArrowRight className="ml-1 h-4 w-4" />
+                <ArrowRightIcon className="ml-1 h-4 w-4" />
               </Link>
             </Button>
             <Button size="lg" variant="outline" className="h-13 rounded-full bg-transparent px-9 text-base font-medium" asChild>
@@ -505,7 +504,7 @@ export default function LandingPage() {
             <div className="flex items-center gap-1.5">
               <div className="flex gap-0.5">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={12} className="fill-primary text-primary" />
+                  <StarIcon key={i} size={12} className="fill-primary text-primary" />
                 ))}
               </div>
               <span>Loved by 50,000+ Nigerians</span>
@@ -584,10 +583,10 @@ export default function LandingPage() {
               href="/reseller"
               className="group relative flex flex-col items-start gap-5 overflow-hidden rounded-3xl border border-border/60 bg-card p-6 transition-colors hover:border-primary/40 md:flex-row md:items-center md:justify-between md:p-8"
             >
-              <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-primary/10 blur-3xl" />
+              <div className="glow-primary pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full opacity-10" />
               <div className="relative flex items-start gap-4">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                  <BadgePercent size={22} />
+                  <BadgePercentIcon size={22} />
                 </div>
                 <div>
                   <span className="mb-1.5 inline-block rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-primary">
@@ -603,7 +602,7 @@ export default function LandingPage() {
               </div>
               <span className="relative inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-transform group-hover:translate-x-0.5">
                 Explore reselling
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRightIcon className="h-4 w-4" />
               </span>
             </Link>
           </motion.div>
@@ -633,9 +632,9 @@ export default function LandingPage() {
           >
             {/* Reward your people — dark */}
             <motion.div variants={fadeUp} className="relative flex flex-col overflow-hidden rounded-3xl bg-foreground p-8 text-background md:p-10">
-              <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-primary/25 blur-3xl" />
+              <div className="glow-primary pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full opacity-25" />
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/20">
-                <Gift size={22} className="text-primary" />
+                <GiftIcon size={22} className="text-primary" />
               </div>
               <h3 className="mb-3 text-2xl font-bold">Reward your people</h3>
               <p className="mb-6 text-sm leading-relaxed text-background/65">
@@ -644,7 +643,7 @@ export default function LandingPage() {
               <ul className="mb-8 space-y-2.5">
                 {["Set up in under a minute", "One link works everywhere", "Winners paid automatically"].map((f) => (
                   <li key={f} className="flex items-center gap-2.5 text-sm text-background/75">
-                    <CheckCircle2 size={15} className="shrink-0 text-primary" />
+                    <CheckCircle2Icon size={15} className="shrink-0 text-primary" />
                     {f}
                   </li>
                 ))}
@@ -652,16 +651,16 @@ export default function LandingPage() {
               <Button className="mt-auto w-fit rounded-full px-7 font-semibold" asChild>
                 <Link href="https://app.wakasub.com/register">
                   Create a Campaign
-                  <ArrowRight className="ml-1 h-4 w-4" />
+                  <ArrowRightIcon className="ml-1 h-4 w-4" />
                 </Link>
               </Button>
             </motion.div>
 
             {/* Win rewards — light */}
             <motion.div variants={fadeUp} className="relative flex flex-col overflow-hidden rounded-3xl border border-border/50 bg-card p-8 md:p-10">
-              <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-primary/10 blur-3xl" />
+              <div className="glow-primary pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full opacity-10" />
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-                <Trophy size={22} className="text-primary" />
+                <TrophyIcon size={22} className="text-primary" />
               </div>
               <h3 className="mb-3 text-2xl font-bold">Claim your rewards</h3>
               <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
@@ -670,7 +669,7 @@ export default function LandingPage() {
               <ul className="mb-8 space-y-2.5">
                 {["Free to receive — always", "Lands on your phone in seconds", "Discover public giveaways"].map((f) => (
                   <li key={f} className="flex items-center gap-2.5 text-sm text-muted-foreground">
-                    <CheckCircle2 size={15} className="shrink-0 text-primary" />
+                    <CheckCircle2Icon size={15} className="shrink-0 text-primary" />
                     {f}
                   </li>
                 ))}
@@ -678,7 +677,7 @@ export default function LandingPage() {
               <Button variant="outline" className="mt-auto w-fit rounded-full bg-transparent px-7 font-semibold" asChild>
                 <Link href="#how-it-works">
                   How claiming works
-                  <ArrowRight className="ml-1 h-4 w-4" />
+                  <ArrowRightIcon className="ml-1 h-4 w-4" />
                 </Link>
               </Button>
             </motion.div>
@@ -780,7 +779,7 @@ export default function LandingPage() {
                 <h3 className="mb-3 font-semibold">{p.title}</h3>
                 <p className="mb-2 text-sm leading-relaxed text-muted-foreground">{p.today}</p>
                 <p className="mt-auto flex gap-1.5 text-sm leading-relaxed text-foreground">
-                  <Sparkles size={15} className="mt-0.5 shrink-0 text-primary" />
+                  <SparklesIcon size={15} className="mt-0.5 shrink-0 text-primary" />
                   <span>{p.now}</span>
                 </p>
               </motion.div>
@@ -825,7 +824,7 @@ export default function LandingPage() {
                 </div>
                 <p className="mb-5 flex-1 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
                 <div className="flex items-center gap-2 border-t border-border/40 pt-4 text-sm font-semibold text-primary">
-                  <Trophy size={14} />
+                  <TrophyIcon size={14} />
                   {s.metric}
                 </div>
               </motion.div>
@@ -842,8 +841,8 @@ export default function LandingPage() {
         <div className="pointer-events-none absolute inset-0 opacity-[0.04]">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-size-[40px_40px]" />
         </div>
-        <div className="pointer-events-none absolute -left-40 top-0 h-96 w-96 rounded-full bg-primary/25 blur-[140px]" />
-        <div className="pointer-events-none absolute -bottom-40 right-0 h-96 w-96 rounded-full bg-primary/15 blur-[140px]" />
+        <div className="glow-primary pointer-events-none absolute -left-40 top-0 h-96 w-96 rounded-full opacity-25" />
+        <div className="glow-primary pointer-events-none absolute -bottom-40 right-0 h-96 w-96 rounded-full opacity-15" />
 
         <div className="container relative mx-auto px-6">
           <motion.div
@@ -854,7 +853,7 @@ export default function LandingPage() {
             className="mb-14 text-center"
           >
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-sm font-semibold text-background/80">
-              <Trophy size={14} className="text-primary" /> Just here to win?
+              <TrophyIcon size={14} className="text-primary" /> Just here to win?
             </div>
             <h2 className="text-4xl font-bold leading-[1.05] md:text-5xl">Free airtime, data &amp; cash.</h2>
           </motion.div>
@@ -938,10 +937,10 @@ export default function LandingPage() {
 
               <div className="mb-10 grid grid-cols-2 gap-3">
                 {[
-                  { icon: Smartphone, label: "Airtime", sub: "MTN · Airtel · Glo · 9mobile" },
-                  { icon: Wifi, label: "Data", sub: "Daily, weekly & monthly" },
-                  { icon: Zap, label: "Electricity", sub: "EKEDC · IKEDC · AEDC" },
-                  { icon: Coins, label: "Cable TV", sub: "DSTV · GOtv · Startimes" },
+                  { icon: SmartphoneIcon, label: "Airtime", sub: "MTN · Airtel · Glo · 9mobile" },
+                  { icon: WifiIcon, label: "Data", sub: "Daily, weekly & monthly" },
+                  { icon: ZapIcon, label: "Electricity", sub: "EKEDC · IKEDC · AEDC" },
+                  { icon: CoinsIcon, label: "Cable TV", sub: "DSTV · GOtv · Startimes" },
                 ].map((u) => (
                   <div key={u.label} className="flex items-center gap-3 rounded-2xl border border-border/50 bg-card p-4">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
@@ -958,7 +957,7 @@ export default function LandingPage() {
               <Button size="lg" className="rounded-full px-8 text-base font-semibold shadow-lg shadow-primary/20" asChild>
                 <Link href="https://app.wakasub.com/register">
                   Open Wakasub
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  <ArrowRightIcon className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </motion.div>
@@ -978,7 +977,7 @@ export default function LandingPage() {
                       <p className="text-[2rem] font-bold tracking-tight">₦24,500.00</p>
                     </div>
                     <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
-                      <Wallet size={18} />
+                      <WalletIcon size={18} />
                     </div>
                   </div>
                   <div className="mt-3 flex gap-2">
@@ -991,10 +990,10 @@ export default function LandingPage() {
                   <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">Quick actions</p>
                   <div className="grid grid-cols-4 gap-2">
                     {[
-                      { icon: Smartphone, label: "Airtime" },
-                      { icon: Wifi, label: "Data" },
-                      { icon: Zap, label: "Electric" },
-                      { icon: Gift, label: "Reward" },
+                      { icon: SmartphoneIcon, label: "Airtime" },
+                      { icon: WifiIcon, label: "Data" },
+                      { icon: ZapIcon, label: "Electric" },
+                      { icon: GiftIcon, label: "Reward" },
                     ].map((a) => (
                       <div key={a.label} className="flex cursor-pointer flex-col items-center gap-1.5 rounded-xl p-2 transition-colors hover:bg-secondary/70">
                         <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
@@ -1015,7 +1014,7 @@ export default function LandingPage() {
                       <div key={tx.label} className="flex items-center justify-between rounded-lg px-1 py-1.5">
                         <div className="flex items-center gap-2">
                           <div className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10">
-                            {tx.positive ? <Gift size={10} className="text-primary" /> : <CheckCircle2 size={10} className="text-primary" />}
+                            {tx.positive ? <GiftIcon size={10} className="text-primary" /> : <CheckCircle2Icon size={10} className="text-primary" />}
                           </div>
                           <span className="text-xs text-muted-foreground">{tx.label}</span>
                         </div>
@@ -1041,8 +1040,8 @@ export default function LandingPage() {
         <div className="pointer-events-none absolute inset-0 opacity-[0.04]">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-size-[40px_40px]" />
         </div>
-        <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-primary/20 blur-[100px]" />
-        <div className="pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-primary/15 blur-[100px]" />
+        <div className="glow-primary pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full opacity-20" />
+        <div className="glow-primary pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full opacity-15" />
 
         <div className="container relative mx-auto px-6">
           <motion.div
@@ -1077,7 +1076,7 @@ export default function LandingPage() {
                 <p className="text-sm leading-relaxed text-background/45">{s.desc}</p>
                 {i < howItWorks.length - 1 && (
                   <div className="absolute -right-2 top-1/2 hidden -translate-y-1/2 lg:block">
-                    <ArrowRight size={16} className="text-background/20" />
+                    <ArrowRightIcon size={16} className="text-background/20" />
                   </div>
                 )}
               </motion.div>
@@ -1123,7 +1122,7 @@ export default function LandingPage() {
               <motion.div key={i} variants={fadeUp} className="flex flex-col rounded-2xl border border-border/50 bg-card p-6 transition-shadow hover:shadow-md">
                 <div className="mb-3 flex gap-0.5">
                   {[...Array(5)].map((_, j) => (
-                    <Star key={j} size={12} className="fill-primary text-primary" />
+                    <StarIcon key={j} size={12} className="fill-primary text-primary" />
                   ))}
                 </div>
                 <p className="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground">&ldquo;{t.body}&rdquo;</p>
@@ -1155,8 +1154,8 @@ export default function LandingPage() {
             <div className="pointer-events-none absolute inset-0 opacity-[0.07]">
               <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-size-[32px_32px]" />
             </div>
-            <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-16 -right-16 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
+            <div className="glow-white pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full opacity-10" />
+            <div className="glow-white pointer-events-none absolute -bottom-16 -right-16 h-72 w-72 rounded-full opacity-10" />
 
             <div className="relative">
               <h2 className="mb-6 text-4xl font-bold leading-tight md:text-6xl">

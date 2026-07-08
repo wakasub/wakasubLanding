@@ -10,16 +10,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Headset,
-  Clock,
-  ShieldCheck,
-  MessageSquare,
-  ArrowRight,
-  Send,
-  CheckCircle2,
-  Mail,
-} from "lucide-react";
+import { ClockIcon } from "@/components/icons/clock";
+import { MessageSquareIcon } from "@/components/icons/message-square";
+import { ArrowRightIcon } from "@/components/icons/arrow-right";
+import { CheckCircle2Icon } from "@/components/icons/check-circle-2";
+import { HeadsetIcon } from "@/components/icons/headset";
+import { ShieldCheckIcon } from "@/components/icons/shield-check";
+import { SendIcon } from "@/components/icons/send";
+import { MailIcon } from "@/components/icons/mail";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
@@ -40,17 +38,17 @@ const topics = [
 
 const promises = [
   {
-    icon: Clock,
+    icon: ClockIcon,
     title: "Fast response",
     desc: "We typically reply within a few hours, every day.",
   },
   {
-    icon: ShieldCheck,
+    icon: ShieldCheckIcon,
     title: "Secure & private",
     desc: "Your details are only used to resolve your request.",
   },
   {
-    icon: Headset,
+    icon: HeadsetIcon,
     title: "Real humans",
     desc: "Talk to people who actually understand the platform.",
   },
@@ -128,7 +126,7 @@ export default function ContactSupportPage() {
             transition={{ duration: 0.4 }}
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/8 px-4 py-1.5 text-sm font-medium text-primary"
           >
-            <Headset size={13} />
+            <HeadsetIcon size={13} />
             Contact Support
           </motion.div>
 
@@ -176,7 +174,7 @@ export default function ContactSupportPage() {
 
                 <div className="relative flex h-full flex-col">
                   <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15 backdrop-blur-sm">
-                    <MessageSquare size={22} />
+                    <MessageSquareIcon size={22} />
                   </div>
                   <h2 className="mb-3 text-2xl font-bold leading-tight">
                     Let&apos;s sort it out
@@ -205,7 +203,7 @@ export default function ContactSupportPage() {
 
                   <div className="mt-auto pt-9">
                     <div className="flex items-center gap-2 text-xs font-medium text-primary-foreground/60">
-                      <Mail size={13} />
+                      <MailIcon size={13} />
                       Prefer email? We read every message that comes through.
                     </div>
                   </div>
@@ -217,7 +215,7 @@ export default function ContactSupportPage() {
                 {submitted ? (
                   <div className="flex h-full flex-col items-center justify-center py-12 text-center">
                     <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                      <CheckCircle2 className="h-8 w-8" />
+                      <CheckCircle2Icon className="h-8 w-8" />
                     </div>
                     <h3 className="mb-2 text-2xl font-bold">Message sent</h3>
                     <p className="mb-8 max-w-xs text-sm leading-relaxed text-muted-foreground">
@@ -235,7 +233,7 @@ export default function ContactSupportPage() {
                       <Button asChild className="rounded-full">
                         <Link href="/">
                           Back to home
-                          <ArrowRight size={14} className="ml-2" />
+                          <ArrowRightIcon size={14} className="ml-2" />
                         </Link>
                       </Button>
                     </div>
@@ -326,7 +324,7 @@ export default function ContactSupportPage() {
                       ) : (
                         <>
                           Send message
-                          <Send size={16} className="ml-2" />
+                          <SendIcon size={16} className="ml-2" />
                         </>
                       )}
                     </Button>

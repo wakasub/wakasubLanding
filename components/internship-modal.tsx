@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Rocket, ArrowRight, Lock } from "lucide-react"
+import { LockIcon } from "@/components/icons/lock"
 
 export function InternshipModal() {
   const [isOpen, setIsOpen] = React.useState(false)
@@ -52,7 +52,7 @@ export function InternshipModal() {
         <div className="p-8 bg-background flex flex-col gap-4">
           <div className="flex items-start gap-4 p-4 rounded-2xl bg-secondary/50 border border-secondary">
             <div className="w-10 h-10 rounded-xl bg-destructive/10 flex items-center justify-center shrink-0">
-              <Lock className="text-destructive w-5 h-5" />
+              <LockIcon size={20} className="text-destructive" />
             </div>
             <div>
               <h4 className="font-bold text-sm">Batch A is Full</h4>
