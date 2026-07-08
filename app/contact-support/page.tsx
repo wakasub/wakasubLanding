@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { Navbar } from "@/components/navbar";
 import { Button } from "@/components/ui/button";
+import { PathsBackground } from "@/components/ui/background-paths";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -114,6 +115,7 @@ export default function ContactSupportPage() {
       {/* ── Hero ── */}
       <section className="relative overflow-hidden pt-36 md:pt-44">
         <div className="bg-dot-grid pointer-events-none absolute inset-0 -z-10 opacity-60" />
+        <PathsBackground className="mask-[linear-gradient(to_bottom,black_5%,black_70%,transparent)]" />
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute right-0 top-0 h-[600px] w-[600px] translate-x-1/2 -translate-y-1/4 rounded-full bg-primary/10 blur-[140px]" />
           <div className="absolute bottom-0 left-0 h-[400px] w-[400px] -translate-x-1/3 translate-y-1/3 rounded-full bg-blue-400/8 blur-[100px]" />

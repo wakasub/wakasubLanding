@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/navbar";
 import { RotatingWord } from "@/components/rotating-word";
 import TestimonialsMarquee from "@/components/ui/community-testimonial";
+import { PathsBackground } from "@/components/ui/background-paths";
 import { Button } from "@/components/ui/button";
 import { SmartphoneIcon } from "@/components/icons/smartphone";
 import { ArrowRightIcon } from "@/components/icons/arrow-right";
@@ -465,6 +466,7 @@ export default function LandingPage() {
       <section className="relative flex min-h-[92vh] flex-col items-center justify-center overflow-hidden px-6 pt-40 pb-16 text-center md:pt-52">
         <div className="bg-grid-lines pointer-events-none absolute inset-0 -z-10 opacity-40" />
         <div className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-b from-background via-background/80 to-background" />
+        <PathsBackground className="mask-[linear-gradient(to_bottom,black_5%,black_60%,transparent)]" />
         <div className="glow-primary pointer-events-none absolute left-1/2 top-1/3 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-15" />
         <div className="glow-primary pointer-events-none absolute right-[12%] top-[18%] -z-10 h-72 w-72 rounded-full opacity-10" />
 

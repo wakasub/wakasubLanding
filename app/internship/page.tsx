@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/navbar";
 import { Button } from "@/components/ui/button";
+import { PathsBackground } from "@/components/ui/background-paths";
 import { MegaphoneIcon } from "@/components/icons/megaphone";
 import { PaletteIcon } from "@/components/icons/palette";
 import { CalendarIcon } from "@/components/icons/calendar";
@@ -113,6 +114,7 @@ export default function InternshipPage() {
       <section className="relative overflow-hidden pb-0 pt-36 md:pt-52">
         {/* dot grid bg */}
         <div className="bg-dot-grid pointer-events-none absolute inset-0 -z-10 opacity-60" />
+        <PathsBackground className="mask-[linear-gradient(to_bottom,black_5%,black_60%,transparent)]" />
         {/* orbs */}
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute right-0 top-0 h-[600px] w-[600px] translate-x-1/2 -translate-y-1/4 rounded-full bg-primary/10 blur-[140px]" />

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/navbar";
 import { Button } from "@/components/ui/button";
+import { PathsBackground } from "@/components/ui/background-paths";
 import { BadgePercentIcon } from "@/components/icons/badge-percent";
 import { RepeatIcon } from "@/components/icons/repeat";
 import { SmartphoneIcon } from "@/components/icons/smartphone";
@@ -74,6 +75,7 @@ export function ResellerContent() {
       <section className="relative overflow-hidden px-6 pt-32 pb-16 md:pt-40">
         <div className="bg-grid-lines pointer-events-none absolute inset-0 -z-10 opacity-40" />
         <div className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-b from-background via-background/80 to-background" />
+        <PathsBackground className="mask-[linear-gradient(to_bottom,black_5%,black_60%,transparent)]" />
         <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[30rem] w-[30rem] -translate-x-1/2 rounded-full bg-primary/15 blur-[150px]" />
 
         <div className="container mx-auto">
