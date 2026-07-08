@@ -17,7 +17,7 @@ export function FloatingPaths({ position }: { position: number }) {
     } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
       684 - i * 5 * position
     } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
-    width: 0.5 + i * 0.03,
+    width: 0.3 + i * 0.02,
     duration: 20 + ((i * 7) % 11),
   }));
 
@@ -36,7 +36,7 @@ export function FloatingPaths({ position }: { position: number }) {
             d={path.d}
             stroke="currentColor"
             strokeWidth={path.width}
-            strokeOpacity={0.1 + path.id * 0.03}
+            strokeOpacity={0.06 + path.id * 0.02}
             initial={{ pathLength: 0.3, opacity: 0.6 }}
             animate={
               reduceMotion
@@ -71,7 +71,7 @@ export function PathsBackground({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "pointer-events-none absolute inset-0 -z-10 text-primary opacity-45 dark:opacity-35",
+        "pointer-events-none absolute inset-0 -z-10 text-primary opacity-30 dark:opacity-25",
         className,
       )}
       aria-hidden

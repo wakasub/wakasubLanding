@@ -42,18 +42,19 @@ export function Navbar() {
   }, []);
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className={`fixed left-0 right-0 top-0 z-[50] border-b transition-all duration-300 ${
-        mobileMenuOpen
-          ? "border-border bg-background py-3"
-          : isScrolled
-          ? "border-border bg-background/80 py-3 backdrop-blur-md"
-          : "border-transparent bg-transparent py-5"
-      }`}
-    >
-      <div className="container mx-auto flex items-center justify-between px-6">
+    <nav className="fixed inset-x-0 top-4 z-[50] px-4">
+      <motion.div
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className={`mx-auto flex max-w-7xl items-center justify-between rounded-2xl border px-5 py-4 transition-all duration-300 md:px-6 ${
+          mobileMenuOpen
+            ? "border-border bg-background shadow-xl shadow-black/10"
+            : isScrolled
+            ? "border-border/70 bg-background/80 shadow-xl shadow-black/10 backdrop-blur-md"
+            : "border-border/50 bg-background/60 shadow-lg shadow-black/5 backdrop-blur-md"
+        }`}
+      >
         <Link href="/" className="flex items-center gap-2">
           <Image src="/waka 512.png" alt="WakaSub" width={32} height={32} />
           <span className="hidden text-xl font-bold tracking-tighter md:flex">
@@ -115,7 +116,7 @@ export function Navbar() {
             )}
           </AnimatePresence>
         </button>
-      </div>
+      </motion.div>
 
       {/* Mobile drawer */}
       <AnimatePresence>
@@ -176,6 +177,6 @@ export function Navbar() {
           </>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </nav>
   );
 }

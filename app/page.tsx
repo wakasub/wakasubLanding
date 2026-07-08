@@ -2,12 +2,21 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useMemo, useRef } from "react";
+import {
+  motion,
+  AnimatePresence,
+  animate,
+  useInView,
+  useMotionValue,
+  useMotionTemplate,
+  useReducedMotion,
+} from "framer-motion";
 import { Navbar } from "@/components/navbar";
 import { RotatingWord } from "@/components/rotating-word";
 import TestimonialsMarquee from "@/components/ui/community-testimonial";
 import { PathsBackground } from "@/components/ui/background-paths";
+import { FloatingIconsLayer, type FloatingIconItem } from "@/components/ui/floating-icons-hero-section";
 import { Button } from "@/components/ui/button";
 import { SmartphoneIcon } from "@/components/icons/smartphone";
 import { ArrowRightIcon } from "@/components/icons/arrow-right";
@@ -66,15 +75,13 @@ const tickerBottom = [
   { icon: GiftIcon, label: "Match-day giveaway open" },
 ];
 
+// hoverColor mirrors the hero's RotatingWord palette (emerald/violet/amber/rose)
 const stats = [
-  { value: "₦200", label: "First reward, free" },
-  { value: "< 5s", label: "To claim & receive" },
-  { value: "4.9★", label: "User rating" },
-  { value: "50K+", label: "Nigerians onboard" },
+  { prefix: "₦", target: 200, label: "First reward, free", hoverColor: "group-hover/stat:text-emerald-500" },
+  { prefix: "< ", target: 5, suffix: "s", label: "To claim & receive", hoverColor: "group-hover/stat:text-violet-500" },
+  { target: 4.9, decimals: 1, suffix: "★", label: "User rating", hoverColor: "group-hover/stat:text-amber-500" },
+  { target: 50, suffix: "K+", label: "Nigerians onboard", hoverColor: "group-hover/stat:text-rose-500" },
 ];
-
-const partners = ["MTN", "Airtel", "Glo", "9mobile", "DSTV", "GOtv", "Startimes", "EKEDC", "IKEDC", "AEDC"];
-const marqueePartners = [...partners, ...partners];
 
 const rewardTypes = [
   { icon: SmartphoneIcon, label: "Airtime", desc: "Any network, any amount" },
@@ -127,37 +134,6 @@ const personas = [
     title: "People who love rewards",
     today: "Chasing giveaways across comments, rarely getting paid.",
     now: "Claim real airtime, data and cash — free to receive.",
-  },
-];
-
-const scenarios = [
-  {
-    tag: "Creator",
-    emoji: "📲",
-    name: "Tobi celebrates a new video",
-    body: "“₦200 airtime to 50 fans who follow and tag a friend.” He funds it once, drops the link in his bio, and wakes up to 50 fans already paid.",
-    metric: "Set up once · 50 fans paid",
-  },
-  {
-    tag: "Community",
-    emoji: "💬",
-    name: "Mrs. Bello boosts her group",
-    body: "Poll turnout was low, so she runs a members-only reward: “₦100 data to 30 random parents who vote.” Suddenly everyone's voting.",
-    metric: "Members only · 30 rewarded",
-  },
-  {
-    tag: "Cash gift",
-    emoji: "🎉",
-    name: "Chidi spoils the group chat",
-    body: "A friend graduated, so he splits ₦20,000 cash between 10 people. They get spendable balance instantly — no bank details, no waiting.",
-    metric: "Cash · paid in seconds",
-  },
-  {
-    tag: "Brand",
-    emoji: "🏢",
-    name: "A brand launches a product",
-    body: "“Win ₦1,000 airtime — 500 winners.” Fans enter for a shot, and every winner is paid the moment the draw closes.",
-    metric: "500 winners · one campaign",
   },
 ];
 
@@ -258,6 +234,129 @@ function TickerRow({ items, reverse = false }: { items: typeof tickerTop; revers
         ))}
       </div>
     </div>
+  );
+}
+
+/* ── Hero floating icons: the rewards story (give → win), tinted like the rotating word ── */
+
+const heroFloatingIcons: FloatingIconItem[] = [
+  { id: 1, icon: GiftIcon, tint: "text-rose-500", className: "top-[15%] left-[7%]" },
+  { id: 2, icon: SmartphoneIcon, className: "top-[13%] right-[8%]" },
+  { id: 3, icon: BanknoteIcon, tint: "text-emerald-500", className: "top-[36%] left-[4%]" },
+  { id: 4, icon: WifiIcon, tint: "text-violet-500", className: "top-[33%] right-[5%]" },
+  { id: 5, icon: TrophyIcon, tint: "text-amber-500", className: "top-[55%] left-[9%] hidden md:block" },
+  { id: 6, icon: CoinsIcon, tint: "text-blue-500", className: "top-[53%] right-[10%] hidden md:block" },
+  { id: 7, icon: WalletIcon, className: "top-[5%] left-[24%] hidden lg:block" },
+  { id: 8, icon: TicketIcon, tint: "text-violet-500", className: "top-[6%] right-[26%] hidden lg:block" },
+  { id: 9, icon: PartyPopperIcon, tint: "text-rose-500", className: "top-[68%] left-[17%] hidden lg:block" },
+  { id: 10, icon: ZapIcon, tint: "text-amber-500", className: "top-[66%] right-[19%] hidden lg:block" },
+];
+
+/* ── Magical stats band: count-up numbers, cursor spotlight, shimmer sweep ── */
+
+function StatValue({
+  prefix = "",
+  target,
+  suffix = "",
+  decimals = 0,
+}: {
+  prefix?: string;
+  target: number;
+  suffix?: string;
+  decimals?: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.6 });
+  const reduced = useReducedMotion();
+  const [display, setDisplay] = useState(() => (reduced ? target : 0));
+  const [settled, setSettled] = useState(false);
+
+  useEffect(() => {
+    if (!inView) return;
+    if (reduced) {
+      setDisplay(target);
+      setSettled(true);
+      return;
+    }
+    const controls = animate(0, target, {
+      duration: 1.6,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate: (v) => setDisplay(v),
+      onComplete: () => setSettled(true),
+    });
+    return () => controls.stop();
+  }, [inView, target, reduced]);
+
+  return (
+    <motion.span
+      ref={ref}
+      className="inline-block tabular-nums"
+      animate={settled && !reduced ? { scale: [1, 1.08, 1] } : undefined}
+      transition={{ duration: 0.45, ease: "easeOut" }}
+    >
+      {prefix}
+      {display.toFixed(decimals)}
+      {suffix}
+    </motion.span>
+  );
+}
+
+function MagicStats() {
+  const mx = useMotionValue(-400);
+  const my = useMotionValue(-400);
+  const reduced = useReducedMotion();
+  const spotlight = useMotionTemplate`radial-gradient(260px circle at ${mx}px ${my}px, color-mix(in oklab, var(--primary) 14%, transparent), transparent 70%)`;
+
+  return (
+    <motion.div
+      variants={stagger}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.4 }}
+      onMouseMove={(e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        mx.set(e.clientX - r.left);
+        my.set(e.clientY - r.top);
+      }}
+      onMouseLeave={() => {
+        mx.set(-400);
+        my.set(-400);
+      }}
+      className="group relative grid grid-cols-2 divide-x divide-y divide-border/50 overflow-hidden rounded-2xl border border-border/50 bg-card md:grid-cols-4 md:divide-y-0"
+    >
+      {/* cursor-following spotlight */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{ background: spotlight }}
+      />
+
+      {/* periodic shimmer sweep */}
+      {!reduced && (
+        <motion.div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-1/4 -skew-x-12 bg-linear-to-r from-transparent via-primary/10 to-transparent"
+          initial={{ x: "-130%" }}
+          animate={{ x: ["-130%", "530%"] }}
+          transition={{ duration: 2.6, repeat: Infinity, repeatDelay: 4.5, ease: "easeInOut" }}
+        />
+      )}
+
+      {stats.map((s) => (
+        <motion.div
+          key={s.label}
+          variants={fadeUp}
+          className="group/stat relative flex flex-col items-center py-10 text-center"
+        >
+          <div
+            className={`text-4xl font-extrabold text-primary transition-colors duration-300 md:text-5xl lg:text-6xl ${s.hoverColor}`}
+          >
+            <StatValue prefix={s.prefix} target={s.target} suffix={s.suffix} decimals={s.decimals} />
+          </div>
+          <div className="mt-2 text-[11px] font-medium uppercase tracking-widest text-muted-foreground">{s.label}</div>
+        </motion.div>
+      ))}
+    </motion.div>
   );
 }
 
@@ -467,15 +566,20 @@ export default function LandingPage() {
         <div className="bg-grid-lines pointer-events-none absolute inset-0 -z-10 opacity-40" />
         <div className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-b from-background via-background/80 to-background" />
         <PathsBackground className="mask-[linear-gradient(to_bottom,black_5%,black_60%,transparent)]" />
-        <div className="glow-primary pointer-events-none absolute left-1/2 top-1/3 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-15" />
-        <div className="glow-primary pointer-events-none absolute right-[12%] top-[18%] -z-10 h-72 w-72 rounded-full opacity-10" />
+        <div className="glow-primary pointer-events-none absolute left-1/2 top-1/3 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.07]" />
+        <div className="glow-primary pointer-events-none absolute right-[12%] top-[18%] -z-10 h-72 w-72 rounded-full opacity-5" />
+
+        <FloatingIconsLayer icons={heroFloatingIcons} />
 
         <motion.div initial="hidden" animate="show" variants={stagger} className="flex w-full max-w-4xl flex-col items-center">
           <motion.h1
             variants={fadeUp}
             className="text-balance text-6xl font-extrabold leading-[0.95] tracking-tight md:text-7xl lg:text-[6.5rem]"
           >
-            Reward your <RotatingWord />
+            Reward <br className="md:hidden" />
+            your
+            <br />
+            <RotatingWord />
             <br />
             <span className="text-gradient">in seconds.</span>
           </motion.h1>
@@ -540,36 +644,7 @@ export default function LandingPage() {
       {/* ── 2. STATS ── */}
       <section className="py-12 md:py-16">
         <div className="container mx-auto px-6">
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.4 }}
-            className="grid grid-cols-2 divide-x divide-y divide-border/50 overflow-hidden rounded-2xl border border-border/50 bg-card md:grid-cols-4 md:divide-y-0"
-          >
-            {stats.map((s, i) => (
-              <motion.div key={i} variants={fadeUp} className="flex flex-col items-center py-10 text-center">
-                <div className="text-4xl font-extrabold text-primary md:text-5xl lg:text-6xl">{s.value}</div>
-                <div className="mt-2 text-[11px] font-medium uppercase tracking-widest text-muted-foreground">{s.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── 3. PARTNERS ── */}
-      <section className="relative overflow-hidden py-10">
-        <p className="mb-6 text-center text-[11px] font-medium uppercase tracking-widest text-muted-foreground/70">
-          Rewards delivered across every Nigerian network
-        </p>
-        <div className="relative flex overflow-hidden mask-[linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
-          <div className="animate-marquee-slow flex shrink-0 items-center gap-12 pr-12">
-            {marqueePartners.map((p, i) => (
-              <span key={`${p}-${i}`} className="text-lg font-bold tracking-wider text-foreground/20 transition-colors hover:text-foreground/50">
-                {p}
-              </span>
-            ))}
-          </div>
+          <MagicStats />
         </div>
       </section>
 
@@ -785,51 +860,6 @@ export default function LandingPage() {
                   <SparklesIcon size={15} className="mt-0.5 shrink-0 text-primary" />
                   <span>{p.now}</span>
                 </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── 7. SCENARIOS ── */}
-      <section className="py-24 md:py-32">
-        <div className="container mx-auto px-6">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-            className="mb-14"
-          >
-            <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">In the wild</p>
-            <h2 className="text-4xl font-bold md:text-5xl">Real moments, real rewards.</h2>
-          </motion.div>
-
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.1 }}
-            className="grid grid-cols-1 gap-4 md:grid-cols-2"
-          >
-            {scenarios.map((s) => (
-              <motion.div
-                key={s.name}
-                variants={fadeUp}
-                className="flex flex-col rounded-2xl border border-border/50 bg-card p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-              >
-                <div className="mb-4 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl">{s.emoji}</span>
-                    <h3 className="text-lg font-semibold">{s.name}</h3>
-                  </div>
-                  <span className="rounded-full bg-primary/10 px-3 py-1 text-[11px] font-semibold text-primary">{s.tag}</span>
-                </div>
-                <p className="mb-5 flex-1 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
-                <div className="flex items-center gap-2 border-t border-border/40 pt-4 text-sm font-semibold text-primary">
-                  <TrophyIcon size={14} />
-                  {s.metric}
-                </div>
               </motion.div>
             ))}
           </motion.div>
