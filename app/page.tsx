@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState, useEffect, useMemo, useRef } from "react";
 import {
   motion,
@@ -17,6 +16,7 @@ import { RotatingWord } from "@/components/rotating-word";
 import TestimonialsMarquee from "@/components/ui/community-testimonial";
 import { PathsBackground } from "@/components/ui/background-paths";
 import { FloatingIconsLayer, type FloatingIconItem } from "@/components/ui/floating-icons-hero-section";
+import { CinematicFooter } from "@/components/ui/motion-footer";
 import { Button } from "@/components/ui/button";
 import { SmartphoneIcon } from "@/components/icons/smartphone";
 import { ArrowRightIcon } from "@/components/icons/arrow-right";
@@ -196,24 +196,6 @@ const testimonials = [
     body: "Match-day giveaways keep my audience coming back every week. For the first time I can actually reward the people who show up.",
   },
 ];
-
-/* ── Store badges (monochrome) ── */
-
-function AppleIcon({ size = 22 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.54 9.103 1.519 12.09 1.013 1.46 2.208 3.09 3.792 3.029 1.52-.065 2.09-.987 3.925-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701" />
-    </svg>
-  );
-}
-
-function GooglePlayIcon({ size = 22 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.487 1.487 0 0 0-.946-.138l11.04 10.932zm0 2.067l-11 10.933c.298.064.612.019.906-.138l13.306-7.522-3.212-3.273z" />
-    </svg>
-  );
-}
 
 /* Reward ticker pill */
 function TickerRow({ items, reverse = false }: { items: typeof tickerTop; reverse?: boolean }) {
@@ -1192,73 +1174,7 @@ export default function LandingPage() {
       </section>
 
       {/* ── 14. FOOTER ── */}
-      <footer className="border-t border-border bg-card/30">
-        <div className="container mx-auto px-6 py-16">
-          <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-12 md:gap-x-8">
-            {/* Brand */}
-            <div className="col-span-2 md:col-span-5 md:pr-8">
-              <Link href="/" className="mb-4 flex items-center gap-2">
-                <Image src="/waka 512.png" alt="WakaSub" width={30} height={30} />
-                <span className="text-lg font-bold tracking-tight">WakaSub</span>
-              </Link>
-              <p className="mb-6 max-w-xs text-sm leading-relaxed text-muted-foreground">
-                The rewards hub of Nigeria — reward your people with airtime, data and cash in seconds.
-              </p>
-              <div className="flex flex-wrap gap-2.5">
-                <a href="https://apps.apple.com/ng/app/wakasub-data-bills-and-more/id6777371534" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 rounded-xl border border-border bg-foreground/5 px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-foreground/10">
-                  <AppleIcon size={16} />
-                  App Store
-                </a>
-                <a href="https://play.google.com/store/apps/details?id=com.wakasub.vtu" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 rounded-xl border border-border bg-foreground/5 px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-foreground/10">
-                  <GooglePlayIcon size={16} />
-                  Google Play
-                </a>
-              </div>
-            </div>
-
-            {/* Platform */}
-            <div className="md:col-span-3">
-              <span className="mb-4 block text-xs font-semibold uppercase tracking-widest text-foreground">Platform</span>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li><Link href="#rewards" className="transition-colors hover:text-primary">Rewards</Link></li>
-                <li><Link href="#who" className="transition-colors hover:text-primary">Who it&apos;s for</Link></li>
-                <li><Link href="#utilities" className="transition-colors hover:text-primary">Utilities</Link></li>
-                <li><Link href="/reseller" className="transition-colors hover:text-primary">Become a reseller</Link></li>
-                <li><Link href="#how-it-works" className="transition-colors hover:text-primary">How it works</Link></li>
-                <li><Link href="https://app.wakasub.com/register" className="transition-colors hover:text-primary">Create a campaign</Link></li>
-              </ul>
-            </div>
-
-            {/* Company */}
-            <div className="md:col-span-2">
-              <span className="mb-4 block text-xs font-semibold uppercase tracking-widest text-foreground">Company</span>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li><Link href="/internship" className="transition-colors hover:text-primary">Internship</Link></li>
-                <li><Link href="/contact-support" className="transition-colors hover:text-primary">Contact</Link></li>
-              </ul>
-            </div>
-
-            {/* Legal */}
-            <div className="md:col-span-2">
-              <span className="mb-4 block text-xs font-semibold uppercase tracking-widest text-foreground">Legal</span>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li><Link href="https://app.wakasub.com/privacy-policy" className="transition-colors hover:text-primary">Privacy Policy</Link></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-border/50 pt-8 text-xs text-muted-foreground sm:flex-row">
-            <p>© {new Date().getFullYear()} Wakasub Technologies Ltd. All rights reserved.</p>
-            <div className="flex items-center gap-2">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-              </span>
-              <span>All systems operational</span>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <CinematicFooter />
 
       {/* ── 15. STICKY MOBILE CTA ── */}
       <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden">
