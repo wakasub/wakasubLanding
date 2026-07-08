@@ -6,6 +6,7 @@ import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/navbar";
 import { RotatingWord } from "@/components/rotating-word";
+import TestimonialsMarquee from "@/components/ui/community-testimonial";
 import { Button } from "@/components/ui/button";
 import { SmartphoneIcon } from "@/components/icons/smartphone";
 import { ArrowRightIcon } from "@/components/icons/arrow-right";
@@ -461,7 +462,7 @@ export default function LandingPage() {
       <Navbar />
 
       {/* ── 1. HERO (single, centered) ── */}
-      <section className="relative flex min-h-[92vh] flex-col items-center justify-center overflow-hidden px-6 pt-28 pb-16 text-center">
+      <section className="relative flex min-h-[92vh] flex-col items-center justify-center overflow-hidden px-6 pt-40 pb-16 text-center md:pt-52">
         <div className="bg-grid-lines pointer-events-none absolute inset-0 -z-10 opacity-40" />
         <div className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-b from-background via-background/80 to-background" />
         <div className="glow-primary pointer-events-none absolute left-1/2 top-1/3 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-15" />
@@ -1098,47 +1099,31 @@ export default function LandingPage() {
       </section>
 
       {/* ── 12. TESTIMONIALS ── */}
-      <section id="testimonials" className="py-24 md:py-32">
-        <div className="container mx-auto px-6">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-            className="mb-14 text-center"
-          >
-            <p className="mb-3 text-sm font-medium uppercase tracking-widest text-primary">Testimonials</p>
-            <h2 className="text-4xl font-bold md:text-5xl">Creators and winners.</h2>
-          </motion.div>
+      <section id="testimonials" className="overflow-hidden py-24 md:py-32">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          className="container mx-auto mb-14 px-6 text-center"
+        >
+          <p className="mb-3 text-sm font-medium uppercase tracking-widest text-primary">Testimonials</p>
+          <h2 className="text-4xl font-bold md:text-5xl">Creators and winners.</h2>
+        </motion.div>
 
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.1 }}
-            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {testimonials.map((t, i) => (
-              <motion.div key={i} variants={fadeUp} className="flex flex-col rounded-2xl border border-border/50 bg-card p-6 transition-shadow hover:shadow-md">
-                <div className="mb-3 flex gap-0.5">
-                  {[...Array(5)].map((_, j) => (
-                    <StarIcon key={j} size={12} className="fill-primary text-primary" />
-                  ))}
-                </div>
-                <p className="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground">&ldquo;{t.body}&rdquo;</p>
-                <div className="flex items-center gap-3 border-t border-border/30 pt-4">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
-                    {t.name.charAt(0)}
-                  </div>
-                  <div>
-                    <div className="text-sm font-semibold">{t.name}</div>
-                    <div className="text-xs text-muted-foreground">{t.role} · {t.location}</div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.6 }}
+        >
+          <TestimonialsMarquee
+            rows={[
+              { id: "r1", items: testimonials.slice(0, 3), duration: "50s" },
+              { id: "r2", items: testimonials.slice(3, 6), duration: "62s", reverse: true },
+            ]}
+          />
+        </motion.div>
       </section>
 
       {/* ── 13. FINAL CTA ── */}
