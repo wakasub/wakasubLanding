@@ -25,7 +25,6 @@ export default function OpengraphImage() {
             style={{
               width: 64,
               height: 64,
-              borderRadius: 18,
               background: "#2f6bed",
               display: "flex",
               alignItems: "center",
@@ -54,7 +53,6 @@ export default function OpengraphImage() {
               key={t}
               style={{
                 padding: "10px 22px",
-                borderRadius: 999,
                 border: "1px solid rgba(255,255,255,0.22)",
                 background: "rgba(255,255,255,0.06)",
               }}

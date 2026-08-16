@@ -32,13 +32,13 @@ function Stars() {
 export function TestimonialCard({ name, role, location, body }: Testimonial) {
   const meta = location ? `${role} · ${location}` : role;
   return (
-    <figure className="flex w-[19rem] shrink-0 flex-col rounded-2xl border border-border/60 bg-card p-6 shadow-sm sm:w-[22rem]">
+    <figure className="flex w-[19rem] shrink-0 flex-col border border-border/60 bg-card p-6 shadow-sm sm:w-[22rem]">
       <Stars />
       <blockquote className="mb-5 flex-1 text-sm leading-relaxed text-muted-foreground">
         &ldquo;{body}&rdquo;
       </blockquote>
       <figcaption className="flex items-center gap-3 border-t border-border/40 pt-4">
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-semibold text-primary">
+        <span className="flex h-9 w-9 shrink-0 items-center justify-center bg-primary/10 text-sm font-semibold text-primary">
           {name.charAt(0)}
         </span>
         <span className="min-w-0">

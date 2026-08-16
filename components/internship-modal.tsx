@@ -31,9 +31,9 @@ export function InternshipModal() {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="sm:max-w-[425px] rounded-[2rem] p-0 overflow-hidden border-none shadow-2xl">
+      <DialogContent className="sm:max-w-[425px] p-0 overflow-hidden border-none shadow-2xl">
         <div className="bg-destructive p-8 text-destructive-foreground relative overflow-hidden">
-          <div className="absolute top-0 right-0 -z-0 w-32 h-32 bg-white/10 rounded-full blur-2xl translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute top-0 right-0 -z-0 w-32 h-32 bg-white/10 blur-2xl translate-x-1/2 -translate-y-1/2" />
           
           <Badge variant="secondary" className="mb-4 bg-white/20 text-white border-none">
             Cohort Updates
@@ -50,8 +50,8 @@ export function InternshipModal() {
         </div>
         
         <div className="p-8 bg-background flex flex-col gap-4">
-          <div className="flex items-start gap-4 p-4 rounded-2xl bg-secondary/50 border border-secondary">
-            <div className="w-10 h-10 rounded-xl bg-destructive/10 flex items-center justify-center shrink-0">
+          <div className="flex items-start gap-4 p-4 bg-secondary/50 border border-secondary">
+            <div className="w-10 h-10 bg-destructive/10 flex items-center justify-center shrink-0">
               <LockIcon size={20} className="text-destructive" />
             </div>
             <div>
@@ -61,12 +61,12 @@ export function InternshipModal() {
           </div>
           
           <div className="flex flex-col gap-2 mt-2">
-            <Button asChild variant="outline" className="w-full h-12 rounded-xl font-bold text-lg" onClick={() => setIsOpen(false)}>
+            <Button asChild variant="outline" className="w-full h-12 font-bold text-lg" onClick={() => setIsOpen(false)}>
               <Link href="/internship">
                 View Internship Page
               </Link>
             </Button>
-            <Button className="w-full h-12 rounded-xl font-medium" onClick={() => setIsOpen(false)}>
+            <Button className="w-full h-12 font-medium" onClick={() => setIsOpen(false)}>
               Close
             </Button>
           </div>

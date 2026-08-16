@@ -48,7 +48,7 @@ export function Navbar() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className={`mx-auto flex max-w-7xl items-center justify-between rounded-2xl border px-5 py-4 transition-all duration-300 md:px-6 ${
+        className={`mx-auto flex max-w-7xl items-center justify-between border px-5 py-4 transition-all duration-300 md:px-6 ${
           mobileMenuOpen
             ? "border-border bg-background shadow-xl shadow-black/10"
             : isScrolled
@@ -82,7 +82,7 @@ export function Navbar() {
             >
               {item.label}
               {item.badge && (
-                <span className="rounded-full bg-primary/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
+                <span className="bg-primary/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
                   {item.badge}
                 </span>
               )}
@@ -94,7 +94,7 @@ export function Navbar() {
           <Button variant="ghost" size="sm" asChild>
             <Link href="https://app.wakasub.com/login">Log in</Link>
           </Button>
-          <Button size="sm" className="rounded-full px-6" asChild>
+          <Button size="sm" className="px-6" asChild>
             <Link href="https://app.wakasub.com/register">Create a Campaign</Link>
           </Button>
         </div>
@@ -147,12 +147,12 @@ export function Navbar() {
                   >
                     <Link
                       href={item.href}
-                      className="flex items-center justify-between rounded-xl px-4 py-3 text-lg font-semibold tracking-tight transition-colors hover:bg-secondary hover:text-primary"
+                      className="flex items-center justify-between px-4 py-3 text-lg font-semibold tracking-tight transition-colors hover:bg-secondary hover:text-primary"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {item.label}
                       {item.badge && (
-                        <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
+                        <span className="bg-primary/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
                           {item.badge}
                         </span>
                       )}
@@ -166,10 +166,10 @@ export function Navbar() {
                   transition={{ delay: 0.3 }}
                   className="mt-8 flex flex-col gap-3"
                 >
-                  <Button variant="outline" className="h-14 w-full rounded-2xl bg-transparent text-lg font-bold" asChild>
+                  <Button variant="outline" className="h-14 w-full bg-transparent text-lg font-bold" asChild>
                     <Link href="https://app.wakasub.com/login" onClick={() => setMobileMenuOpen(false)}>Log in</Link>
                   </Button>
-                  <Button className="h-14 w-full rounded-2xl text-lg font-bold shadow-lg shadow-primary/20" asChild>
+                  <Button className="h-14 w-full text-lg font-bold shadow-lg shadow-primary/20" asChild>
                     <Link href="https://app.wakasub.com/register" onClick={() => setMobileMenuOpen(false)}>Create a Campaign</Link>
                   </Button>
                 </motion.div>

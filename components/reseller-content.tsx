@@ -76,14 +76,14 @@ export function ResellerContent() {
         <div className="bg-grid-lines pointer-events-none absolute inset-0 -z-10 opacity-40" />
         <div className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-b from-background via-background/80 to-background" />
         <PathsBackground className="mask-[linear-gradient(to_bottom,black_5%,black_60%,transparent)]" />
-        <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[30rem] w-[30rem] -translate-x-1/2 rounded-full bg-primary/15 blur-[150px]" />
+        <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[30rem] w-[30rem] -translate-x-1/2 bg-primary/15 blur-[150px]" />
 
         <div className="container mx-auto">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             <motion.div initial="hidden" animate="show" variants={stagger}>
               <motion.span
                 variants={fadeUp}
-                className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary"
+                className="inline-flex items-center gap-2 border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary"
               >
                 <BadgePercentIcon size={13} />
                 VTU Reseller Program
@@ -100,13 +100,13 @@ export function ResellerContent() {
                 on every transaction.
               </motion.p>
               <motion.div variants={fadeUp} className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Button size="lg" className="h-13 rounded-full px-9 text-base font-semibold shadow-lg shadow-primary/25" asChild>
+                <Button size="lg" className="h-13 px-9 text-base font-semibold shadow-lg shadow-primary/25" asChild>
                   <Link href="https://app.wakasub.com/register">
                     Become a reseller
                     <ArrowRightIcon className="ml-1 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button size="lg" variant="outline" className="h-13 rounded-full bg-transparent px-9 text-base font-medium" asChild>
+                <Button size="lg" variant="outline" className="h-13 bg-transparent px-9 text-base font-medium" asChild>
                   <Link href="/contact-support">Talk to our team</Link>
                 </Button>
               </motion.div>
@@ -119,31 +119,31 @@ export function ResellerContent() {
 
             {/* Rate card */}
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }} className="relative">
-              <div className="pointer-events-none absolute -inset-4 -z-10 rounded-[2.5rem] bg-primary/10 blur-3xl" />
-              <div className="overflow-hidden rounded-[2rem] border border-border/60 bg-card shadow-2xl shadow-black/12 ring-1 ring-black/5 dark:ring-white/5">
+              <div className="pointer-events-none absolute -inset-4 -z-10 bg-primary/10 blur-3xl" />
+              <div className="overflow-hidden border border-border/60 bg-card shadow-2xl shadow-black/12 ring-1 ring-black/5 dark:ring-white/5">
                 <div className="bg-primary px-6 py-5 text-primary-foreground">
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-xs font-medium opacity-70">Reseller pricing</p>
                       <p className="text-[1.6rem] font-bold tracking-tight">Wholesale rates</p>
                     </div>
-                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
+                    <div className="flex h-11 w-11 items-center justify-center bg-white/20 backdrop-blur-sm">
                       <TrendingUpIcon size={18} />
                     </div>
                   </div>
                   <div className="mt-3 flex flex-wrap gap-2">
-                    <span className="rounded-full bg-white/15 px-3 py-1 text-[11px] font-medium">Instant delivery</span>
-                    <span className="rounded-full bg-white/15 px-3 py-1 text-[11px] font-medium">Best discounts</span>
-                    <span className="rounded-full bg-white/15 px-3 py-1 text-[11px] font-medium">One wallet</span>
+                    <span className="bg-white/15 px-3 py-1 text-[11px] font-medium">Instant delivery</span>
+                    <span className="bg-white/15 px-3 py-1 text-[11px] font-medium">Best discounts</span>
+                    <span className="bg-white/15 px-3 py-1 text-[11px] font-medium">One wallet</span>
                   </div>
                 </div>
                 <div className="p-4">
                   <p className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">What you can resell</p>
                   <ul className="space-y-1">
                     {services.map((s) => (
-                      <li key={s.label} className="flex items-center justify-between rounded-xl px-2 py-2.5 transition-colors hover:bg-secondary/60">
+                      <li key={s.label} className="flex items-center justify-between px-2 py-2.5 transition-colors hover:bg-secondary/60">
                         <div className="flex items-center gap-3">
-                          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                          <div className="flex h-9 w-9 items-center justify-center bg-primary/10 text-primary">
                             <s.icon size={16} />
                           </div>
                           <div>
@@ -151,13 +151,13 @@ export function ResellerContent() {
                             <p className="text-[11px] leading-tight text-muted-foreground">{s.note}</p>
                           </div>
                         </div>
-                        <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                        <span className="inline-flex items-center gap-1 bg-primary/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
                           <BadgePercentIcon size={11} /> Discounted
                         </span>
                       </li>
                     ))}
                   </ul>
-                  <Button className="mt-3 w-full rounded-full font-semibold" asChild>
+                  <Button className="mt-3 w-full font-semibold" asChild>
                     <Link href="https://app.wakasub.com/register">
                       Start reselling
                       <ArrowRightIcon className="ml-1 h-4 w-4" />
@@ -179,8 +179,8 @@ export function ResellerContent() {
           </motion.div>
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.15 }} className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((f) => (
-              <motion.div key={f.title} variants={fadeUp} className="rounded-2xl border border-border/50 bg-card p-6">
-                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <motion.div key={f.title} variants={fadeUp} className="border border-border/50 bg-card p-6">
+                <div className="mb-4 flex h-11 w-11 items-center justify-center bg-primary/10 text-primary">
                   <f.icon size={20} />
                 </div>
                 <h3 className="mb-1.5 text-base font-bold">{f.title}</h3>
@@ -200,9 +200,9 @@ export function ResellerContent() {
           </motion.div>
           <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.1 }} className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((s) => (
-              <motion.div key={s.n} variants={fadeUp} className="relative rounded-2xl border border-border/50 bg-card p-6">
+              <motion.div key={s.n} variants={fadeUp} className="relative border border-border/50 bg-card p-6">
                 <div className="mb-4 flex items-center justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <div className="flex h-10 w-10 items-center justify-center bg-primary/10 text-primary">
                     <s.icon size={18} />
                   </div>
                   <span className="text-sm font-bold text-muted-foreground/50">{s.n}</span>
@@ -224,7 +224,7 @@ export function ResellerContent() {
           </motion.div>
           <div className="mx-auto grid max-w-4xl grid-cols-1 gap-4 md:grid-cols-2">
             {faqs.map((item) => (
-              <div key={item.q} className="rounded-2xl border border-border/50 bg-card p-6">
+              <div key={item.q} className="border border-border/50 bg-card p-6">
                 <h3 className="mb-2 text-base font-semibold">{item.q}</h3>
                 <p className="text-sm leading-relaxed text-muted-foreground">{item.a}</p>
               </div>
@@ -240,20 +240,20 @@ export function ResellerContent() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.4 }}
-          className="relative mx-auto max-w-4xl overflow-hidden rounded-3xl bg-primary px-8 py-16 text-center text-primary-foreground md:rounded-[2.5rem] md:px-16 md:py-20"
+          className="relative mx-auto max-w-4xl overflow-hidden bg-primary px-8 py-16 text-center text-primary-foreground md:px-16 md:py-20"
         >
-          <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-16 -right-16 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
+          <div className="pointer-events-none absolute -left-20 -top-20 h-72 w-72 bg-white/10 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-16 -right-16 h-72 w-72 bg-white/10 blur-3xl" />
           <div className="relative">
             <h2 className="mb-5 text-3xl font-bold leading-tight md:text-5xl">Start reselling today</h2>
             <p className="mx-auto mb-9 max-w-lg text-lg text-primary-foreground/75">
               Join thousands of resellers earning on airtime, data and bills at Nigeria&apos;s best rates.
             </p>
             <div className="flex flex-col justify-center gap-3 sm:flex-row">
-              <Button size="lg" variant="secondary" className="h-13 rounded-full px-9 text-base font-bold shadow-xl" asChild>
+              <Button size="lg" variant="secondary" className="h-13 px-9 text-base font-bold shadow-xl" asChild>
                 <Link href="https://app.wakasub.com/register">Become a reseller</Link>
               </Button>
-              <Button size="lg" variant="outline" className="h-13 rounded-full border-white/40 bg-transparent px-9 text-base font-medium text-primary-foreground hover:bg-white/10 hover:text-primary-foreground" asChild>
+              <Button size="lg" variant="outline" className="h-13 border-white/40 bg-transparent px-9 text-base font-medium text-primary-foreground hover:bg-white/10 hover:text-primary-foreground" asChild>
                 <Link href="/contact-support">Talk to our team</Link>
               </Button>
             </div>

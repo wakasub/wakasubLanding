@@ -88,7 +88,7 @@ export function BackgroundPaths({
 }: {
   title?: string;
 }) {
-  const words = title.split(" ");
+  const words = title.split("");
 
   return (
     <div className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-background">
@@ -127,10 +127,10 @@ export function BackgroundPaths({
             ))}
           </h1>
 
-          <div className="group relative inline-block overflow-hidden rounded-2xl bg-linear-to-b from-primary/20 to-primary/5 p-px shadow-lg backdrop-blur-lg transition-shadow duration-300 hover:shadow-xl">
+          <div className="group relative inline-block overflow-hidden bg-linear-to-b from-primary/20 to-primary/5 p-px shadow-lg backdrop-blur-lg transition-shadow duration-300 hover:shadow-xl">
             <Button
               variant="ghost"
-              className="rounded-[1.15rem] border border-border bg-background/95 px-8 py-6 text-lg font-semibold backdrop-blur-md transition-all duration-300 hover:bg-background group-hover:-translate-y-0.5"
+              className="border border-border bg-background/95 px-8 py-6 text-lg font-semibold backdrop-blur-md transition-all duration-300 hover:bg-background group-hover:-translate-y-0.5"
               asChild
             >
               <Link href="https://app.wakasub.com/register">

@@ -279,7 +279,7 @@ export function CinematicFooter() {
       >
         <footer className="cinematic-footer-wrapper fixed bottom-0 left-0 flex h-screen w-full flex-col justify-between overflow-hidden bg-background text-foreground">
           {/* Ambient light & grid */}
-          <div className="footer-aurora animate-footer-breathe pointer-events-none absolute left-1/2 top-1/2 z-0 h-[60vh] w-[80vw] -translate-x-1/2 -translate-y-1/2 rounded-[50%] blur-[80px]" />
+          <div className="footer-aurora animate-footer-breathe pointer-events-none absolute left-1/2 top-1/2 z-0 h-[60vh] w-[80vw] -translate-x-1/2 -translate-y-1/2 blur-[80px]" />
           <div className="footer-bg-grid pointer-events-none absolute inset-0 z-0" />
 
           {/* Giant background wordmark */}
@@ -315,7 +315,7 @@ export function CinematicFooter() {
                   href="https://apps.apple.com/ng/app/wakasub-data-bills-and-more/id6777371534"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-glass-pill group flex items-center gap-3 rounded-full px-10 py-5 text-sm font-bold text-foreground md:text-base"
+                  className="footer-glass-pill group flex items-center gap-3 px-10 py-5 text-sm font-bold text-foreground md:text-base"
                 >
                   <svg className="h-6 w-6 text-muted-foreground transition-colors group-hover:text-foreground" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
                     <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.04 2.26-.79 3.59-.76 1.56.04 2.87.67 3.55 1.76-3.13 1.77-2.62 5.92.35 7.14-.65 1.58-1.57 3.1-2.57 4.03zm-3.21-14.7c-.55 1.4-1.89 2.37-3.25 2.28.09-1.5 1.05-2.82 2.38-3.4 1.25-.57 2.66-.41 3.25.04-.15.35-.26.72-.38 1.08z" />
@@ -328,7 +328,7 @@ export function CinematicFooter() {
                   href="https://play.google.com/store/apps/details?id=com.wakasub.vtu"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="footer-glass-pill group flex items-center gap-3 rounded-full px-10 py-5 text-sm font-bold text-foreground md:text-base"
+                  className="footer-glass-pill group flex items-center gap-3 px-10 py-5 text-sm font-bold text-foreground md:text-base"
                 >
                   <svg className="h-6 w-6 text-muted-foreground transition-colors group-hover:text-foreground" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
                     <path d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.487 1.487 0 0 0-.946-.138l11.04 10.932zm0 2.067l-11 10.933c.298.064.612.019.906-.138l13.306-7.522-3.212-3.273z" />
@@ -344,7 +344,7 @@ export function CinematicFooter() {
                     key={link.label}
                     as={Link}
                     href={link.href}
-                    className="footer-glass-pill rounded-full px-6 py-3 text-xs font-medium text-muted-foreground hover:text-foreground md:text-sm"
+                    className="footer-glass-pill px-6 py-3 text-xs font-medium text-muted-foreground hover:text-foreground md:text-sm"
                   >
                     {link.label}
                   </MagneticButton>
@@ -359,8 +359,8 @@ export function CinematicFooter() {
               <span>© {new Date().getFullYear()} Wakasub Technologies Ltd.</span>
               <span className="hidden items-center gap-1.5 sm:flex">
                 <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+                  <span className="absolute inline-flex h-full w-full animate-ping bg-primary opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 bg-primary" />
                 </span>
                 All systems operational
               </span>
@@ -370,7 +370,7 @@ export function CinematicFooter() {
               as="button"
               onClick={scrollToTop}
               aria-label="Back to top"
-              className="footer-glass-pill group order-1 flex h-12 w-12 items-center justify-center rounded-full text-muted-foreground hover:text-foreground md:order-2"
+              className="footer-glass-pill group order-1 flex h-12 w-12 items-center justify-center text-muted-foreground hover:text-foreground md:order-2"
             >
               <svg className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />

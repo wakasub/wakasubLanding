@@ -117,8 +117,8 @@ export default function ContactSupportPage() {
         <div className="bg-dot-grid pointer-events-none absolute inset-0 -z-10 opacity-60" />
         <PathsBackground className="mask-[linear-gradient(to_bottom,black_5%,black_70%,transparent)]" />
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute right-0 top-0 h-[600px] w-[600px] translate-x-1/2 -translate-y-1/4 rounded-full bg-primary/10 blur-[140px]" />
-          <div className="absolute bottom-0 left-0 h-[400px] w-[400px] -translate-x-1/3 translate-y-1/3 rounded-full bg-blue-400/8 blur-[100px]" />
+          <div className="absolute right-0 top-0 h-[600px] w-[600px] translate-x-1/2 -translate-y-1/4 bg-primary/10 blur-[140px]" />
+          <div className="absolute bottom-0 left-0 h-[400px] w-[400px] -translate-x-1/3 translate-y-1/3 bg-blue-400/8 blur-[100px]" />
         </div>
 
         <div className="container mx-auto px-6 pb-14 text-center">
@@ -126,7 +126,7 @@ export default function ContactSupportPage() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/8 px-4 py-1.5 text-sm font-medium text-primary"
+            className="mb-6 inline-flex items-center gap-2 border border-primary/20 bg-primary/8 px-4 py-1.5 text-sm font-medium text-primary"
           >
             <HeadsetIcon size={13} />
             Contact Support
@@ -164,7 +164,7 @@ export default function ContactSupportPage() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.15 }}
-            className="mx-auto max-w-5xl overflow-hidden rounded-3xl border border-border/50 bg-background shadow-2xl shadow-black/5 ring-1 ring-black/5 dark:ring-white/5 md:rounded-[2.5rem]"
+            className="mx-auto max-w-5xl overflow-hidden border border-border/50 bg-background shadow-2xl shadow-black/5 ring-1 ring-black/5 dark:ring-white/5"
           >
             <div className="grid grid-cols-1 lg:grid-cols-5">
               {/* Left — brand panel */}
@@ -172,10 +172,10 @@ export default function ContactSupportPage() {
                 <div className="pointer-events-none absolute inset-0 opacity-[0.07]">
                   <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-size-[28px_28px]" />
                 </div>
-                <div className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-white/10 blur-3xl" />
+                <div className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 bg-white/10 blur-3xl" />
 
                 <div className="relative flex h-full flex-col">
-                  <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15 backdrop-blur-sm">
+                  <div className="mb-6 inline-flex h-12 w-12 items-center justify-center bg-white/15 backdrop-blur-sm">
                     <MessageSquareIcon size={22} />
                   </div>
                   <h2 className="mb-3 text-2xl font-bold leading-tight">
@@ -190,7 +190,7 @@ export default function ContactSupportPage() {
                   <div className="space-y-5">
                     {promises.map((p) => (
                       <div key={p.title} className="flex gap-4">
-                        <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/15">
+                        <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center bg-white/15">
                           <p.icon size={16} />
                         </div>
                         <div>
@@ -216,7 +216,7 @@ export default function ContactSupportPage() {
               <div className="p-8 md:p-11 lg:col-span-3">
                 {submitted ? (
                   <div className="flex h-full flex-col items-center justify-center py-12 text-center">
-                    <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                    <div className="mb-5 flex h-16 w-16 items-center justify-center bg-primary/10 text-primary">
                       <CheckCircle2Icon className="h-8 w-8" />
                     </div>
                     <h3 className="mb-2 text-2xl font-bold">Message sent</h3>
@@ -227,12 +227,12 @@ export default function ContactSupportPage() {
                     <div className="flex flex-wrap items-center justify-center gap-3">
                       <Button
                         variant="outline"
-                        className="rounded-full"
+                        className=""
                         onClick={() => setSubmitted(false)}
                       >
                         Send another message
                       </Button>
-                      <Button asChild className="rounded-full">
+                      <Button asChild className="">
                         <Link href="/">
                           Back to home
                           <ArrowRightIcon size={14} className="ml-2" />
@@ -255,7 +255,7 @@ export default function ContactSupportPage() {
                               onClick={() =>
                                 setForm((prev) => ({ ...prev, topic: t }))
                               }
-                              className={`rounded-full border px-4 py-1.5 text-sm font-medium transition-all ${
+                              className={` border px-4 py-1.5 text-sm font-medium transition-all ${
                                 active
                                   ? "border-primary bg-primary text-primary-foreground shadow-sm shadow-primary/25"
                                   : "border-border bg-background text-muted-foreground hover:border-primary/40 hover:text-foreground"
@@ -280,7 +280,7 @@ export default function ContactSupportPage() {
                           required
                           maxLength={120}
                           disabled={submitting}
-                          className="h-11 rounded-xl"
+                          className="h-11"
                         />
                       </div>
                       <div className="flex flex-col gap-2">
@@ -295,7 +295,7 @@ export default function ContactSupportPage() {
                           required
                           maxLength={200}
                           disabled={submitting}
-                          className="h-11 rounded-xl"
+                          className="h-11"
                         />
                       </div>
                     </div>
@@ -312,14 +312,14 @@ export default function ContactSupportPage() {
                         maxLength={5000}
                         rows={6}
                         disabled={submitting}
-                        className="min-h-[150px] resize-y rounded-xl"
+                        className="min-h-[150px] resize-y"
                       />
                     </div>
 
                     <Button
                       type="submit"
                       disabled={submitting}
-                      className="h-12 w-full rounded-xl text-base font-bold shadow-lg shadow-primary/20"
+                      className="h-12 w-full text-base font-bold shadow-lg shadow-primary/20"
                     >
                       {submitting ? (
                         "Sending…"

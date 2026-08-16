@@ -117,8 +117,8 @@ export default function InternshipPage() {
         <PathsBackground className="mask-[linear-gradient(to_bottom,black_5%,black_60%,transparent)]" />
         {/* orbs */}
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute right-0 top-0 h-[600px] w-[600px] translate-x-1/2 -translate-y-1/4 rounded-full bg-primary/10 blur-[140px]" />
-          <div className="absolute bottom-0 left-0 h-[400px] w-[400px] -translate-x-1/3 translate-y-1/3 rounded-full bg-blue-400/8 blur-[100px]" />
+          <div className="absolute right-0 top-0 h-[600px] w-[600px] translate-x-1/2 -translate-y-1/4 bg-primary/10 blur-[140px]" />
+          <div className="absolute bottom-0 left-0 h-[400px] w-[400px] -translate-x-1/3 translate-y-1/3 bg-blue-400/8 blur-[100px]" />
         </div>
 
         <div className="container mx-auto px-6 pb-24 text-center">
@@ -127,7 +127,7 @@ export default function InternshipPage() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-destructive/20 bg-destructive/8 px-4 py-1.5 text-sm font-medium text-destructive"
+            className="mb-6 inline-flex items-center gap-2 border border-destructive/20 bg-destructive/8 px-4 py-1.5 text-sm font-medium text-destructive"
           >
             <LockIcon size={12} />
             Applications closed — Batch A
@@ -162,11 +162,11 @@ export default function InternshipPage() {
             transition={{ duration: 0.55, delay: 0.3 }}
             className="flex flex-wrap items-center justify-center gap-3"
           >
-            <div className="flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-2 text-sm font-medium shadow-sm backdrop-blur-sm">
+            <div className="flex items-center gap-2 border border-border bg-background/80 px-4 py-2 text-sm font-medium shadow-sm backdrop-blur-sm">
               <CalendarIcon size={14} className="text-primary" />
               Batch A deadline: Feb 22, 2026
             </div>
-            <div className="flex items-center gap-2 rounded-full border border-border bg-background/80 px-4 py-2 text-sm font-medium shadow-sm backdrop-blur-sm">
+            <div className="flex items-center gap-2 border border-border bg-background/80 px-4 py-2 text-sm font-medium shadow-sm backdrop-blur-sm">
               <UsersIcon size={14} className="text-primary" />4 open departments
             </div>
           </motion.div>
@@ -206,10 +206,10 @@ export default function InternshipPage() {
               <motion.div
                 key={d.name}
                 variants={fadeUp}
-                className="group flex flex-col rounded-2xl border border-border/50 bg-background p-7 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
+                className="group flex flex-col border border-border/50 bg-background p-7 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
               >
                 <div
-                  className={`mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl ${d.color} shadow-lg ${d.glow} transition-transform duration-300 group-hover:scale-110`}
+                  className={`mb-5 inline-flex h-12 w-12 items-center justify-center ${d.color} shadow-lg ${d.glow} transition-transform duration-300 group-hover:scale-110`}
                 >
                   <d.icon className="text-white" size={22} />
                 </div>
@@ -256,10 +256,10 @@ export default function InternshipPage() {
               <motion.div
                 key={i}
                 variants={fadeUp}
-                className="flex gap-5 rounded-2xl border border-border/50 bg-card p-7 transition-shadow hover:shadow-md"
+                className="flex gap-5 border border-border/50 bg-card p-7 transition-shadow hover:shadow-md"
               >
                 <div
-                  className={`mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${b.accent}`}
+                  className={`mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center ${b.accent}`}
                 >
                   <b.icon size={20} />
                 </div>
@@ -286,7 +286,7 @@ export default function InternshipPage() {
         </div>
 
         <div className="container relative mx-auto px-6">
-          <div className="mx-auto max-w-3xl overflow-hidden rounded-3xl border border-border/50 bg-background shadow-2xl shadow-black/5 ring-1 ring-black/5 dark:ring-white/5 md:rounded-[2.5rem]">
+          <div className="mx-auto max-w-3xl overflow-hidden border border-border/50 bg-background shadow-2xl shadow-black/5 ring-1 ring-black/5 dark:ring-white/5">
             <div className="grid grid-cols-1 md:grid-cols-2">
               {/* Left — brand panel */}
               <div className="relative overflow-hidden bg-primary p-10 text-primary-foreground md:p-12">
@@ -329,7 +329,7 @@ export default function InternshipPage() {
 
               {/* Right — closed state */}
               <div className="flex flex-col items-center justify-center p-10 text-center md:p-12">
-                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-destructive/20 bg-destructive/8">
+                <div className="mb-6 flex h-16 w-16 items-center justify-center border border-destructive/20 bg-destructive/8">
                   <LockIcon size={28} className="text-destructive" />
                 </div>
                 <h3 className="mb-3 text-2xl font-bold">Batch A is closed</h3>
@@ -339,7 +339,7 @@ export default function InternshipPage() {
                 </p>
 
                 {/* Timeline */}
-                <div className="mb-8 w-full rounded-xl border border-border/50 bg-secondary/40 p-4 text-left">
+                <div className="mb-8 w-full border border-border/50 bg-secondary/40 p-4 text-left">
                   <div className="space-y-3">
                     {[
                       { label: "Batch A", status: "Closed", done: true },
@@ -347,7 +347,7 @@ export default function InternshipPage() {
                     ].map((b) => (
                       <div key={b.label} className="flex items-center gap-3">
                         <div
-                          className={`h-2.5 w-2.5 rounded-full ${b.done ? "bg-destructive" : "bg-primary animate-pulse"}`}
+                          className={`h-2.5 w-2.5 ${b.done ? "bg-destructive" : "bg-primary animate-pulse"}`}
                         />
                         <span className="flex-1 text-sm font-medium">
                           {b.label}
@@ -362,7 +362,7 @@ export default function InternshipPage() {
                   </div>
                 </div>
 
-                <Button asChild className="w-full rounded-full" variant="outline">
+                <Button asChild className="w-full" variant="outline">
                   <Link href="/">
                     Back to home
                     <ArrowRightIcon size={14} className="ml-2" />

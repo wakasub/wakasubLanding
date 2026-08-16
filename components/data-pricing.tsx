@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { DATA_PLANS_SNAPSHOT } from "@/lib/data-plans-snapshot";
 import {
   dedupePlans,
   flattenPlans,
@@ -15,9 +14,9 @@ import {
   formatValidity,
   isPublicPlan,
   networkBrand,
-  normalizePayload,
   planQualifier,
   type DataPlansPayload,
+  type DataPlansSource,
   type Plan,
 } from "@/lib/data-plans";
 
@@ -36,35 +35,19 @@ const fadeUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
-export function DataPricing() {
-  const [payload, setPayload] = useState<DataPlansPayload>(DATA_PLANS_SNAPSHOT);
-  const [isLive, setIsLive] = useState(false);
-  const [network, setNetwork] = useState(DATA_PLANS_SNAPSHOT.networks[0]?.network ?? "MTN");
+type DataPricingProps = {
+  /** Feed resolved on the server — see `lib/data-plans-server.ts`. */
+  initialPlans: DataPlansPayload;
+  source: DataPlansSource;
+};
+
+export function DataPricing({ initialPlans: payload, source }: DataPricingProps) {
+  const [network, setNetwork] = useState(payload.networks[0]?.network ?? "MTN");
   const [typeSlug, setTypeSlug] = useState("all");
   const [sort, setSort] = useState<SortId>("size");
   const [expanded, setExpanded] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
-
-  /* The snapshot renders first (so the table is in the HTML), then live prices
-     replace it once the proxy answers. */
-  useEffect(() => {
-    let cancelled = false;
-    fetch("/api/data-plans")
-      .then((res) => res.json())
-      .then((body) => {
-        if (cancelled) return;
-        const next = normalizePayload(body);
-        if (!next) return;
-        setPayload(next);
-        setIsLive(body?.source === "live");
-      })
-      .catch(() => {
-        /* the snapshot is already on screen — nothing to do */
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  const isLive = source === "live";
 
   const allPlans = useMemo(
     () => dedupePlans(flattenPlans(payload).filter(isPublicPlan)),

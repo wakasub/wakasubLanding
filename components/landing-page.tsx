@@ -13,6 +13,7 @@ import {
 } from "framer-motion";
 import { Navbar } from "@/components/navbar";
 import { DataPricing } from "@/components/data-pricing";
+import type { DataPlansPayload, DataPlansSource } from "@/lib/data-plans";
 import { RotatingWord } from "@/components/rotating-word";
 import TestimonialsMarquee from "@/components/ui/community-testimonial";
 import { PathsBackground } from "@/components/ui/background-paths";
@@ -297,9 +298,9 @@ function TickerRow({
         {doubled.map((p, i) => (
           <span
             key={`${p.label}-${i}`}
-            className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-border/70 bg-card px-4 py-2 text-sm font-medium text-foreground/80 shadow-sm"
+            className="inline-flex items-center gap-2 whitespace-nowrap border border-border/70 bg-card px-4 py-2 text-sm font-medium text-foreground/80 shadow-sm"
           >
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10">
+            <span className="flex h-5 w-5 items-center justify-center bg-primary/10">
               <p.icon size={11} className="text-primary" />
             </span>
             {p.label}
@@ -435,7 +436,7 @@ function MagicStats() {
         mx.set(-400);
         my.set(-400);
       }}
-      className="group relative grid grid-cols-2 divide-x divide-y divide-border/50 overflow-hidden rounded-2xl border border-border/50 bg-card md:grid-cols-4 md:divide-y-0"
+      className="group relative grid grid-cols-2 divide-x divide-y divide-border/50 overflow-hidden border border-border/50 bg-card md:grid-cols-4 md:divide-y-0"
     >
       {/* cursor-following spotlight */}
       <motion.div
@@ -559,7 +560,7 @@ function Confetti({ seed }: { seed: number }) {
       {pieces.map((p, i) => (
         <motion.span
           key={i}
-          className={`absolute h-2 w-2 rounded-[2px] ${tints[p.tint]}`}
+          className={`absolute h-2 w-2 ${tints[p.tint]}`}
           initial={{ opacity: 1, x: 0, y: 0, scale: 1, rotate: 0 }}
           animate={{ opacity: 0, x: p.x, y: p.y, scale: 0.4, rotate: p.rotate }}
           transition={{ duration: 0.9, delay: p.delay, ease: "easeOut" }}
@@ -597,12 +598,12 @@ function LiveClaimDemo() {
   return (
     <div className="relative w-full max-w-sm">
       {/* glow */}
-      <div className="pointer-events-none absolute -inset-px -z-10 rounded-[1.7rem] bg-linear-to-b from-primary/30 to-transparent blur-md" />
+      <div className="pointer-events-none absolute -inset-px -z-10 bg-linear-to-b from-primary/30 to-transparent blur-md" />
 
-      <div className="relative overflow-hidden rounded-[1.6rem] border border-border/70 bg-card/80 p-1.5 shadow-2xl shadow-primary/10 backdrop-blur-xl">
+      <div className="relative overflow-hidden border border-border/70 bg-card/80 p-1.5 shadow-2xl shadow-primary/10 backdrop-blur-xl">
         {/* header */}
         <div className="flex items-center gap-2.5 px-3.5 pb-3 pt-2.5">
-          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-xs font-bold text-primary">
+          <span className="flex h-8 w-8 items-center justify-center bg-primary/15 text-xs font-bold text-primary">
             {giver.initial}
           </span>
           <div className="min-w-0 flex-1 text-left">
@@ -613,17 +614,17 @@ function LiveClaimDemo() {
               {giver.campaign}
             </p>
           </div>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
+          <span className="inline-flex items-center gap-1.5 bg-primary/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
             <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+              <span className="absolute inline-flex h-full w-full animate-ping bg-primary opacity-75" />
+              <span className="relative inline-flex h-1.5 w-1.5 bg-primary" />
             </span>
             Live
           </span>
         </div>
 
         {/* body */}
-        <div className="relative min-h-[208px] overflow-hidden rounded-[1.2rem] bg-background/60 p-5">
+        <div className="relative min-h-[208px] overflow-hidden bg-background/60 p-5">
           <AnimatePresence mode="wait">
             {step === "offer" && (
               <motion.div
@@ -634,7 +635,7 @@ function LiveClaimDemo() {
                 transition={{ duration: 0.3 }}
                 className="flex h-full flex-col items-center"
               >
-                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/12">
+                <div className="flex h-14 w-14 items-center justify-center bg-primary/12">
                   <reward.icon size={26} className="text-primary" />
                 </div>
                 <p className="mt-3 text-[11px] font-medium uppercase tracking-widest text-muted-foreground">
@@ -647,7 +648,7 @@ function LiveClaimDemo() {
                   </span>
                 </p>
                 <div className="relative mt-4 w-full">
-                  <div className="flex h-11 w-full items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground shadow-lg shadow-primary/30">
+                  <div className="flex h-11 w-full items-center justify-center bg-primary font-semibold text-primary-foreground shadow-lg shadow-primary/30">
                     Claim now
                   </div>
                   {/* auto-tapping cursor */}
@@ -684,7 +685,7 @@ function LiveClaimDemo() {
               >
                 <div className="relative flex h-14 w-14 items-center justify-center">
                   <motion.span
-                    className="absolute inset-0 rounded-full border-2 border-primary/20 border-t-primary"
+                    className="absolute inset-0 border-2 border-primary/20 border-t-primary"
                     animate={{ rotate: 360 }}
                     transition={{
                       duration: 0.8,
@@ -700,9 +701,9 @@ function LiveClaimDemo() {
                 <p className="mt-1 text-xs text-muted-foreground">
                   to {giver.phone} · {reward.network}
                 </p>
-                <div className="mt-4 h-1.5 w-44 overflow-hidden rounded-full bg-border">
+                <div className="mt-4 h-1.5 w-44 overflow-hidden bg-border">
                   <motion.div
-                    className="h-full rounded-full bg-primary"
+                    className="h-full bg-primary"
                     initial={{ width: "0%" }}
                     animate={{ width: "100%" }}
                     transition={{ duration: 1.4, ease: "easeInOut" }}
@@ -722,7 +723,7 @@ function LiveClaimDemo() {
               >
                 <Confetti seed={round} />
                 <motion.div
-                  className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground"
+                  className="flex h-14 w-14 items-center justify-center bg-primary text-primary-foreground"
                   initial={{ scale: 0.4, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ type: "spring", stiffness: 320, damping: 16 }}
@@ -750,7 +751,13 @@ function LiveClaimDemo() {
   );
 }
 
-export default function LandingPage() {
+type LandingPageProps = {
+  /** Price feed resolved on the server so the table ships with real prices. */
+  initialPlans: DataPlansPayload;
+  plansSource: DataPlansSource;
+};
+
+export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
   return (
     <main className="min-h-screen overflow-x-hidden pb-20 md:pb-0">
       <Navbar />
@@ -760,8 +767,8 @@ export default function LandingPage() {
         <div className="bg-grid-lines pointer-events-none absolute inset-0 -z-10 opacity-40" />
         <div className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-b from-background via-background/80 to-background" />
         <PathsBackground className="mask-[linear-gradient(to_bottom,black_5%,black_60%,transparent)]" />
-        <div className="glow-primary pointer-events-none absolute left-1/2 top-1/3 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.07]" />
-        <div className="glow-primary pointer-events-none absolute right-[12%] top-[18%] -z-10 h-72 w-72 rounded-full opacity-5" />
+        <div className="glow-primary pointer-events-none absolute left-1/2 top-1/3 -z-10 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 opacity-[0.07]" />
+        <div className="glow-primary pointer-events-none absolute right-[12%] top-[18%] -z-10 h-72 w-72 opacity-5" />
 
         <FloatingIconsLayer icons={heroFloatingIcons} />
 
@@ -798,7 +805,7 @@ export default function LandingPage() {
           >
             <Button
               size="lg"
-              className="h-13 rounded-full px-9 text-base font-semibold shadow-lg shadow-primary/25"
+              className="h-13 px-9 text-base font-semibold shadow-lg shadow-primary/25"
               asChild
             >
               <Link href="https://app.wakasub.com/register">
@@ -809,7 +816,7 @@ export default function LandingPage() {
             <Button
               size="lg"
               variant="outline"
-              className="h-13 rounded-full bg-transparent px-9 text-base font-medium"
+              className="h-13 bg-transparent px-9 text-base font-medium"
               asChild
             >
               <Link href="#how-it-works">See how it works</Link>
@@ -824,7 +831,7 @@ export default function LandingPage() {
               {["A", "C", "T", "N"].map((c) => (
                 <span
                   key={c}
-                  className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-background bg-primary/15 text-[11px] font-bold text-primary"
+                  className="flex h-7 w-7 items-center justify-center border-2 border-background bg-primary/15 text-[11px] font-bold text-primary"
                 >
                   {c}
                 </span>
@@ -885,15 +892,15 @@ export default function LandingPage() {
           >
             <Link
               href="/reseller"
-              className="group relative flex flex-col items-start gap-5 overflow-hidden rounded-3xl border border-border/60 bg-card p-6 transition-colors hover:border-primary/40 md:flex-row md:items-center md:justify-between md:p-8"
+              className="group relative flex flex-col items-start gap-5 overflow-hidden border border-border/60 bg-card p-6 transition-colors hover:border-primary/40 md:flex-row md:items-center md:justify-between md:p-8"
             >
-              <div className="glow-primary pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full opacity-10" />
+              <div className="glow-primary pointer-events-none absolute -right-16 -top-16 h-48 w-48 opacity-10" />
               <div className="relative flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center bg-primary/10 text-primary">
                   <BadgePercentIcon size={22} />
                 </div>
                 <div>
-                  <span className="mb-1.5 inline-block rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-primary">
+                  <span className="mb-1.5 inline-block bg-primary/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-primary">
                     For VTU resellers
                   </span>
                   <h2 className="text-xl font-bold leading-tight md:text-2xl">
@@ -906,7 +913,7 @@ export default function LandingPage() {
                   </p>
                 </div>
               </div>
-              <span className="relative inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-transform group-hover:translate-x-0.5">
+              <span className="relative inline-flex shrink-0 items-center gap-1.5 bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-transform group-hover:translate-x-0.5">
                 Explore reselling
                 <ArrowRightIcon className="h-4 w-4" />
               </span>
@@ -915,7 +922,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <DataPricing />
+      <DataPricing initialPlans={initialPlans} source={plansSource} />
 
       {/* ── 4. TWO WAYS ── */}
       <section className="py-24 md:py-32">
@@ -945,10 +952,10 @@ export default function LandingPage() {
             {/* Reward your people — dark */}
             <motion.div
               variants={fadeUp}
-              className="relative flex flex-col overflow-hidden rounded-3xl bg-foreground p-8 text-background md:p-10"
+              className="relative flex flex-col overflow-hidden bg-foreground p-8 text-background md:p-10"
             >
-              <div className="glow-primary pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full opacity-25" />
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/20">
+              <div className="glow-primary pointer-events-none absolute -right-16 -top-16 h-56 w-56 opacity-25" />
+              <div className="mb-5 flex h-12 w-12 items-center justify-center bg-primary/20">
                 <GiftIcon size={22} className="text-primary" />
               </div>
               <h3 className="mb-3 text-2xl font-bold">Reward your people</h3>
@@ -975,7 +982,7 @@ export default function LandingPage() {
                 ))}
               </ul>
               <Button
-                className="mt-auto w-fit rounded-full px-7 font-semibold"
+                className="mt-auto w-fit px-7 font-semibold"
                 asChild
               >
                 <Link href="https://app.wakasub.com/register">
@@ -988,10 +995,10 @@ export default function LandingPage() {
             {/* Win rewards — light */}
             <motion.div
               variants={fadeUp}
-              className="relative flex flex-col overflow-hidden rounded-3xl border border-border/50 bg-card p-8 md:p-10"
+              className="relative flex flex-col overflow-hidden border border-border/50 bg-card p-8 md:p-10"
             >
-              <div className="glow-primary pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full opacity-10" />
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
+              <div className="glow-primary pointer-events-none absolute -right-16 -top-16 h-56 w-56 opacity-10" />
+              <div className="mb-5 flex h-12 w-12 items-center justify-center bg-primary/10">
                 <TrophyIcon size={22} className="text-primary" />
               </div>
               <h3 className="mb-3 text-2xl font-bold">Claim your rewards</h3>
@@ -1019,7 +1026,7 @@ export default function LandingPage() {
               </ul>
               <Button
                 variant="outline"
-                className="mt-auto w-fit rounded-full bg-transparent px-7 font-semibold"
+                className="mt-auto w-fit bg-transparent px-7 font-semibold"
                 asChild
               >
                 <Link href="#how-it-works">
@@ -1061,9 +1068,9 @@ export default function LandingPage() {
               <motion.div
                 key={r.label}
                 variants={fadeUp}
-                className="group flex items-center gap-4 rounded-2xl border border-border/50 bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                className="group flex items-center gap-4 border border-border/50 bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               >
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center bg-primary/10 text-primary">
                   <r.icon size={22} />
                 </div>
                 <div>
@@ -1079,7 +1086,7 @@ export default function LandingPage() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
-            className="flex flex-col gap-5 rounded-3xl border border-border/50 bg-secondary/30 p-7 md:flex-row md:items-center md:justify-between"
+            className="flex flex-col gap-5 border border-border/50 bg-secondary/30 p-7 md:flex-row md:items-center md:justify-between"
           >
             <div className="shrink-0">
               <p className="mb-1 text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
@@ -1093,7 +1100,7 @@ export default function LandingPage() {
               {campaignTypes.map((c) => (
                 <span
                   key={c.label}
-                  className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-medium"
+                  className="inline-flex items-center gap-2 border border-border bg-card px-4 py-2 text-sm font-medium"
                 >
                   <c.icon size={14} className="text-primary" />
                   {c.label}
@@ -1133,9 +1140,9 @@ export default function LandingPage() {
               <motion.div
                 key={p.title}
                 variants={fadeUp}
-                className="group flex flex-col rounded-2xl border border-border/50 bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                className="group flex flex-col border border-border/50 bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               >
-                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <div className="mb-4 flex h-11 w-11 items-center justify-center bg-primary/10 text-primary">
                   <p.icon size={20} />
                 </div>
                 <h3 className="mb-3 font-semibold">{p.title}</h3>
@@ -1158,13 +1165,13 @@ export default function LandingPage() {
       {/* ── 8. JUST HERE TO WIN ── */}
       <section
         id="win"
-        className="relative mx-4 my-8 overflow-hidden rounded-3xl bg-foreground py-20 text-background md:rounded-[2.5rem] md:py-28"
+        className="relative mx-4 my-8 overflow-hidden bg-foreground py-20 text-background md:py-28"
       >
         <div className="pointer-events-none absolute inset-0 opacity-[0.04]">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-size-[40px_40px]" />
         </div>
-        <div className="glow-primary pointer-events-none absolute -left-40 top-0 h-96 w-96 rounded-full opacity-25" />
-        <div className="glow-primary pointer-events-none absolute -bottom-40 right-0 h-96 w-96 rounded-full opacity-15" />
+        <div className="glow-primary pointer-events-none absolute -left-40 top-0 h-96 w-96 opacity-25" />
+        <div className="glow-primary pointer-events-none absolute -bottom-40 right-0 h-96 w-96 opacity-15" />
 
         <div className="container relative mx-auto px-6">
           <motion.div
@@ -1174,7 +1181,7 @@ export default function LandingPage() {
             viewport={{ once: true, amount: 0.3 }}
             className="mb-14 text-center"
           >
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-sm font-semibold text-background/80">
+            <div className="mb-5 inline-flex items-center gap-2 border border-white/15 bg-white/5 px-4 py-1.5 text-sm font-semibold text-background/80">
               <TrophyIcon size={14} className="text-primary" /> Just here to
               win?
             </div>
@@ -1194,9 +1201,9 @@ export default function LandingPage() {
               <motion.div
                 key={p.title}
                 variants={fadeUp}
-                className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
+                className="border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
               >
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full border border-primary/40 bg-primary/15 text-primary">
+                <div className="mb-4 flex h-10 w-10 items-center justify-center border border-primary/40 bg-primary/15 text-primary">
                   <p.icon size={18} />
                 </div>
                 <h4 className="mb-2 text-base font-bold">{p.title}</h4>
@@ -1216,7 +1223,7 @@ export default function LandingPage() {
           >
             <Button
               size="lg"
-              className="rounded-full px-10 text-base font-semibold"
+              className="px-10 text-base font-semibold"
               asChild
             >
               <Link href="https://app.wakasub.com/register">
@@ -1256,9 +1263,9 @@ export default function LandingPage() {
               <motion.div
                 key={t.title}
                 variants={fadeUp}
-                className="flex flex-col rounded-2xl border border-border/50 bg-card p-6 transition-shadow hover:shadow-md"
+                className="flex flex-col border border-border/50 bg-card p-6 transition-shadow hover:shadow-md"
               >
-                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <div className="mb-4 flex h-11 w-11 items-center justify-center bg-primary/10 text-primary">
                   <t.icon size={20} />
                 </div>
                 <h3 className="mb-2 font-semibold">{t.title}</h3>
@@ -1317,9 +1324,9 @@ export default function LandingPage() {
                 ].map((u) => (
                   <div
                     key={u.label}
-                    className="flex items-center gap-3 rounded-2xl border border-border/50 bg-card p-4"
+                    className="flex items-center gap-3 border border-border/50 bg-card p-4"
                   >
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-primary/10 text-primary">
                       <u.icon size={18} />
                     </div>
                     <div>
@@ -1334,7 +1341,7 @@ export default function LandingPage() {
 
               <Button
                 size="lg"
-                className="rounded-full px-8 text-base font-semibold shadow-lg shadow-primary/20"
+                className="px-8 text-base font-semibold shadow-lg shadow-primary/20"
                 asChild
               >
                 <Link href="https://app.wakasub.com/register">
@@ -1351,7 +1358,7 @@ export default function LandingPage() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="overflow-hidden rounded-[2rem] border border-border/60 bg-card shadow-2xl shadow-black/12 ring-1 ring-black/5 dark:ring-white/5">
+              <div className="overflow-hidden border border-border/60 bg-card shadow-2xl shadow-black/12 ring-1 ring-black/5 dark:ring-white/5">
                 <div className="bg-primary px-6 py-5 text-primary-foreground">
                   <div className="flex items-center justify-between">
                     <div>
@@ -1362,15 +1369,15 @@ export default function LandingPage() {
                         ₦24,500.00
                       </p>
                     </div>
-                    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm">
+                    <div className="flex h-11 w-11 items-center justify-center bg-white/20 backdrop-blur-sm">
                       <WalletIcon size={18} />
                     </div>
                   </div>
                   <div className="mt-3 flex gap-2">
-                    <span className="rounded-full bg-white/15 px-3 py-1 text-[11px] font-medium">
+                    <span className="bg-white/15 px-3 py-1 text-[11px] font-medium">
                       + Add money
                     </span>
-                    <span className="rounded-full bg-white/15 px-3 py-1 text-[11px] font-medium">
+                    <span className="bg-white/15 px-3 py-1 text-[11px] font-medium">
                       🎁 Won ₦2,000
                     </span>
                   </div>
@@ -1389,9 +1396,9 @@ export default function LandingPage() {
                     ].map((a) => (
                       <div
                         key={a.label}
-                        className="flex cursor-pointer flex-col items-center gap-1.5 rounded-xl p-2 transition-colors hover:bg-secondary/70"
+                        className="flex cursor-pointer flex-col items-center gap-1.5 p-2 transition-colors hover:bg-secondary/70"
                       >
-                        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                        <div className="flex h-9 w-9 items-center justify-center bg-primary/10 text-primary">
                           <a.icon size={15} />
                         </div>
                         <span className="text-[10px] font-medium text-muted-foreground">
@@ -1401,7 +1408,7 @@ export default function LandingPage() {
                     ))}
                   </div>
 
-                  <div className="mt-4 space-y-1 rounded-xl bg-secondary/40 p-3">
+                  <div className="mt-4 space-y-1 bg-secondary/40 p-3">
                     <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
                       Recent
                     </p>
@@ -1421,10 +1428,10 @@ export default function LandingPage() {
                     ].map((tx) => (
                       <div
                         key={tx.label}
-                        className="flex items-center justify-between rounded-lg px-1 py-1.5"
+                        className="flex items-center justify-between px-1 py-1.5"
                       >
                         <div className="flex items-center gap-2">
-                          <div className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10">
+                          <div className="flex h-5 w-5 items-center justify-center bg-primary/10">
                             {tx.positive ? (
                               <GiftIcon size={10} className="text-primary" />
                             ) : (
@@ -1461,13 +1468,13 @@ export default function LandingPage() {
       {/* ── 11. HOW IT WORKS ── */}
       <section
         id="how-it-works"
-        className="relative mx-4 my-12 overflow-hidden rounded-3xl bg-foreground py-24 text-background md:rounded-[2.5rem]"
+        className="relative mx-4 my-12 overflow-hidden bg-foreground py-24 text-background"
       >
         <div className="pointer-events-none absolute inset-0 opacity-[0.04]">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-size-[40px_40px]" />
         </div>
-        <div className="glow-primary pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full opacity-20" />
-        <div className="glow-primary pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full opacity-15" />
+        <div className="glow-primary pointer-events-none absolute -right-32 -top-32 h-96 w-96 opacity-20" />
+        <div className="glow-primary pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 opacity-15" />
 
         <div className="container relative mx-auto px-6">
           <motion.div
@@ -1496,13 +1503,13 @@ export default function LandingPage() {
               <motion.div
                 key={s.n}
                 variants={fadeUp}
-                className="relative rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
+                className="relative border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
               >
                 <div className="mb-4 flex items-center justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-primary/40 bg-primary/15 text-sm font-bold text-primary">
+                  <div className="flex h-10 w-10 items-center justify-center border border-primary/40 bg-primary/15 text-sm font-bold text-primary">
                     {s.n}
                   </div>
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10">
+                  <div className="flex h-9 w-9 items-center justify-center bg-white/10">
                     <s.icon size={16} className="text-background/60" />
                   </div>
                 </div>
@@ -1528,7 +1535,7 @@ export default function LandingPage() {
           >
             <Button
               size="lg"
-              className="rounded-full px-10 text-base font-semibold"
+              className="px-10 text-base font-semibold"
               asChild
             >
               <Link href="https://app.wakasub.com/register">
@@ -1584,13 +1591,13 @@ export default function LandingPage() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.4 }}
-            className="relative mx-auto max-w-4xl overflow-hidden rounded-3xl bg-primary px-8 py-20 text-center text-primary-foreground md:px-16 md:rounded-[2.5rem]"
+            className="relative mx-auto max-w-4xl overflow-hidden bg-primary px-8 py-20 text-center text-primary-foreground md:px-16"
           >
             <div className="pointer-events-none absolute inset-0 opacity-[0.07]">
               <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-size-[32px_32px]" />
             </div>
-            <div className="glow-white pointer-events-none absolute -left-20 -top-20 h-72 w-72 rounded-full opacity-10" />
-            <div className="glow-white pointer-events-none absolute -bottom-16 -right-16 h-72 w-72 rounded-full opacity-10" />
+            <div className="glow-white pointer-events-none absolute -left-20 -top-20 h-72 w-72 opacity-10" />
+            <div className="glow-white pointer-events-none absolute -bottom-16 -right-16 h-72 w-72 opacity-10" />
 
             <div className="relative">
               <h2 className="title-glow mb-6 text-4xl font-bold leading-tight md:text-6xl">
@@ -1605,7 +1612,7 @@ export default function LandingPage() {
               <Button
                 size="lg"
                 variant="secondary"
-                className="h-14 rounded-full px-12 text-base font-bold shadow-xl"
+                className="h-14 px-12 text-base font-bold shadow-xl"
                 asChild
               >
                 <Link href="https://app.wakasub.com/register">
@@ -1625,7 +1632,7 @@ export default function LandingPage() {
         <div className="border-t border-border/50 bg-background/95 px-4 py-3 shadow-2xl shadow-black/10 backdrop-blur-md">
           <Button
             size="lg"
-            className="h-12 w-full rounded-full text-base font-semibold"
+            className="h-12 w-full text-base font-semibold"
             asChild
           >
             <Link href="https://app.wakasub.com/register">

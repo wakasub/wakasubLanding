@@ -73,7 +73,7 @@ function Icon({
     >
       <motion.div
         className={cn(
-          "flex h-11 w-11 items-center justify-center rounded-2xl border-2 border-current/30 bg-card/80 shadow-lg shadow-black/5 backdrop-blur-md md:h-16 md:w-16 md:rounded-[1.25rem]",
+          "flex h-11 w-11 items-center justify-center border-2 border-current/30 bg-card/80 shadow-lg shadow-black/5 backdrop-blur-md md:h-16 md:w-16",
           "text-primary",
           iconData.tint,
         )}

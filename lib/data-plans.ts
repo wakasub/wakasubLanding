@@ -39,6 +39,9 @@ export type DataPlansPayload = {
   networks: NetworkGroup[];
 };
 
+/** Where the rendered price list came from — the API, or the bundled fallback. */
+export type DataPlansSource = "live" | "snapshot";
+
 /** A plan flattened out of the network/type tree, ready for the table. */
 export type Plan = RawPlan & {
   network: string;
