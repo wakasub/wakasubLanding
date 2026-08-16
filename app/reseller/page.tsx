@@ -57,14 +57,25 @@ const resellerJsonLd = {
         "@type": "Offer",
         priceCurrency: "NGN",
         price: "0",
-        description: "Free to join. Fund your wallet and resell at discounted wholesale rates.",
+        description:
+          "Free to join. Fund your wallet and resell at discounted wholesale rates.",
       },
     },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://wakasub.com" },
-        { "@type": "ListItem", position: 2, name: "Become a reseller", item: "https://wakasub.com/reseller" },
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://wakasub.com",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Become a reseller",
+          item: "https://wakasub.com/reseller",
+        },
       ],
     },
     {
