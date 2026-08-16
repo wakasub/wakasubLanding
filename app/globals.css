@@ -183,6 +183,15 @@
   animation: slide-up-in 0.4s ease-out forwards;
 }
 
+/* Horizontal filter rails scroll, but the scrollbar itself is visual noise. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
