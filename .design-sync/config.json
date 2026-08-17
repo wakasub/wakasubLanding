@@ -1,0 +1,29 @@
+{
+  "projectId": "da946a31-67e7-403f-9711-6b063d6fb2d1",
+  "shape": "package",
+  "pkg": "my-v0-project",
+  "globalName": "Wakasub",
+  "entry": "./ds-entry.tsx",
+  "srcDir": "components",
+  "tsconfig": "tsconfig.json",
+  "cssEntry": "dist/styles.css",
+  "docsDir": ".design-sync/docs",
+  "readmeHeader": ".design-sync/conventions.md",
+  "buildCmd": "npx tsc -p tsconfig.ds.json && node .ds-sync/node_modules/@tailwindcss/cli/dist/index.mjs -i .design-sync/ds-styles.css -o dist/styles.css",
+  "componentSrcMap": {
+    "LandingPage": null
+  },
+  "overrides": {
+    "Dialog": { "cardMode": "single", "viewport": "760x520" },
+    "TestimonialsMarquee": { "cardMode": "column" },
+    "Card": { "cardMode": "column" },
+    "Textarea": { "cardMode": "column" },
+    "Badge": { "cardMode": "column" },
+    "Button": { "cardMode": "column" },
+    "Input": { "cardMode": "column" },
+    "Label": { "cardMode": "column" },
+    "WhatsAppButton": { "cardMode": "column" },
+    "PathsBackground": { "cardMode": "column" },
+    "FloatingIconsLayer": { "cardMode": "single" }
+  }
+}

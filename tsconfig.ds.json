@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationMap": false,
+    "incremental": false,
+    "rootDir": ".",
+    "outDir": "dist/types"
+  },
+  "include": ["ds-entry.tsx", "ds-shim.ts", "components/**/*.ts", "components/**/*.tsx", "lib/**/*.ts"],
+  "exclude": ["node_modules", ".next", "app", "dist"]
+}

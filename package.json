@@ -2,6 +2,7 @@
   "name": "my-v0-project",
   "version": "0.1.0",
   "private": true,
+  "types": "dist/types/ds-entry.d.ts",
   "scripts": {
     "dev": "next dev -p 5555",
     "build": "next build",

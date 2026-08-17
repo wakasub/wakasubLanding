@@ -1,0 +1,138 @@
+/* Stylesheet entry for the claude.ai/design sync — NOT used by the Next app.
+ *
+ * app/globals.css alone compiles to only the utilities this repo happens to
+ * use, because Tailwind v4 generates from a content scan. That is correct for
+ * the app and wrong for a design system: the design agent composes NEW layouts
+ * out of utilities no landing-page file ever needed (grid-cols-3, w-1/2,
+ * max-w-4xl…), and any class missing from the shipped CSS renders as nothing.
+ *
+ * So this entry re-exports the app's real theme and tokens, then safelists the
+ * common utility surface an agent builds layout from. Brand colors resolve
+ * through the same @theme tokens as the app, so safelisted classes cannot
+ * drift from the design language. The radius scale is pinned to var(--radius)
+ * (0rem) in globals.css, so the rounded-* family below stays square by design.
+ */
+@import "../app/globals.css";
+
+/* Authored preview cards live in a dot-directory, which Tailwind's automatic
+ * source detection skips. */
+@source "./previews";
+
+/* ── Brand fonts ─────────────────────────────────────────────────────────────
+ * The app gets Poppins and Bricolage Grotesque from next/font/google, which
+ * only exists inside a Next build — designs rendered from this bundle have no
+ * such loader, so without these rules everything falls back to a system face.
+ * The woff2 files next/font already self-hosted are committed under
+ * .design-sync/fonts/ so a re-sync never depends on .next/ being present.
+ * url()s are relative to the COMPILED stylesheet (dist/styles.css).
+ */
+@font-face { font-family: "Poppins"; font-style: normal; font-weight: 400; font-display: swap; src: url("../.design-sync/fonts/poppins-400.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-style: normal; font-weight: 500; font-display: swap; src: url("../.design-sync/fonts/poppins-500.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-style: normal; font-weight: 600; font-display: swap; src: url("../.design-sync/fonts/poppins-600.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-style: normal; font-weight: 700; font-display: swap; src: url("../.design-sync/fonts/poppins-700.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-style: normal; font-weight: 800; font-display: swap; src: url("../.design-sync/fonts/poppins-800.woff2") format("woff2"); }
+@font-face { font-family: "Poppins"; font-style: normal; font-weight: 900; font-display: swap; src: url("../.design-sync/fonts/poppins-900.woff2") format("woff2"); }
+@font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 400 800; font-display: swap; src: url("../.design-sync/fonts/bricolage-grotesque-variable.woff2") format("woff2"); }
+
+/* layout.tsx supplies these two variables via next/font; restate them so the
+ * @theme inline --font-sans / --font-display chains resolve here too. */
+:root {
+  --font-poppins: "Poppins";
+  --font-display: "Bricolage Grotesque";
+}
+
+/* layout.tsx puts `font-sans` on <body>; previews have no such wrapper. */
+body {
+  font-family: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ── Layout ──────────────────────────────────────────────────────────────── */
+@source inline("{block,inline-block,inline,flex,inline-flex,grid,inline-grid,contents,hidden}");
+@source inline("{sm,md,lg,xl}:{block,flex,inline-flex,grid,hidden}");
+@source inline("flex-{row,row-reverse,col,col-reverse,wrap,nowrap,1,auto,initial,none}");
+@source inline("{sm,md,lg}:flex-{row,col}");
+@source inline("items-{start,center,end,baseline,stretch}");
+@source inline("justify-{start,center,end,between,around,evenly}");
+@source inline("self-{auto,start,center,end,stretch}");
+@source inline("content-{start,center,end,between,around,evenly}");
+@source inline("grid-cols-{1,2,3,4,5,6,7,8,9,10,11,12,none}");
+@source inline("{sm,md,lg,xl}:grid-cols-{1,2,3,4,5,6,12}");
+@source inline("grid-rows-{1,2,3,4,5,6,none}");
+@source inline("col-span-{1,2,3,4,5,6,7,8,9,10,11,12,full}");
+@source inline("{sm,md,lg}:col-span-{1,2,3,4,6,12}");
+@source inline("row-span-{1,2,3,4,5,6,full}");
+@source inline("order-{1,2,3,4,5,6,first,last,none}");
+@source inline("shrink-{0,}") ;
+@source inline("grow-{0,}");
+@source inline("basis-{0,auto,full,1/2,1/3,2/3,1/4,3/4}");
+
+/* ── Spacing ─────────────────────────────────────────────────────────────── */
+@source inline("{p,px,py,pt,pr,pb,pl,m,mx,my,mt,mr,mb,ml,gap,gap-x,gap-y,space-x,space-y}-{0,0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32}");
+@source inline("{sm,md,lg}:{p,px,py,pt,pb,gap,mt,mb}-{0,1,2,3,4,5,6,8,10,12,16,20,24}");
+@source inline("{m,mx,my,mt,mr,mb,ml}-auto");
+
+/* ── Sizing ──────────────────────────────────────────────────────────────── */
+@source inline("w-{0,px,auto,full,screen,fit,min,max,dvw,1/2,1/3,2/3,1/4,3/4,1/5,2/5,3/5,4/5,1/6,5/6}");
+@source inline("w-{4,5,6,8,9,10,11,12,14,16,20,24,28,32,36,40,48,56,64,72,80,96}");
+@source inline("h-{0,px,auto,full,screen,fit,min,max,dvh}");
+@source inline("h-{4,5,6,8,9,10,11,12,13,14,16,20,24,28,32,36,40,48,56,64,72,80,96}");
+@source inline("{min,max}-w-{0,full,fit,min,max,screen,none,xs,sm,md,lg,xl,2xl,3xl,4xl,5xl,6xl,7xl,prose}");
+@source inline("{min,max}-h-{0,full,fit,screen,dvh,none}");
+@source inline("{sm,md,lg}:w-{auto,full,1/2,1/3,2/3,1/4}");
+@source inline("size-{4,5,6,8,9,10,12,16,20,24,full}");
+@source inline("aspect-{square,video,auto}");
+
+/* ── Typography ──────────────────────────────────────────────────────────── */
+@source inline("text-{xs,sm,base,lg,xl,2xl,3xl,4xl,5xl,6xl,7xl,8xl,9xl}");
+@source inline("{sm,md,lg}:text-{xs,sm,base,lg,xl,2xl,3xl,4xl,5xl,6xl,7xl}");
+@source inline("font-{thin,light,normal,medium,semibold,bold,extrabold,black}");
+@source inline("font-{sans,display,mono,serif}");
+@source inline("text-{left,center,right,justify}");
+@source inline("{sm,md,lg}:text-{left,center,right}");
+@source inline("leading-{none,tight,snug,normal,relaxed,loose,3,4,5,6,7,8,9,10}");
+@source inline("tracking-{tighter,tight,normal,wide,wider,widest}");
+@source inline("{truncate,uppercase,lowercase,capitalize,normal-case,italic,not-italic,underline,line-through,no-underline,text-balance,text-pretty,text-nowrap,whitespace-nowrap,break-words,tabular-nums}");
+@source inline("line-clamp-{1,2,3,4,5,6,none}");
+@source inline("{list-none,list-disc,list-decimal,list-inside,list-outside}");
+@source inline("underline-offset-{1,2,4,8}");
+@source inline("align-{top,middle,bottom,baseline}");
+
+/* ── Color, on the design system's own tokens ────────────────────────────── */
+@source inline("{text,bg,border,ring,fill,stroke,divide,outline,decoration,caret,accent,shadow}-{background,foreground,card,card-foreground,popover,popover-foreground,primary,primary-foreground,secondary,secondary-foreground,muted,muted-foreground,accent,accent-foreground,destructive,destructive-foreground,border,input,ring,chart-1,chart-2,chart-3,chart-4,chart-5,sidebar,sidebar-foreground,sidebar-primary,sidebar-accent,sidebar-border}");
+@source inline("{text,bg,border}-{primary,secondary,muted,accent,destructive,foreground,card,background,border}/{5,10,15,20,25,30,40,50,60,70,75,80,90,95}");
+@source inline("{text,bg,border,fill,stroke}-{transparent,current,inherit,white,black}");
+@source inline("bg-{white,black}/{5,10,20,30,40,50,60,70,80,90}");
+@source inline("dark:{text,bg,border}-{background,foreground,card,primary,secondary,muted,accent,destructive,border,input,white,black}");
+@source inline("hover:{text,bg,border}-{primary,secondary,muted,accent,destructive,foreground,card,background}");
+@source inline("hover:{text,bg}-{primary,secondary,muted,accent,destructive}/{80,90}");
+@source inline("bg-gradient-to-{t,tr,r,br,b,bl,l,tl}");
+@source inline("{from,via,to}-{primary,secondary,muted,accent,background,card,transparent,white,black}");
+@source inline("{from,via,to}-{primary,secondary,accent,background,card}/{0,5,10,20,30,40,50,60,70,80,90}");
+
+/* ── Borders, radius (flat at 0 by design), effects ──────────────────────── */
+@source inline("border{,-0,-2,-4,-8}");
+@source inline("border-{t,r,b,l,x,y}{,-0,-2,-4,-8}");
+@source inline("rounded{,-none,-xs,-sm,-md,-lg,-xl,-2xl,-3xl,-full}");
+@source inline("{divide-x,divide-y,border-solid,border-dashed,border-dotted,border-none}");
+@source inline("shadow{,-2xs,-xs,-sm,-md,-lg,-xl,-2xl,-none,-inner}");
+@source inline("ring{,-0,-1,-2,-4,-8,-inset}");
+@source inline("opacity-{0,5,10,20,25,30,40,50,60,70,75,80,90,95,100}");
+@source inline("{blur-sm,blur,blur-md,blur-lg,blur-xl,blur-2xl,blur-3xl,backdrop-blur,backdrop-blur-sm,backdrop-blur-md,backdrop-blur-lg,backdrop-blur-xl}");
+
+/* ── Position, overflow, misc ────────────────────────────────────────────── */
+@source inline("{static,relative,absolute,fixed,sticky}");
+@source inline("{inset,inset-x,inset-y,top,right,bottom,left}-{0,px,auto,1,2,3,4,6,8,10,12,16,full,1/2}");
+@source inline("z-{0,10,20,30,40,50,auto}");
+@source inline("overflow-{auto,hidden,visible,scroll,clip}");
+@source inline("overflow-{x,y}-{auto,hidden,visible,scroll}");
+@source inline("{object-cover,object-contain,object-center,object-top,object-bottom}");
+@source inline("{cursor-pointer,cursor-default,cursor-not-allowed,pointer-events-none,pointer-events-auto,select-none,select-text}");
+@source inline("{transition,transition-all,transition-colors,transition-opacity,transition-transform,transition-shadow}");
+@source inline("duration-{75,100,150,200,300,500,700,1000}");
+@source inline("ease-{linear,in,out,in-out}");
+@source inline("{scale,rotate}-{0,45,90,95,100,105,110,125,180}");
+@source inline("translate-{x,y}-{0,px,1,2,4,8,full,1/2}");
+@source inline("hover:{scale-105,scale-110,opacity-80,opacity-90,underline,shadow-lg,shadow-md}");
+@source inline("focus-visible:{ring-2,ring-ring,outline-none}");
+@source inline("{sr-only,not-sr-only,antialiased,isolate,backdrop-brightness-50}");
+@source inline("{list-item,table,table-cell,table-row,align-middle}");
