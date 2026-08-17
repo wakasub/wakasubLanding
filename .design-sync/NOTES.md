@@ -43,6 +43,15 @@ size. Compiled output is ~370 KB, which is fine.
 
 **If a class the agent uses doesn't work, add it to the safelist there.**
 
+`@source not "./*.md"` is load-bearing, not tidiness. Without it Tailwind scans
+`conventions.md` and `NOTES.md` and compiles the class names they *quote*.
+Found in the second sync: `bg-blue-600` had entered the shipped stylesheet, and
+its only occurrence anywhere in the repo was the line in `conventions.md`
+telling the design agent never to use raw palette colors. Documentation naming
+a class must not make that class resolve — otherwise the counter-examples in
+the docs quietly become working vocabulary. It also made the stylesheet churn
+on every doc edit, so each re-sync saw a spurious `styling: true`.
+
 ## Fonts
 
 Poppins and Bricolage Grotesque come from `next/font/google`, which only exists

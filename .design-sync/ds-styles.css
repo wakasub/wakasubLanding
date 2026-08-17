@@ -18,6 +18,14 @@
  * source detection skips. */
 @source "./previews";
 
+/* ...but the prose next to them must NOT be scanned. conventions.md names
+ * classes as counter-examples ("bg-primary is correct; bg-blue-600 is not"),
+ * and NOTES.md quotes classes while explaining past bugs. Scanned, those
+ * strings compile into the shipped stylesheet — so the very class the docs
+ * tell the design agent to avoid would resolve, and silently produce a colour
+ * that ignores dark mode. Documentation must not be able to widen the CSS. */
+@source not "./*.md";
+
 /* ── Brand fonts ─────────────────────────────────────────────────────────────
  * The app gets Poppins and Bricolage Grotesque from next/font/google, which
  * only exists inside a Next build — designs rendered from this bundle have no
