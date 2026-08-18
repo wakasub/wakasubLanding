@@ -325,3 +325,16 @@
 .group:hover .btn-neu {
   box-shadow: 3px 3px 0 var(--foreground);
 }
+
+/* On an inverted surface the offset shadow has to flip too, or it is
+   dark-on-dark and disappears. `--background` is exactly the right colour
+   here in both themes: these panels are painted with `--foreground`, and in
+   dark mode that inverts (the panel turns light) — so the shadow follows
+   automatically without a second dark-mode rule. */
+:is(.bg-foreground, .bg-primary)
+  :is(
+    [data-slot="button"]:not(:disabled):hover,
+    .group:hover .btn-neu
+  ) {
+  box-shadow: 3px 3px 0 var(--background);
+}
