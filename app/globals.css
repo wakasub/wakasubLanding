@@ -322,6 +322,7 @@
    A utility would therefore inherit that translucent blue and render the
    offset shadow in brand colour instead of the foreground. */
 [data-slot="button"]:not(:disabled):hover,
+.btn-neu:hover,
 .group:hover .btn-neu {
   box-shadow: 3px 3px 0 var(--foreground);
 }
@@ -334,6 +335,7 @@
 :is(.bg-foreground, .bg-primary)
   :is(
     [data-slot="button"]:not(:disabled):hover,
+    .btn-neu:hover,
     .group:hover .btn-neu
   ) {
   box-shadow: 3px 3px 0 var(--background);

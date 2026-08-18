@@ -45,7 +45,7 @@ export function WhatsAppButton({
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-sm font-bold uppercase tracking-[0.14em] transition-colors",
+        "btn-neu group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-sm font-bold uppercase tracking-[0.14em] transition-all",
         variant === "solid"
           ? "bg-[#25D366] text-[#0B141A] hover:bg-[#1FBF5B]"
           : "border border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-[#0B141A]",
