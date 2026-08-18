@@ -365,7 +365,7 @@ export default function InternshipPage() {
                 <Button asChild className="w-full" variant="outline">
                   <Link href="/">
                     Back to home
-                    <ArrowRightIcon size={14} className="ml-2" />
+                    <ArrowRightIcon size={14} className="btn-icon" />
                   </Link>
                 </Button>
                 <p className="mt-5 text-xs text-muted-foreground">

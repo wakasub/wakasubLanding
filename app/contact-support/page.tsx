@@ -242,7 +242,7 @@ export default function ContactSupportPage() {
                       <Button asChild className="">
                         <Link href="/">
                           Back to home
-                          <ArrowRightIcon size={14} className="ml-2" />
+                          <ArrowRightIcon size={14} className="btn-icon" />
                         </Link>
                       </Button>
                     </div>

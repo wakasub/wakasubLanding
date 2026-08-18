@@ -192,7 +192,7 @@ export function ResellerContent() {
                 >
                   <Link href="https://app.wakasub.com/register">
                     Become a reseller
-                    <ArrowRightIcon className="ml-1 h-4 w-4" />
+                    <ArrowRightIcon className="btn-icon" />
                   </Link>
                 </Button>
                 <Button
@@ -289,7 +289,7 @@ export function ResellerContent() {
                   <Button className="mt-3 w-full font-semibold" asChild>
                     <Link href="https://app.wakasub.com/register">
                       Start reselling
-                      <ArrowRightIcon className="ml-1 h-4 w-4" />
+                      <ArrowRightIcon className="btn-icon" />
                     </Link>
                   </Button>
                 </div>

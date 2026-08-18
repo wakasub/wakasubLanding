@@ -810,7 +810,7 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
             >
               <Link href="https://app.wakasub.com/register">
                 Create a Campaign
-                <ArrowRightIcon className="ml-1 h-4 w-4" />
+                <ArrowRightIcon className="btn-icon" />
               </Link>
             </Button>
             <Button
@@ -913,9 +913,9 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
                   </p>
                 </div>
               </div>
-              <span className="relative inline-flex shrink-0 items-center gap-1.5 bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 transition-transform group-hover:translate-x-0.5">
+              <span className="relative inline-flex shrink-0 items-center gap-2 bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/25 btn-neu transition-all">
                 Explore reselling
-                <ArrowRightIcon className="h-4 w-4" />
+                <ArrowRightIcon className="btn-icon" />
               </span>
             </Link>
           </motion.div>
@@ -984,7 +984,7 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
               <Button className="mt-auto w-fit px-7 font-semibold" asChild>
                 <Link href="https://app.wakasub.com/register">
                   Create a Campaign
-                  <ArrowRightIcon className="ml-1 h-4 w-4" />
+                  <ArrowRightIcon className="btn-icon" />
                 </Link>
               </Button>
             </motion.div>
@@ -1028,7 +1028,7 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
               >
                 <Link href="#how-it-works">
                   How claiming works
-                  <ArrowRightIcon className="ml-1 h-4 w-4" />
+                  <ArrowRightIcon className="btn-icon" />
                 </Link>
               </Button>
             </motion.div>
@@ -1339,7 +1339,7 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
               >
                 <Link href="https://app.wakasub.com/register">
                   Open Wakasub
-                  <ArrowRightIcon className="ml-2 h-4 w-4" />
+                  <ArrowRightIcon className="btn-icon" />
                 </Link>
               </Button>
             </motion.div>

@@ -45,6 +45,8 @@ Both ship as woff2 in `fonts/`. Headings on this site are heavy and tight: `text
 
 `animate-marquee`, `animate-marquee-slow`, `animate-marquee-reverse` (infinite horizontal scrollers, already reduced-motion aware), `animate-float`, `animate-slide-up`, `bg-dot-grid` and `bg-grid-lines` (background textures).
 
+**Buttons carry their own hover behaviour — do not re-implement it.** Every `Button` grows a hard 3px offset shadow in the foreground colour on hover; that rule is global CSS keyed off `[data-slot="button"]`, so it applies automatically and needs no class. Put `className="btn-icon"` on an icon inside a button (nothing else — no size or margin classes) and it stays collapsed to zero width until the button is hovered or keyboard-focused, then animates in. Use it for trailing affordance icons like an arrow; never on an icon-only button, whose icon must stay visible at rest. On a non-button element that should get the same offset shadow from a parent's hover, mark the parent `group` and the element `btn-neu`.
+
 ### One caveat that matters
 
 The shipped stylesheet is a **compiled, finite set of utilities** — not Tailwind's full generated space. Common layout, spacing, sizing, typography, color and effect utilities are included (including `sm:`/`md:`/`lg:` variants of the layout-critical ones), but exotic or arbitrary-value classes may not resolve. When a class appears to do nothing, check it against the stylesheet rather than assuming it applied.

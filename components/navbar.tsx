@@ -1,13 +1,84 @@
 "use client";
 
 import React from "react";
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { MenuIcon } from "@/components/icons/menu";
 import { XIcon } from "@/components/icons/x";
 import Image from "next/image";
+
+/** Position of the sliding highlight behind the nav links. */
+type CursorPos = { left: number; width: number; opacity: number };
+
+/**
+ * Desktop nav links with a single highlight that slides between them.
+ *
+ * One shared pill is animated rather than fading a background in on each
+ * link, so moving along the row reads as one continuous motion. The pill is
+ * square — the design system pins every radius to 0 — and uses `secondary`
+ * rather than `accent` because only `secondary` is defined for both themes.
+ */
+function NavTabs() {
+  const [cursor, setCursor] = useState<CursorPos>({
+    left: 0,
+    width: 0,
+    opacity: 0,
+  });
+
+  return (
+    <ul
+      onMouseLeave={() => setCursor((c) => ({ ...c, opacity: 0 }))}
+      className="relative hidden items-center lg:flex"
+    >
+      {navLinks.map((item) => (
+        <NavTab key={item.label} item={item} onHover={setCursor} />
+      ))}
+
+      <motion.li
+        aria-hidden
+        animate={cursor}
+        transition={{ type: "spring", stiffness: 420, damping: 34, mass: 0.6 }}
+        className="absolute inset-y-0 z-0 bg-secondary"
+      />
+    </ul>
+  );
+}
+
+function NavTab({
+  item,
+  onHover,
+}: {
+  item: (typeof navLinks)[number];
+  onHover: (pos: CursorPos) => void;
+}) {
+  const ref = useRef<HTMLLIElement>(null);
+
+  return (
+    <li
+      ref={ref}
+      onMouseEnter={() => {
+        const el = ref.current;
+        if (!el) return;
+        onHover({ left: el.offsetLeft, width: el.offsetWidth, opacity: 1 });
+      }}
+      className="relative z-10"
+    >
+      <Link
+        href={item.href}
+        className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors hover:text-secondary-foreground"
+      >
+        {item.label}
+        {item.badge && (
+          <span className="bg-primary/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
+            {item.badge}
+          </span>
+        )}
+      </Link>
+    </li>
+  );
+}
 
 const navLinks = [
   { label: "Rewards", href: "#rewards", badge: "New" },
@@ -73,22 +144,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden items-center gap-6 lg:flex">
-          {navLinks.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className="flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-primary"
-            >
-              {item.label}
-              {item.badge && (
-                <span className="bg-primary/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary">
-                  {item.badge}
-                </span>
-              )}
-            </Link>
-          ))}
-        </div>
+        <NavTabs />
 
         <div className="hidden items-center gap-4 lg:flex">
           <Button variant="ghost" size="sm" asChild>
