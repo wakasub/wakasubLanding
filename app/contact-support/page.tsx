@@ -128,7 +128,7 @@ export default function ContactSupportPage() {
           <div className="absolute bottom-0 left-0 h-[400px] w-[400px] -translate-x-1/3 translate-y-1/3 bg-blue-400/8 blur-[100px]" />
         </div>
 
-        <div className="container mx-auto px-6 pb-14 text-center">
+        <div className="mx-auto w-full max-w-7xl px-6 pb-14 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -165,7 +165,7 @@ export default function ContactSupportPage() {
 
       {/* ── Unified card ── */}
       <section className="pb-28">
-        <div className="container mx-auto px-6">
+        <div className="mx-auto w-full max-w-7xl px-6">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -352,7 +352,7 @@ export default function ContactSupportPage() {
 
       {/* ── Footer ── */}
       <footer className="border-t border-border py-12">
-        <div className="container mx-auto px-6">
+        <div className="mx-auto w-full max-w-7xl px-6">
           <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
             <Link href="/" className="flex items-center gap-2">
               <Image src="/waka 512.png" alt="WakaSub" width={24} height={24} />

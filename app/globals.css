@@ -35,7 +35,7 @@
   /* Square by design — the UI carries its structure in hairline borders, not
      rounded corners. Keeping the whole radius scale at 0 means any stray
      rounded-* utility (ours or a vendored component's) stays square too. */
-  --radius: 0rem;
+  /* --radius: 0rem; */
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -108,15 +108,15 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --radius-xs: var(--radius);
+  /* --radius-xs: var(--radius);
   --radius-sm: var(--radius);
   --radius-md: var(--radius);
   --radius-lg: var(--radius);
   --radius-xl: var(--radius);
   --radius-2xl: var(--radius);
   --radius-3xl: var(--radius);
-  --radius-4xl: var(--radius);
-  --radius-full: var(--radius);
+  --radius-4xl: var(--radius); */
+  /* --radius-full: var(--radius); */
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);

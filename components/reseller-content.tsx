@@ -149,13 +149,13 @@ export function ResellerContent() {
         Join resellers group
       </WhatsAppButton>
       {/* Hero */}
-      <section className="relative overflow-hidden px-6 pt-32 pb-16 md:pt-40">
+      <section className="relative overflow-hidden pt-32 pb-16 md:pt-40">
         <div className="bg-grid-lines pointer-events-none absolute inset-0 -z-10 opacity-40" />
         <div className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-b from-background via-background/80 to-background" />
         <PathsBackground className="mask-[linear-gradient(to_bottom,black_5%,black_60%,transparent)]" />
         <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[30rem] w-[30rem] -translate-x-1/2 bg-primary/15 blur-[150px]" />
 
-        <div className="container mx-auto">
+        <div className="mx-auto w-full max-w-7xl px-6">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             <motion.div initial="hidden" animate="show" variants={stagger}>
               <motion.span
@@ -301,7 +301,7 @@ export function ResellerContent() {
 
       {/* Features */}
       <section className="py-20 md:py-28">
-        <div className="container mx-auto px-6">
+        <div className="mx-auto w-full max-w-7xl px-6">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -344,7 +344,7 @@ export function ResellerContent() {
 
       {/* How it works */}
       <section className="bg-secondary/20 py-20 md:py-28">
-        <div className="container mx-auto px-6">
+        <div className="mx-auto w-full max-w-7xl px-6">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -392,7 +392,7 @@ export function ResellerContent() {
 
       {/* FAQ */}
       <section className="py-20 md:py-28">
-        <div className="container mx-auto px-6">
+        <div className="mx-auto w-full max-w-7xl px-6">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -465,7 +465,7 @@ export function ResellerContent() {
 
       {/* Footer */}
       <footer className="border-t border-border py-12">
-        <div className="container mx-auto px-6">
+        <div className="mx-auto w-full max-w-7xl px-6">
           <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
             <Link href="/" className="flex items-center gap-2">
               <Image src="/waka 512.png" alt="WakaSub" width={24} height={24} />

@@ -121,7 +121,7 @@ export default function InternshipPage() {
           <div className="absolute bottom-0 left-0 h-[400px] w-[400px] -translate-x-1/3 translate-y-1/3 bg-blue-400/8 blur-[100px]" />
         </div>
 
-        <div className="container mx-auto px-6 pb-24 text-center">
+        <div className="mx-auto w-full max-w-7xl px-6 pb-24 text-center">
           {/* Closed badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -175,7 +175,7 @@ export default function InternshipPage() {
 
       {/* ── Departments ── */}
       <section className="bg-secondary/30 py-28">
-        <div className="container mx-auto px-6">
+        <div className="mx-auto w-full max-w-7xl px-6">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -225,7 +225,7 @@ export default function InternshipPage() {
 
       {/* ── Benefits ── */}
       <section className="py-28">
-        <div className="container mx-auto px-6">
+        <div className="mx-auto w-full max-w-7xl px-6">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -285,7 +285,7 @@ export default function InternshipPage() {
           <div className="bg-dot-grid absolute inset-0 opacity-40" />
         </div>
 
-        <div className="container relative mx-auto px-6">
+        <div className="relative mx-auto w-full max-w-7xl px-6">
           <div className="mx-auto max-w-3xl overflow-hidden border border-border/50 bg-background shadow-2xl shadow-black/5 ring-1 ring-black/5 dark:ring-white/5">
             <div className="grid grid-cols-1 md:grid-cols-2">
               {/* Left — brand panel */}
@@ -379,7 +379,7 @@ export default function InternshipPage() {
 
       {/* ── Footer ── */}
       <footer className="border-t border-border py-12">
-        <div className="container mx-auto px-6">
+        <div className="mx-auto w-full max-w-7xl px-6">
           <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
             <Link href="/" className="flex items-center gap-2">
               <Image

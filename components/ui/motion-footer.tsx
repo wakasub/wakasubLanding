@@ -354,7 +354,7 @@ export function CinematicFooter() {
           </div>
 
           {/* 3. Bottom bar */}
-          <div className="relative z-20 flex w-full flex-col items-center justify-between gap-6 px-6 pb-8 md:flex-row md:px-12">
+          <div className="relative z-20 mx-auto flex w-full max-w-7xl flex-col items-center justify-between gap-6 px-6 pb-8 md:flex-row">
             <div className="order-2 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground md:order-1 md:text-xs">
               <span>© {new Date().getFullYear()} Wakasub Technologies Ltd.</span>
               <span className="hidden items-center gap-1.5 sm:flex">

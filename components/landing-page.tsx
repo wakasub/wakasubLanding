@@ -683,9 +683,9 @@ function LiveClaimDemo() {
                 transition={{ duration: 0.3 }}
                 className="flex h-full flex-col items-center justify-center"
               >
-                <div className="relative flex h-14 w-14 items-center justify-center">
+                <div className="relative flex h-14 w-14 items-center justify-center rounded-full">
                   <motion.span
-                    className="absolute inset-0 border-2 border-primary/20 border-t-primary"
+                    className="absolute inset-0 border-2 border-primary/20 border-t-primary rounded-full"
                     animate={{ rotate: 360 }}
                     transition={{
                       duration: 0.8,
@@ -723,7 +723,7 @@ function LiveClaimDemo() {
               >
                 <Confetti seed={round} />
                 <motion.div
-                  className="flex h-14 w-14 items-center justify-center bg-primary text-primary-foreground"
+                  className="flex h-14 w-14 items-center justify-center bg-primary text-primary-foreground rounded-full"
                   initial={{ scale: 0.4, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ type: "spring", stiffness: 320, damping: 16 }}
@@ -876,14 +876,14 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
 
       {/* ── 2. STATS ── */}
       <section className="py-12 md:py-16">
-        <div className="container mx-auto px-6">
+        <div className="mx-auto w-full max-w-7xl px-6">
           <MagicStats />
         </div>
       </section>
 
       {/* ── 3.5 RESELLER HINT ── */}
-      <section className="px-6 py-12 md:py-16">
-        <div className="container mx-auto">
+      <section className="py-12 md:py-16">
+        <div className="mx-auto w-full max-w-7xl px-6">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -926,7 +926,7 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
 
       {/* ── 4. TWO WAYS ── */}
       <section className="py-24 md:py-32">
-        <div className="container mx-auto px-6">
+        <div className="mx-auto w-full max-w-7xl px-6">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -981,10 +981,7 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
                   </li>
                 ))}
               </ul>
-              <Button
-                className="mt-auto w-fit px-7 font-semibold"
-                asChild
-              >
+              <Button className="mt-auto w-fit px-7 font-semibold" asChild>
                 <Link href="https://app.wakasub.com/register">
                   Create a Campaign
                   <ArrowRightIcon className="ml-1 h-4 w-4" />
@@ -1041,7 +1038,7 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
 
       {/* ── 5. REWARDS ── */}
       <section id="rewards" className="py-24 md:py-32">
-        <div className="container mx-auto px-6">
+        <div className="mx-auto w-full max-w-7xl px-6">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -1113,7 +1110,7 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
 
       {/* ── 6. WHO IT'S FOR ── */}
       <section id="who" className="py-24 md:py-32">
-        <div className="container mx-auto px-6">
+        <div className="mx-auto w-full max-w-7xl px-6">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -1173,7 +1170,7 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
         <div className="glow-primary pointer-events-none absolute -left-40 top-0 h-96 w-96 opacity-25" />
         <div className="glow-primary pointer-events-none absolute -bottom-40 right-0 h-96 w-96 opacity-15" />
 
-        <div className="container relative mx-auto px-6">
+        <div className="relative mx-auto w-full max-w-7xl px-6">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -1221,11 +1218,7 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
             transition={{ delay: 0.4 }}
             className="mt-12 text-center"
           >
-            <Button
-              size="lg"
-              className="px-10 text-base font-semibold"
-              asChild
-            >
+            <Button size="lg" className="px-10 text-base font-semibold" asChild>
               <Link href="https://app.wakasub.com/register">
                 Start claiming rewards
               </Link>
@@ -1236,7 +1229,7 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
 
       {/* ── 9. TRUST ── */}
       <section id="why" className="py-24 md:py-32">
-        <div className="container mx-auto px-6">
+        <div className="mx-auto w-full max-w-7xl px-6">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -1280,7 +1273,7 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
 
       {/* ── 10. UTILITIES ── */}
       <section id="utilities" className="bg-secondary/20 py-24 md:py-32">
-        <div className="container mx-auto px-6">
+        <div className="mx-auto w-full max-w-7xl px-6">
           <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:gap-24">
             <motion.div
               variants={fadeUp}
@@ -1476,7 +1469,7 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
         <div className="glow-primary pointer-events-none absolute -right-32 -top-32 h-96 w-96 opacity-20" />
         <div className="glow-primary pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 opacity-15" />
 
-        <div className="container relative mx-auto px-6">
+        <div className="relative mx-auto w-full max-w-7xl px-6">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -1533,11 +1526,7 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
             transition={{ delay: 0.6 }}
             className="mt-12 text-center"
           >
-            <Button
-              size="lg"
-              className="px-10 text-base font-semibold"
-              asChild
-            >
+            <Button size="lg" className="px-10 text-base font-semibold" asChild>
               <Link href="https://app.wakasub.com/register">
                 Create your first campaign
               </Link>
@@ -1553,7 +1542,7 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
-          className="container mx-auto mb-14 px-6 text-center"
+          className="mx-auto mb-14 w-full max-w-7xl px-6 text-center"
         >
           <p className="mb-3 text-sm font-medium uppercase tracking-widest text-primary">
             Testimonials
@@ -1585,7 +1574,7 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
 
       {/* ── 13. FINAL CTA ── */}
       <section className="py-20 md:py-28">
-        <div className="container mx-auto px-6">
+        <div className="mx-auto w-full max-w-7xl px-6">
           <motion.div
             variants={fadeUp}
             initial="hidden"
