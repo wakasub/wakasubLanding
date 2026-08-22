@@ -276,16 +276,7 @@
   }
 }
 
-/* ── Button icons: absent until hover ─────────────────────────────────────
-   Buttons read as a plain label at rest; an icon marked `.btn-icon` collapses
-   to zero width and animates in when the button is hovered or keyboard-
-   focused, alongside the hard offset shadow set in `buttonVariants`.
 
-   The negative margin cancels the button's own `gap-2` while the icon is
-   hidden — flex gap is applied between items regardless of their width, so
-   without it a collapsed icon would leave a visible trailing space. Opt-in by
-   class, never a blanket `[&_svg]` rule: an icon-only button must keep its
-   icon at rest. */
 .btn-icon {
   display: inline-flex;
   width: 0;
@@ -314,16 +305,9 @@
   }
 }
 
-/* The hard offset shadow that lifts a button on hover.
-
-   Written as plain CSS rather than a Tailwind `hover:shadow-*` utility on
-   purpose: several buttons also carry `shadow-primary/25`, and Tailwind
-   composes every box-shadow layer's colour from one shared custom property.
-   A utility would therefore inherit that translucent blue and render the
-   offset shadow in brand colour instead of the foreground. */
-[data-slot="button"]:not(:disabled):hover,
-.btn-neu:hover,
-.group:hover .btn-neu {
+[data-slot="button"]:not(:disabled),
+.btn-neu,
+ .btn-neu {
   box-shadow: 3px 3px 0 var(--foreground);
 }
 
@@ -334,9 +318,9 @@
    automatically without a second dark-mode rule. */
 :is(.bg-foreground, .bg-primary)
   :is(
-    [data-slot="button"]:not(:disabled):hover,
-    .btn-neu:hover,
-    .group:hover .btn-neu
+    [data-slot="button"]:not(:disabled),
+    .btn-neu,
+     .btn-neu
   ) {
   box-shadow: 3px 3px 0 var(--background);
 }

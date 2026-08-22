@@ -816,10 +816,13 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
             <Button
               size="lg"
               variant="outline"
-              className="h-13 bg-transparent px-9 text-base font-medium"
+              className="h-13 px-9 text-base font-medium"
               asChild
             >
-              <Link href="#how-it-works">See how it works</Link>
+              <Link href="#how-it-works">
+                See how it works
+                <ArrowRightIcon className="btn-icon" />
+              </Link>
             </Button>
           </motion.div>
 
@@ -1221,6 +1224,7 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
             <Button size="lg" className="px-10 text-base font-semibold" asChild>
               <Link href="https://app.wakasub.com/register">
                 Start claiming rewards
+                <ArrowRightIcon className="btn-icon" />
               </Link>
             </Button>
           </motion.div>
@@ -1529,6 +1533,7 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
             <Button size="lg" className="px-10 text-base font-semibold" asChild>
               <Link href="https://app.wakasub.com/register">
                 Create your first campaign
+                <ArrowRightIcon className="btn-icon" />
               </Link>
             </Button>
           </motion.div>

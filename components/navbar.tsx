@@ -96,7 +96,9 @@ export function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? "hidden" : "unset";
-    return () => { document.body.style.overflow = "unset"; };
+    return () => {
+      document.body.style.overflow = "unset";
+    };
   }, [mobileMenuOpen]);
 
   useEffect(() => {
@@ -123,8 +125,8 @@ export function Navbar() {
           mobileMenuOpen
             ? "border-border bg-background shadow-xl shadow-black/10"
             : isScrolled
-            ? "border-border/70 bg-background/80 shadow-xl shadow-black/10 backdrop-blur-md"
-            : "border-border/50 bg-background/60 shadow-lg shadow-black/5 backdrop-blur-md"
+              ? "border-border/70 bg-background/80 shadow-xl shadow-black/10 backdrop-blur-md"
+              : "border-border/50 bg-background/60 shadow-lg shadow-black/5 backdrop-blur-md"
         }`}
       >
         <Link href="/" className="flex items-center gap-2">
@@ -135,7 +137,11 @@ export function Navbar() {
                 key={i}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + i * 0.1, duration: 0.7, ease: "easeOut" }}
+                transition={{
+                  delay: 0.3 + i * 0.1,
+                  duration: 0.7,
+                  ease: "easeOut",
+                }}
               >
                 {char}
               </motion.span>
@@ -147,11 +153,13 @@ export function Navbar() {
         <NavTabs />
 
         <div className="hidden items-center gap-4 lg:flex">
-          <Button variant="ghost" size="sm" asChild>
+          <Button variant="outline" size="sm" asChild>
             <Link href="https://app.wakasub.com/login">Log in</Link>
           </Button>
           <Button size="sm" className="px-6" asChild>
-            <Link href="https://app.wakasub.com/register">Create a Campaign</Link>
+            <Link href="https://app.wakasub.com/register">
+              Create a Campaign
+            </Link>
           </Button>
         </div>
 
@@ -163,11 +171,23 @@ export function Navbar() {
         >
           <AnimatePresence mode="wait">
             {mobileMenuOpen ? (
-              <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
+              <motion.div
+                key="close"
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
                 <XIcon size={24} />
               </motion.div>
             ) : (
-              <motion.div key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
+              <motion.div
+                key="menu"
+                initial={{ rotate: 90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: -90, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
                 <MenuIcon size={24} />
               </motion.div>
             )}
@@ -222,11 +242,28 @@ export function Navbar() {
                   transition={{ delay: 0.3 }}
                   className="mt-8 flex flex-col gap-3"
                 >
-                  <Button variant="outline" className="h-14 w-full bg-transparent text-lg font-bold" asChild>
-                    <Link href="https://app.wakasub.com/login" onClick={() => setMobileMenuOpen(false)}>Log in</Link>
+                  <Button
+                    variant="outline"
+                    className="h-14 w-full !bg-accent text-lg font-bold"
+                    asChild
+                  >
+                    <Link
+                      href="https://app.wakasub.com/login"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Log in
+                    </Link>
                   </Button>
-                  <Button className="h-14 w-full text-lg font-bold shadow-lg shadow-primary/20" asChild>
-                    <Link href="https://app.wakasub.com/register" onClick={() => setMobileMenuOpen(false)}>Create a Campaign</Link>
+                  <Button
+                    className="h-14 w-full text-lg font-bold shadow-lg shadow-primary/20"
+                    asChild
+                  >
+                    <Link
+                      href="https://app.wakasub.com/register"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Create a Campaign
+                    </Link>
                   </Button>
                 </motion.div>
               </div>
