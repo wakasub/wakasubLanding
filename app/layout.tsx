@@ -82,6 +82,7 @@ export const metadata: Metadata = {
     locale: "en_NG",
     url: "https://wakasub.com",
     siteName: "Wakasub",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Wakasub — The Rewards Hub of Nigeria" }],
     title: "Wakasub — The Rewards Hub of Nigeria",
     description:
       "Reward your people with airtime, data and cash in seconds, and resell airtime & data at Nigeria's best rates. Create a campaign, share one link, or fund a reseller wallet — delivery is instant.",
@@ -92,6 +93,7 @@ export const metadata: Metadata = {
     description:
       "Reward your audience with airtime, data and cash in seconds, and resell at Nigeria's best VTU rates. Instant delivery on every network.",
     creator: "@wakasub",
+    images: ["/twitter-image"],
   },
   alternates: {
     canonical: "https://wakasub.com",

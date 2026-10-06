@@ -21,7 +21,7 @@ import {
   FloatingIconsLayer,
   type FloatingIconItem,
 } from "@/components/ui/floating-icons-hero-section";
-import { CinematicFooter } from "@/components/ui/motion-footer";
+import { SiteFooter } from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
 import { SmartphoneIcon } from "@/components/icons/smartphone";
 import { ArrowRightIcon } from "@/components/icons/arrow-right";
@@ -877,13 +877,6 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
         </motion.div>
       </section>
 
-      {/* ── 2. STATS ── */}
-      <section className="py-12 md:py-16">
-        <div className="mx-auto w-full max-w-7xl px-6">
-          <MagicStats />
-        </div>
-      </section>
-
       {/* ── 3.5 RESELLER HINT ── */}
       <section className="py-12 md:py-16">
         <div className="mx-auto w-full max-w-7xl px-6">
@@ -1619,7 +1612,7 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
       </section>
 
       {/* ── 14. FOOTER ── */}
-      <CinematicFooter />
+      <SiteFooter />
 
       {/* ── 15. STICKY MOBILE CTA ── */}
       <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden">

@@ -18,7 +18,7 @@ export { TestimonialCard } from "./components/ui/community-testimonial";
 export { default as TestimonialsMarquee } from "./components/ui/community-testimonial";
 export { BackgroundPaths, PathsBackground } from "./components/ui/background-paths";
 export { FloatingIconsLayer } from "./components/ui/floating-icons-hero-section";
-export { CinematicFooter } from "./components/ui/motion-footer";
+export { SiteFooter } from "./components/site-footer";
 
 // ── Page sections ────────────────────────────────────────────────────────
 export { Navbar } from "./components/navbar";
