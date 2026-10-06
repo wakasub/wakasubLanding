@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import {
   dedupePlans,
@@ -47,6 +47,20 @@ export function DataPricing({ initialPlans: payload, source }: DataPricingProps)
   const [sort, setSort] = useState<SortId>("size");
   const [expanded, setExpanded] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
+  const toolbarRef = useRef<HTMLDivElement>(null);
+
+  /* The switcher + filters stick under the floating navbar; the column header
+     sticks beneath them, so it needs to know how tall the toolbar is. */
+  useEffect(() => {
+    const toolbar = toolbarRef.current;
+    const panel = panelRef.current;
+    if (!toolbar || !panel) return;
+    const sync = () => panel.style.setProperty("--toolbar-h", `${toolbar.offsetHeight}px`);
+    sync();
+    const observer = new ResizeObserver(sync);
+    observer.observe(toolbar);
+    return () => observer.disconnect();
+  }, []);
   const isLive = source === "live";
 
   const allPlans = useMemo(
@@ -165,6 +179,8 @@ export function DataPricing({ initialPlans: payload, source }: DataPricingProps)
           {/* carrier rule — the panel takes the colour of the selected network */}
           <div className="h-1 bg-[var(--brand)] transition-colors duration-300" />
 
+          {/* sticky toolbar: network switcher + filters stay on screen while the table scrolls */}
+          <div ref={toolbarRef} className="sticky top-[5.5rem] z-20 bg-background">
           {/* network switcher */}
           <div className="grid grid-cols-4 border-b border-border">
             {networks.map((n, index) => {
@@ -193,7 +209,7 @@ export function DataPricing({ initialPlans: payload, source }: DataPricingProps)
           </div>
 
           {/* type filters + sort */}
-          <div className="flex flex-col gap-4 border-b border-border px-4 py-4 lg:flex-row lg:items-center lg:justify-between lg:px-6">
+          <div className="flex flex-col gap-3 border-b border-border px-4 py-3 lg:flex-row lg:py-4 lg:items-center lg:justify-between lg:px-6">
             <div className="no-scrollbar -mb-1 flex gap-6 overflow-x-auto pb-1">
               {typeFilters.map((filter) => {
                 const active = filter.slug === typeSlug;
@@ -238,18 +254,20 @@ export function DataPricing({ initialPlans: payload, source }: DataPricingProps)
             </div>
           </div>
 
+          </div>
+
           {/* table */}
           <div className="relative">
             <table className="w-full border-collapse text-left">
               <thead>
-                <tr className="border-b border-border text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                  <th scope="col" className="px-4 py-3 font-semibold sm:px-6">
+                <tr className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                  <th scope="col" className="px-4 py-3 font-semibold sm:px-6 sticky top-[calc(5.5rem+var(--toolbar-h,0px))] z-10 bg-background shadow-[inset_0_-1px_0_var(--border)]">
                     Plan
                   </th>
-                  <th scope="col" className="hidden px-4 py-3 font-semibold sm:table-cell">
+                  <th scope="col" className="hidden px-4 py-3 font-semibold sm:table-cell sticky top-[calc(5.5rem+var(--toolbar-h,0px))] z-10 bg-background shadow-[inset_0_-1px_0_var(--border)]">
                     Validity
                   </th>
-                  <th scope="col" className="px-4 py-3 text-right font-semibold sm:px-6">
+                  <th scope="col" className="px-4 py-3 text-right font-semibold sm:px-6 sticky top-[calc(5.5rem+var(--toolbar-h,0px))] z-10 bg-background shadow-[inset_0_-1px_0_var(--border)]">
                     Price
                   </th>
                 </tr>

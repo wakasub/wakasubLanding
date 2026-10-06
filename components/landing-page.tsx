@@ -1,16 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect, useMemo, useRef } from "react";
-import {
-  motion,
-  AnimatePresence,
-  animate,
-  useInView,
-  useMotionValue,
-  useMotionTemplate,
-  useReducedMotion,
-} from "framer-motion";
+import { useState, useEffect, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/navbar";
 import { DataPricing } from "@/components/data-pricing";
 import type { DataPlansPayload, DataPlansSource } from "@/lib/data-plans";
@@ -82,36 +74,6 @@ const tickerBottom = [
   { icon: SparklesIcon, label: "Members-only reward" },
   { icon: BanknoteIcon, label: "Cash credited in seconds" },
   { icon: GiftIcon, label: "Match-day giveaway open" },
-];
-
-// hoverColor mirrors the hero's RotatingWord palette (emerald/violet/amber/rose)
-const stats = [
-  {
-    prefix: "₦",
-    target: 200,
-    label: "First reward, free",
-    hoverColor: "group-hover/stat:text-emerald-500",
-  },
-  {
-    prefix: "< ",
-    target: 5,
-    suffix: "s",
-    label: "To claim & receive",
-    hoverColor: "group-hover/stat:text-violet-500",
-  },
-  {
-    target: 4.9,
-    decimals: 1,
-    suffix: "★",
-    label: "User rating",
-    hoverColor: "group-hover/stat:text-amber-500",
-  },
-  {
-    target: 50,
-    suffix: "K+",
-    label: "Nigerians onboard",
-    hoverColor: "group-hover/stat:text-rose-500",
-  },
 ];
 
 const rewardTypes = [
@@ -197,24 +159,28 @@ const howItWorks = [
     n: "01",
     icon: WalletIcon,
     title: "Set it up",
+    proof: "₦200 airtime · 50 winners",
     desc: "Pick airtime, data or cash, choose winners and rules. Under a minute.",
   },
   {
     n: "02",
     icon: Share2Icon,
     title: "Share your link",
+    proof: "wakasub.com/c/your-link",
     desc: "Drop it on WhatsApp, TikTok, X — one link does it all.",
   },
   {
     n: "03",
     icon: SparklesIcon,
     title: "People claim",
+    proof: "Claimed in 3 seconds",
     desc: "Your people tap, claim in seconds, and receiving is always free.",
   },
   {
     n: "04",
     icon: TrophyIcon,
     title: "Winners get paid",
+    proof: "₦200 sent to 0803 ••• 4521",
     desc: "Rewards land automatically while you watch the claims roll in.",
   },
 ];
@@ -365,126 +331,6 @@ const heroFloatingIcons: FloatingIconItem[] = [
     className: "top-[66%] right-[19%] hidden lg:block",
   },
 ];
-
-/* ── Magical stats band: count-up numbers, cursor spotlight, shimmer sweep ── */
-
-function StatValue({
-  prefix = "",
-  target,
-  suffix = "",
-  decimals = 0,
-}: {
-  prefix?: string;
-  target: number;
-  suffix?: string;
-  decimals?: number;
-}) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.6 });
-  const reduced = useReducedMotion();
-  const [display, setDisplay] = useState(() => (reduced ? target : 0));
-  const [settled, setSettled] = useState(false);
-
-  useEffect(() => {
-    if (!inView) return;
-    if (reduced) {
-      setDisplay(target);
-      setSettled(true);
-      return;
-    }
-    const controls = animate(0, target, {
-      duration: 1.6,
-      ease: [0.16, 1, 0.3, 1],
-      onUpdate: (v) => setDisplay(v),
-      onComplete: () => setSettled(true),
-    });
-    return () => controls.stop();
-  }, [inView, target, reduced]);
-
-  return (
-    <motion.span
-      ref={ref}
-      className="inline-block tabular-nums"
-      animate={settled && !reduced ? { scale: [1, 1.08, 1] } : undefined}
-      transition={{ duration: 0.45, ease: "easeOut" }}
-    >
-      {prefix}
-      {display.toFixed(decimals)}
-      {suffix}
-    </motion.span>
-  );
-}
-
-function MagicStats() {
-  const mx = useMotionValue(-400);
-  const my = useMotionValue(-400);
-  const reduced = useReducedMotion();
-  const spotlight = useMotionTemplate`radial-gradient(260px circle at ${mx}px ${my}px, color-mix(in oklab, var(--primary) 14%, transparent), transparent 70%)`;
-
-  return (
-    <motion.div
-      variants={stagger}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.4 }}
-      onMouseMove={(e) => {
-        const r = e.currentTarget.getBoundingClientRect();
-        mx.set(e.clientX - r.left);
-        my.set(e.clientY - r.top);
-      }}
-      onMouseLeave={() => {
-        mx.set(-400);
-        my.set(-400);
-      }}
-      className="group relative grid grid-cols-2 divide-x divide-y divide-border/50 overflow-hidden border border-border/50 bg-card md:grid-cols-4 md:divide-y-0"
-    >
-      {/* cursor-following spotlight */}
-      <motion.div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{ background: spotlight }}
-      />
-
-      {/* periodic shimmer sweep */}
-      {!reduced && (
-        <motion.div
-          aria-hidden
-          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-1/4 -skew-x-12 bg-linear-to-r from-transparent via-primary/10 to-transparent"
-          initial={{ x: "-130%" }}
-          animate={{ x: ["-130%", "530%"] }}
-          transition={{
-            duration: 2.6,
-            repeat: Infinity,
-            repeatDelay: 4.5,
-            ease: "easeInOut",
-          }}
-        />
-      )}
-
-      {stats.map((s) => (
-        <motion.div
-          key={s.label}
-          variants={fadeUp}
-          className="group/stat relative flex flex-col items-center py-10 text-center"
-        >
-          <div
-            className={`text-4xl font-extrabold text-primary transition-colors duration-300 md:text-5xl lg:text-6xl ${s.hoverColor}`}
-          >
-            <StatValue
-              prefix={s.prefix}
-              target={s.target}
-              suffix={s.suffix}
-              decimals={s.decimals}
-            />
-          </div>
-          <div className="mt-2 text-[11px] font-medium uppercase tracking-widest text-muted-foreground">
-            {s.label}
-          </div>
-        </motion.div>
-      ))}
-    </motion.div>
-  );
-}
 
 /* ── Interactive hero: live claim demo ── */
 
@@ -758,8 +604,9 @@ type LandingPageProps = {
 };
 
 export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
+  const [persona, setPersona] = useState(0);
   return (
-    <main className="min-h-screen overflow-x-hidden pb-20 md:pb-0">
+    <main className="min-h-screen overflow-x-clip pb-20 md:pb-0">
       <Navbar />
 
       {/* ── 1. HERO (single, centered) ── */}
@@ -1112,45 +959,93 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
-            className="mb-14 text-center"
+            className="mb-12 max-w-2xl md:mb-16"
           >
-            <p className="mb-2 text-sm font-medium uppercase tracking-widest text-primary">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-primary">
               Who it&apos;s for
             </p>
-            <h2 className="title-glow text-4xl font-bold md:text-5xl">
+            <h2 className="font-display text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl">
               Made for the way you reward.
             </h2>
+            <p className="mt-5 text-lg text-muted-foreground">
+              Pick the one that sounds like you.
+            </p>
           </motion.div>
 
           <motion.div
-            variants={stagger}
+            variants={fadeUp}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.1 }}
-            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+            className="grid border border-border lg:grid-cols-12"
           >
-            {personas.map((p) => (
-              <motion.div
-                key={p.title}
-                variants={fadeUp}
-                className="group flex flex-col border border-border/50 bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-              >
-                <div className="mb-4 flex h-11 w-11 items-center justify-center bg-primary/10 text-primary">
-                  <p.icon size={20} />
-                </div>
-                <h3 className="mb-3 font-semibold">{p.title}</h3>
-                <p className="mb-2 text-sm leading-relaxed text-muted-foreground">
-                  {p.today}
-                </p>
-                <p className="mt-auto flex gap-1.5 text-sm leading-relaxed text-foreground">
-                  <SparklesIcon
-                    size={15}
-                    className="mt-0.5 shrink-0 text-primary"
-                  />
-                  <span>{p.now}</span>
-                </p>
-              </motion.div>
-            ))}
+            <div
+              role="tablist"
+              aria-label="Who Wakasub is for"
+              className="flex overflow-x-auto border-b border-border lg:col-span-4 lg:flex-col lg:divide-y lg:divide-border lg:overflow-visible lg:border-b-0 lg:border-r"
+            >
+              {personas.map((p, i) => {
+                const active = i === persona;
+                return (
+                  <button
+                    key={p.title}
+                    role="tab"
+                    id={`persona-tab-${i}`}
+                    aria-selected={active}
+                    aria-controls="persona-panel"
+                    onClick={() => setPersona(i)}
+                    className={`flex shrink-0 items-center gap-3 border-b-2 px-5 py-4 text-left text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-primary lg:border-b-0 lg:border-l-4 lg:py-5 lg:text-base ${
+                      active
+                        ? "border-primary bg-secondary/60 text-foreground"
+                        : "border-transparent text-muted-foreground hover:bg-secondary/30 hover:text-foreground"
+                    }`}
+                  >
+                    <p.icon
+                      size={18}
+                      className={active ? "text-primary" : ""}
+                    />
+                    <span className="whitespace-nowrap lg:whitespace-normal">
+                      {p.title}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <div
+              id="persona-panel"
+              role="tabpanel"
+              aria-labelledby={`persona-tab-${persona}`}
+              className="lg:col-span-8"
+            >
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={persona}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.25, ease: "easeOut" }}
+                  className="grid h-full md:grid-cols-2"
+                >
+                  <div className="flex flex-col gap-4 border-b border-border p-8 md:border-b-0 md:border-r md:p-10">
+                    <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                      Today
+                    </span>
+                    <p className="text-xl leading-snug text-muted-foreground line-through decoration-muted-foreground/40 decoration-1 md:text-2xl">
+                      {personas[persona].today}
+                    </p>
+                  </div>
+                  <div className="flex flex-col gap-4 bg-primary p-8 text-primary-foreground md:p-10">
+                    <span className="text-xs font-semibold uppercase tracking-widest text-primary-foreground/70">
+                      With Wakasub
+                    </span>
+                    <p className="font-display text-2xl font-bold leading-snug md:text-3xl">
+                      {personas[persona].now}
+                    </p>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -1158,69 +1053,65 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
       {/* ── 8. JUST HERE TO WIN ── */}
       <section
         id="win"
-        className="relative mx-4 my-8 overflow-hidden bg-foreground py-20 text-background md:py-28"
+        className="border-y border-border bg-secondary/40 py-24 md:py-32"
       >
-        <div className="pointer-events-none absolute inset-0 opacity-[0.04]">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-size-[40px_40px]" />
-        </div>
-        <div className="glow-primary pointer-events-none absolute -left-40 top-0 h-96 w-96 opacity-25" />
-        <div className="glow-primary pointer-events-none absolute -bottom-40 right-0 h-96 w-96 opacity-15" />
-
-        <div className="relative mx-auto w-full max-w-7xl px-6">
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.3 }}
-            className="mb-14 text-center"
-          >
-            <div className="mb-5 inline-flex items-center gap-2 border border-white/15 bg-white/5 px-4 py-1.5 text-sm font-semibold text-background/80">
-              <TrophyIcon size={14} className="text-primary" /> Just here to
-              win?
-            </div>
-            <h2 className="title-glow text-4xl font-bold leading-[1.05] md:text-5xl">
-              Free airtime, data &amp; cash.
-            </h2>
-          </motion.div>
-
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
-          >
-            {winnerPerks.map((p) => (
-              <motion.div
-                key={p.title}
-                variants={fadeUp}
-                className="border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
+        <div className="mx-auto w-full max-w-7xl px-6">
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.3 }}
+              className="self-start lg:sticky lg:top-28 lg:col-span-5"
+            >
+              <p className="mb-5 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-primary">
+                <TrophyIcon size={14} /> Just here to win?
+              </p>
+              <h2 className="font-display text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl">
+                Free airtime, data &amp;&nbsp;cash.
+              </h2>
+              <p className="mt-6 max-w-md text-lg leading-relaxed text-muted-foreground">
+                Find a giveaway, claim your reward, keep every naira of it.
+                There&apos;s nothing to pay and nothing to wait for.
+              </p>
+              <Button
+                size="lg"
+                className="mt-8 px-10 text-base font-semibold"
+                asChild
               >
-                <div className="mb-4 flex h-10 w-10 items-center justify-center border border-primary/40 bg-primary/15 text-primary">
-                  <p.icon size={18} />
-                </div>
-                <h4 className="mb-2 text-base font-bold">{p.title}</h4>
-                <p className="text-sm leading-relaxed text-background/45">
-                  {p.desc}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
+                <Link href="https://app.wakasub.com/register">
+                  Start claiming rewards
+                  <ArrowRightIcon className="btn-icon" />
+                </Link>
+              </Button>
+            </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="mt-12 text-center"
-          >
-            <Button size="lg" className="px-10 text-base font-semibold" asChild>
-              <Link href="https://app.wakasub.com/register">
-                Start claiming rewards
-                <ArrowRightIcon className="btn-icon" />
-              </Link>
-            </Button>
-          </motion.div>
+            <motion.ul
+              variants={stagger}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.15 }}
+              className="divide-y divide-border border-y border-border lg:col-span-7"
+            >
+              {winnerPerks.map((p) => (
+                <motion.li
+                  key={p.title}
+                  variants={fadeUp}
+                  className="group grid grid-cols-[auto_1fr] items-start gap-x-5 gap-y-1 bg-background/0 px-2 py-7 transition-colors hover:bg-background sm:gap-x-7 sm:px-6 sm:py-8"
+                >
+                  <div className="row-span-2 flex h-12 w-12 items-center justify-center border border-border bg-background text-primary transition-colors group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground">
+                    <p.icon size={20} />
+                  </div>
+                  <h3 className="font-display text-2xl font-bold tracking-tight md:text-3xl">
+                    {p.title}
+                  </h3>
+                  <p className="max-w-md text-base leading-relaxed text-muted-foreground">
+                    {p.desc}
+                  </p>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </div>
         </div>
       </section>
 
@@ -1458,13 +1349,9 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
       {/* ── 11. HOW IT WORKS ── */}
       <section
         id="how-it-works"
-        className="relative mx-4 my-12 overflow-hidden bg-foreground py-24 text-background"
+        className="relative mx-4 my-12 overflow-hidden bg-foreground py-24 text-background md:py-28"
       >
-        <div className="pointer-events-none absolute inset-0 opacity-[0.04]">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-size-[40px_40px]" />
-        </div>
-        <div className="glow-primary pointer-events-none absolute -right-32 -top-32 h-96 w-96 opacity-20" />
-        <div className="glow-primary pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 opacity-15" />
+        <div className="glow-primary pointer-events-none absolute -right-40 -top-40 h-[28rem] w-[28rem] opacity-20" />
 
         <div className="relative mx-auto w-full max-w-7xl px-6">
           <motion.div
@@ -1472,64 +1359,62 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
-            className="mb-14 text-center"
+            className="mb-14 flex flex-col gap-8 md:mb-16 md:flex-row md:items-end md:justify-between"
           >
-            <p className="mb-4 text-sm font-medium uppercase tracking-widest text-primary">
-              How it works
-            </p>
-            <h2 className="title-glow text-4xl font-bold leading-tight md:text-5xl">
-              From idea to paid winners.
-            </h2>
-          </motion.div>
-
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.1 }}
-            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
-          >
-            {howItWorks.map((s, i) => (
-              <motion.div
-                key={s.n}
-                variants={fadeUp}
-                className="relative border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
-              >
-                <div className="mb-4 flex items-center justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center border border-primary/40 bg-primary/15 text-sm font-bold text-primary">
-                    {s.n}
-                  </div>
-                  <div className="flex h-9 w-9 items-center justify-center bg-white/10">
-                    <s.icon size={16} className="text-background/60" />
-                  </div>
-                </div>
-                <h4 className="mb-2 text-base font-bold">{s.title}</h4>
-                <p className="text-sm leading-relaxed text-background/45">
-                  {s.desc}
-                </p>
-                {i < howItWorks.length - 1 && (
-                  <div className="absolute -right-2 top-1/2 hidden -translate-y-1/2 lg:block">
-                    <ArrowRightIcon size={16} className="text-background/20" />
-                  </div>
-                )}
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6 }}
-            className="mt-12 text-center"
-          >
-            <Button size="lg" className="px-10 text-base font-semibold" asChild>
+            <div>
+              <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-primary">
+                How it works
+              </p>
+              <h2 className="font-display max-w-2xl text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl">
+                From idea to paid winners.
+              </h2>
+            </div>
+            <Button
+              size="lg"
+              className="self-start px-10 text-base font-semibold md:self-auto"
+              asChild
+            >
               <Link href="https://app.wakasub.com/register">
                 Create your first campaign
                 <ArrowRightIcon className="btn-icon" />
               </Link>
             </Button>
           </motion.div>
+
+          <motion.ol
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.15 }}
+            className="grid grid-cols-1 gap-px border border-white/10 bg-white/10 md:grid-cols-2 lg:grid-cols-4"
+          >
+            {howItWorks.map((s) => (
+              <motion.li
+                key={s.n}
+                variants={fadeUp}
+                className="flex flex-col bg-foreground p-7"
+              >
+                <span
+                  aria-hidden
+                  className="font-display text-7xl font-extrabold leading-none text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.28)]"
+                >
+                  {s.n}
+                </span>
+                <h3 className="font-display mt-8 text-2xl font-bold tracking-tight">
+                  {s.title}
+                </h3>
+                <p className="mt-2 text-base leading-relaxed text-background/60">
+                  {s.desc}
+                </p>
+                <div className="mt-8 flex items-center gap-3 border border-white/10 bg-white/5 px-4 py-3 text-sm lg:mt-auto">
+                  <s.icon size={16} className="shrink-0 text-primary" />
+                  <span className="font-medium text-background/80">
+                    {s.proof}
+                  </span>
+                </div>
+              </motion.li>
+            ))}
+          </motion.ol>
         </div>
       </section>
 
