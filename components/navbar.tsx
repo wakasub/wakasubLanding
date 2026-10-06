@@ -81,11 +81,11 @@ function NavTab({
 }
 
 const navLinks = [
-  { label: "Rewards", href: "#rewards", badge: "New" },
-  { label: "Who it's for", href: "#who" },
-  { label: "Utilities", href: "#utilities" },
-  { label: "Data prices", href: "#data-prices" },
-  { label: "How it works", href: "#how-it-works" },
+  { label: "Rewards", href: "/#rewards", badge: "New" },
+  { label: "Who it's for", href: "/#who" },
+  { label: "Utilities", href: "/#utilities" },
+  { label: "Data prices", href: "/#data-prices" },
+  { label: "How it works", href: "/#how-it-works" },
   { label: "Internship", href: "/internship" },
   { label: "Contact", href: "/contact-support" },
 ];

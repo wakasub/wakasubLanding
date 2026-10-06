@@ -324,3 +324,8 @@
   ) {
   box-shadow: 3px 3px 0 var(--background);
 }
+
+/* Anchor targets land below the floating navbar instead of under it. */
+section[id] {
+  scroll-margin-top: 6rem;
+}
