@@ -122,12 +122,10 @@ export function DataPricing({ initialPlans: payload, source }: DataPricingProps)
   const chooseNetwork = (name: string) => {
     setNetwork(name);
     setTypeSlug("all");
-    setExpanded(false);
   };
 
   const chooseType = (slug: string) => {
     setTypeSlug(slug);
-    setExpanded(false);
   };
 
   return (

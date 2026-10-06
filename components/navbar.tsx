@@ -30,7 +30,7 @@ function NavTabs() {
   return (
     <ul
       onMouseLeave={() => setCursor((c) => ({ ...c, opacity: 0 }))}
-      className="relative hidden items-center lg:flex"
+      className="relative hidden items-center xl:flex"
     >
       {navLinks.map((item) => (
         <NavTab key={item.label} item={item} onHover={setCursor} />
@@ -152,7 +152,7 @@ export function Navbar() {
         {/* Desktop nav */}
         <NavTabs />
 
-        <div className="hidden items-center gap-4 lg:flex">
+        <div className="hidden items-center gap-4 xl:flex">
           <Button variant="outline" size="sm" asChild>
             <Link href="https://app.wakasub.com/login">Log in</Link>
           </Button>
@@ -165,7 +165,7 @@ export function Navbar() {
 
         {/* Mobile toggle */}
         <button
-          className="relative z-[60] p-2 lg:hidden"
+          className="relative z-[60] p-2 xl:hidden"
           onClick={() => setMobileMenuOpen((o) => !o)}
           aria-label="Toggle menu"
         >
@@ -204,14 +204,14 @@ export function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="fixed inset-0 z-[45] bg-background/90 backdrop-blur-md lg:hidden"
+              className="fixed inset-0 z-[45] bg-background/90 backdrop-blur-md xl:hidden"
             />
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed bottom-0 right-0 top-0 z-[56] h-screen w-[85%] max-w-sm border-l border-border bg-background p-8 pt-24 shadow-2xl lg:hidden"
+              className="fixed bottom-0 right-0 top-0 z-[56] h-screen w-[85%] max-w-sm border-l border-border bg-background p-8 pt-24 shadow-2xl xl:hidden"
             >
               <div className="flex w-full flex-col gap-2">
                 {navLinks.map((item, i) => (
