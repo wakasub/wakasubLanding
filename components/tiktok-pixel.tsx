@@ -133,10 +133,20 @@ export function TikTokPixel() {
       // to this very click.
       decorateSignupLink(link);
 
-      // No content_type: TikTok only accepts product/product_group/
-      // destination/hotel/flight there, and the SDK warns on anything else.
+      // content_name is nested in `contents`, matching the snippet TikTok
+      // generates from this pixel's own funnel configuration. No content_type:
+      // TikTok only accepts product/product_group/destination/hotel/flight
+      // there, and the SDK warns on anything else.
       ttqTrack("ClickButton", {
-        content_name: link.textContent?.trim().slice(0, 80) || "Get started",
+        contents: [
+          {
+            // `contents` is TikTok's product-array schema and it warns when an
+            // entry has no content_id. There is one thing being clicked here,
+            // so the id is a constant rather than anything per-link.
+            content_id: "signup_cta",
+            content_name: link.textContent?.trim().slice(0, 80) || "Get started",
+          },
+        ],
         description: "Signup CTA on wakasub.com",
       });
     }
