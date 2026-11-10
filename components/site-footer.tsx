@@ -60,6 +60,14 @@ export function SiteFooter() {
               The rewards hub of Nigeria. Send airtime, data and cash to your
               people with one link.
             </p>
+            <address className="mt-6 space-y-2 text-sm not-italic leading-relaxed text-muted-foreground">
+              <p>Jos Street, Area 3, Garki, Abuja, Nigeria</p>
+              <p>
+                <a href="mailto:wakasub321@gmail.com" className={linkClass}>
+                  wakasub321@gmail.com
+                </a>
+              </p>
+            </address>
             <div className="mt-6 flex flex-wrap gap-3">
               {stores.map((s) => (
                 <a
