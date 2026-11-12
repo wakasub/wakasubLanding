@@ -14,6 +14,7 @@ import {
   type FloatingIconItem,
 } from "@/components/ui/floating-icons-hero-section";
 import { SiteFooter } from "@/components/site-footer";
+import { WhatsAppButton, whatsappChatUrl } from "@/components/whatsapp-cta";
 import { Button } from "@/components/ui/button";
 import { SmartphoneIcon } from "@/components/icons/smartphone";
 import { ArrowRightIcon } from "@/components/icons/arrow-right";
@@ -1499,7 +1500,16 @@ export function LandingPage({ initialPlans, plansSource }: LandingPageProps) {
       {/* ── 14. FOOTER ── */}
       <SiteFooter />
 
-      {/* ── 15. STICKY MOBILE CTA ── */}
+      {/* ── 15. FLOATING WHATSAPP SUPPORT ── */}
+      {/* Mobile sits above the sticky CTA bar; desktop clears the viewport edge. */}
+      <WhatsAppButton
+        href={whatsappChatUrl("Hi Wakasub, I need help with")}
+        className="fixed bottom-24 right-6 z-50 px-5 py-3 md:bottom-16 md:right-8"
+      >
+        Contact us
+      </WhatsAppButton>
+
+      {/* ── 16. STICKY MOBILE CTA ── */}
       <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden">
         <div className="border-t border-border/50 bg-background/95 px-4 py-3 shadow-2xl shadow-black/10 backdrop-blur-md">
           <Button

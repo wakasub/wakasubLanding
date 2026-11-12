@@ -19,7 +19,7 @@ import { HeadsetIcon } from "@/components/icons/headset";
 import { ShieldCheckIcon } from "@/components/icons/shield-check";
 import { SendIcon } from "@/components/icons/send";
 import { MailIcon } from "@/components/icons/mail";
-import { WhatsAppButton } from "@/components/whatsapp-cta";
+import { WhatsAppButton, whatsappChatUrl } from "@/components/whatsapp-cta";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
@@ -113,11 +113,12 @@ export default function ContactSupportPage() {
     <main className="min-h-screen bg-background relative">
       <Navbar />
 
-      {/* <section> */}
-      <WhatsAppButton href="https://wa.link/kg38li" className="fixed bottom-16 right-8 z-1000">
-        contact us
+      <WhatsAppButton
+        href={whatsappChatUrl("Hi Wakasub, I need help with")}
+        className="fixed bottom-6 right-6 z-50 px-5 py-3 md:bottom-16 md:right-8"
+      >
+        Contact us
       </WhatsAppButton>
-      {/* </section> */}
 
       {/* ── Hero ── */}
       <section className="relative overflow-hidden pt-36 md:pt-44">

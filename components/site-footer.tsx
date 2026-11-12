@@ -1,5 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import {
+  WHATSAPP_SUPPORT_DISPLAY,
+  WHATSAPP_SUPPORT_NUMBER,
+} from "@/components/whatsapp-cta";
 
 const columns = [
   {
@@ -62,6 +66,11 @@ export function SiteFooter() {
             </p>
             <address className="mt-6 space-y-2 text-sm not-italic leading-relaxed text-muted-foreground">
               <p>Jos Street, Area 3, Garki, Abuja, Nigeria</p>
+              <p>
+                <a href={`tel:+${WHATSAPP_SUPPORT_NUMBER}`} className={linkClass}>
+                  {WHATSAPP_SUPPORT_DISPLAY}
+                </a>
+              </p>
               <p>
                 <a href="mailto:wakasub321@gmail.com" className={linkClass}>
                   wakasub321@gmail.com
